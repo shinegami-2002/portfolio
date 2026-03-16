@@ -55,7 +55,7 @@ export function TimelineCard({ experience, defaultExpanded = false }: TimelineCa
               {experience.bullets.map((bullet, i) => (
                 <li
                   key={i}
-                  className="text-sm text-text-primary/80 pl-4 relative before:content-['\25B8'] before:absolute before:left-0 before:text-cyan-accent/60"
+                  className="text-base text-text-primary/80 pl-4 relative before:content-['\25B8'] before:absolute before:left-0 before:text-cyan-accent/60"
                 >
                   {bullet}
                 </li>

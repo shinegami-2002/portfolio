@@ -45,7 +45,7 @@ export function Projects() {
 
       {/* Project grid */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
         layout
       >
         <AnimatePresence mode="popLayout">

@@ -36,7 +36,7 @@ export function Experience() {
           }}
         />
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {experiences.map((exp, index) => {
             const dot = dotColors[exp.accent];
 

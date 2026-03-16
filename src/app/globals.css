@@ -11,6 +11,7 @@
 
   body {
     @apply bg-deep text-text-primary font-body;
+    font-size: 17px;
     overflow-x: hidden;
     min-height: 100vh;
   }

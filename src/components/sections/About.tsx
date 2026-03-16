@@ -66,7 +66,7 @@ export function About() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-body text-text-primary text-base md:text-lg leading-relaxed">
+          <p className="font-body text-text-primary text-lg leading-relaxed">
             Applied AI/ML Engineer building agentic AI systems, production LLM
             pipelines, and scalable cloud deployments. Architected enterprise RAG
             platform serving 230+ users at 75% lower cost; shipped multi-agent

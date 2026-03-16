@@ -82,7 +82,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <p className="text-xs text-text-muted font-mono mt-1">{project.period}</p>
 
-      <p className="text-sm text-text-primary/70 mt-3">{project.description}</p>
+      <p className="text-base text-text-primary/70 mt-3">{project.description}</p>
 
       <div className="flex flex-wrap gap-1.5 mt-3">
         {project.tags.slice(0, 5).map((tag) => (
@@ -114,7 +114,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 {project.bullets.map((bullet, i) => (
                   <li
                     key={i}
-                    className="text-sm text-text-primary/70 pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-cyan-accent/50"
+                    className="text-base text-text-primary/70 pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-cyan-accent/50"
                   >
                     {bullet}
                   </li>

@@ -46,9 +46,11 @@ export function SceneContainer() {
     <div
       className="fixed inset-0 -z-10"
       style={{
-        background: `radial-gradient(ellipse at 20% 20%, rgba(0,242,255,0.03) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 80%, rgba(255,0,193,0.02) 0%, transparent 50%),
-          radial-gradient(ellipse at 50% 50%, rgba(77,136,255,0.015) 0%, transparent 60%),
+        background: `radial-gradient(ellipse at 20% 20%, rgba(0,242,255,0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 80%, rgba(255,0,193,0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 50%, rgba(77,136,255,0.05) 0%, transparent 60%),
+          radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.6) 0%, transparent 40%),
+          radial-gradient(ellipse at 30% 70%, rgba(140,0,255,0.04) 0%, transparent 45%),
           #050510`,
       }}
     />

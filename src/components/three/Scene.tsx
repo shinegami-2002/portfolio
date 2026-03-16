@@ -5,8 +5,8 @@ import { Preload, PerformanceMonitor } from '@react-three/drei';
 import { Suspense, useState } from 'react';
 import { Starfield } from './Starfield';
 import { NebulaClouds } from './NebulaClouds';
-import { FloatingGeometries } from './FloatingGeometries';
 import { CameraController } from './CameraController';
+import { HeroIcosahedron } from './HeroIcosahedron';
 
 export function Scene() {
   const [dpr, setDpr] = useState(1.5);
@@ -40,7 +40,7 @@ export function Scene() {
             <CameraController />
             <Starfield />
             <NebulaClouds />
-            <FloatingGeometries />
+            <HeroIcosahedron />
             <Preload all />
           </Suspense>
         </PerformanceMonitor>
