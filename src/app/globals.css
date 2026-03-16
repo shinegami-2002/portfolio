@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-deep text-text-primary font-body;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: rgba(0, 242, 255, 0.2);
+    color: #fff;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-cyan-accent/60 ring-offset-2 ring-offset-deep;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-xl;
+  }
+
+  .glass-nav {
+    background: rgba(5, 5, 16, 0.80);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    @apply border-b border-white/[0.06];
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+  }
+
+  .glow-magenta {
+    box-shadow: 0 0 30px rgba(255, 0, 193, 0.15);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-accent via-blue-accent to-magenta-accent;
+  }
+}
