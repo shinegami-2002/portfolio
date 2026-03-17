@@ -27,6 +27,7 @@ const config: Config = {
         'drift': 'drift 25s ease-in-out infinite',
         'drift-reverse': 'drift 30s ease-in-out infinite reverse',
         'drift-slow': 'drift 20s ease-in-out infinite 2s',
+        'spotlight': 'spotlight 2s ease .75s 1 forwards',
       },
       keyframes: {
         shimmer: {
@@ -49,6 +50,10 @@ const config: Config = {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '33%': { transform: 'translate(30px, -20px) scale(1.05)' },
           '66%': { transform: 'translate(-20px, 15px) scale(0.95)' },
+        },
+        spotlight: {
+          '0%': { opacity: '0', transform: 'translate(-72%, -62%) scale(0.5)' },
+          '100%': { opacity: '1', transform: 'translate(-50%, -40%) scale(1)' },
         },
       },
     },
