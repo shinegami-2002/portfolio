@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <SceneContainer />
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" className="relative z-10">
         <Hero />
         <About />
         <Experience />
