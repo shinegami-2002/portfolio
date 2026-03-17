@@ -28,6 +28,11 @@ export const metadata: Metadata = {
   title: 'Shanmukha Chatadi | Applied AI/ML Engineer',
   description:
     'Applied AI/ML Engineer building agentic AI systems, production LLM pipelines, and scalable cloud deployments. MS CS @ NC State. Published researcher.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
   openGraph: {
     title: 'Shanmukha Chatadi | AI/ML Engineer Portfolio',
     description:
