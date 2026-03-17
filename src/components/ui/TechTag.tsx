@@ -2,14 +2,14 @@ import { cn } from '@/lib/utils';
 
 interface TechTagProps {
   children: React.ReactNode;
-  variant?: 'cyan' | 'magenta' | 'blue' | 'muted';
+  variant?: 'cyan' | 'blue' | 'gold' | 'muted';
   size?: 'sm' | 'md';
 }
 
 const variantStyles = {
   cyan: 'border-cyan-accent/20 text-cyan-accent',
-  magenta: 'border-magenta-accent/20 text-magenta-accent',
   blue: 'border-blue-accent/20 text-blue-accent',
+  gold: 'border-amber-400/20 text-amber-400',
   muted: 'border-white/15 text-text-muted',
 };
 

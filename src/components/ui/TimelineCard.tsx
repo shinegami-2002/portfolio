@@ -9,21 +9,21 @@ import type { Experience } from '@/types';
 interface TimelineCardProps {
   experience: Experience;
   defaultExpanded?: boolean;
+  isFirst?: boolean;
 }
 
-export function TimelineCard({ experience, defaultExpanded = false }: TimelineCardProps) {
+export function TimelineCard({ experience, defaultExpanded = false, isFirst = false }: TimelineCardProps) {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const accentColors = {
-    cyan: { border: 'border-cyan-accent/20', text: 'text-cyan-accent', tag: 'cyan' as const },
-    magenta: { border: 'border-magenta-accent/20', text: 'text-magenta-accent', tag: 'magenta' as const },
-    blue: { border: 'border-blue-accent/20', text: 'text-blue-accent', tag: 'blue' as const },
+    cyan: { border: 'border-cyan-accent/20', leftBorder: 'border-l-cyan-accent/40', text: 'text-cyan-accent', tag: 'cyan' as const },
+    blue: { border: 'border-blue-accent/20', leftBorder: 'border-l-blue-accent/40', text: 'text-blue-accent', tag: 'blue' as const },
   };
   const accent = accentColors[experience.accent];
 
   return (
     <div
-      className={`glass-card p-5 cursor-pointer ${accent.border}`}
+      className={`glass-card p-5 cursor-pointer border-l-2 ${accent.leftBorder} ${accent.border} ${isFirst ? 'shadow-[0_0_25px_rgba(0,242,255,0.08)]' : ''}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex justify-between items-start gap-4">
@@ -42,13 +42,13 @@ export function TimelineCard({ experience, defaultExpanded = false }: TimelineCa
         </motion.div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
             <ul className="mt-4 space-y-2">

@@ -1,27 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, BookOpen, HeartPulse, Link, Layers, Brain, Gamepad2, Bot, type LucideIcon } from 'lucide-react';
 import { SectionWrapper } from '@/components/layout/SectionWrapper';
 import { projects } from '@/data/projects';
 import { cn } from '@/lib/utils';
 
-const ACCENT_COLORS: Record<string, { border: string; text: string; glow: string; tagBg: string; tagBorder: string; gradientFrom: string }> = {
+const ACCENT_COLORS: Record<string, { border: string; text: string; glow: string; tagBg: string; tagBorder: string }> = {
   cyan: {
     border: 'border-cyan-accent/25',
     text: 'text-cyan-accent',
     glow: '0 0 40px rgba(0,242,255,0.12)',
     tagBg: 'bg-cyan-accent/10',
     tagBorder: 'border-cyan-accent/20',
-    gradientFrom: 'from-cyan-accent/20',
-  },
-  magenta: {
-    border: 'border-magenta-accent/25',
-    text: 'text-magenta-accent',
-    glow: '0 0 40px rgba(255,0,193,0.12)',
-    tagBg: 'bg-magenta-accent/10',
-    tagBorder: 'border-magenta-accent/20',
-    gradientFrom: 'from-magenta-accent/20',
   },
   blue: {
     border: 'border-blue-accent/25',
@@ -29,16 +20,43 @@ const ACCENT_COLORS: Record<string, { border: string; text: string; glow: string
     glow: '0 0 40px rgba(77,136,255,0.12)',
     tagBg: 'bg-blue-accent/10',
     tagBorder: 'border-blue-accent/20',
-    gradientFrom: 'from-blue-accent/20',
   },
 };
 
-const REPO_NAMES: Record<string, string> = {
-  'scholar-agent': 'scholar-agent',
-  'mcp-healthcare': 'mcp-healthcare-server',
-  'linkvault': 'linkvault',
-  'distributed-task-queue': 'distributed-task-queue',
-  'ai-chatbot': 'AI_ChatBot',
+interface ProjectHeaderConfig {
+  icon: LucideIcon;
+  gradient: string;
+}
+
+const PROJECT_HEADERS: Record<string, ProjectHeaderConfig> = {
+  'scholar-agent': {
+    icon: BookOpen,
+    gradient: 'from-cyan-500/30 via-blue-600/20 to-blue-800/10',
+  },
+  'mcp-healthcare': {
+    icon: HeartPulse,
+    gradient: 'from-blue-500/30 via-teal-600/20 to-cyan-800/10',
+  },
+  'linkvault': {
+    icon: Link,
+    gradient: 'from-blue-600/30 via-indigo-600/20 to-indigo-900/10',
+  },
+  'distributed-task-queue': {
+    icon: Layers,
+    gradient: 'from-slate-600/30 via-blue-700/20 to-cyan-800/10',
+  },
+  'neural-network-pruning': {
+    icon: Brain,
+    gradient: 'from-teal-500/30 via-blue-600/20 to-blue-900/10',
+  },
+  'llms4pcg': {
+    icon: Gamepad2,
+    gradient: 'from-slate-700/30 via-blue-800/20 to-slate-900/10',
+  },
+  'ai-chatbot': {
+    icon: Bot,
+    gradient: 'from-cyan-500/30 via-blue-800/20 to-slate-900/10',
+  },
 };
 
 function ProjectShowcaseCard({
@@ -49,10 +67,7 @@ function ProjectShowcaseCard({
   index: number;
 }) {
   const colors = ACCENT_COLORS[project.accent] || ACCENT_COLORS.cyan;
-  const repoName = REPO_NAMES[project.id];
-  const ogImageUrl = repoName
-    ? `https://opengraph.githubassets.com/1/shinegami-2002/${repoName}`
-    : null;
+  const headerConfig = PROJECT_HEADERS[project.id];
 
   return (
     <motion.div
@@ -73,25 +88,37 @@ function ProjectShowcaseCard({
         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
       }}
     >
-      {/* GitHub OG image or gradient header */}
-      {ogImageUrl ? (
-        <div className="relative w-full h-48 md:h-56 overflow-hidden border-b border-white/[0.06]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={ogImageUrl}
-            alt={`${project.title} preview`}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-transparent to-transparent opacity-60" />
+      {/* Styled gradient header with icon watermark */}
+      {headerConfig ? (
+        <div
+          className={cn(
+            'relative w-full h-40 md:h-48 overflow-hidden border-b border-white/[0.06]',
+            'bg-gradient-to-br',
+            headerConfig.gradient,
+          )}
+        >
+          <div className="absolute inset-0 bg-[#050510]/40" />
+          {/* Large watermark icon */}
+          <div className="absolute right-6 top-1/2 -translate-y-1/2">
+            <headerConfig.icon className="w-24 h-24 md:w-32 md:h-32 text-white/[0.06]" strokeWidth={1} />
+          </div>
+          {/* Title overlay */}
+          <div className="absolute bottom-4 left-6 right-6">
+            <h3 className="font-heading text-xl md:text-2xl font-semibold text-white/90">
+              {project.title}
+            </h3>
+            {project.subtitle && (
+              <p className={cn('text-sm font-mono mt-1', colors.text, 'opacity-80')}>
+                {project.subtitle}
+              </p>
+            )}
+          </div>
         </div>
       ) : (
         <div
           className={cn(
             'relative w-full h-32 md:h-40 overflow-hidden border-b border-white/[0.06]',
-            'bg-gradient-to-br',
-            colors.gradientFrom,
-            'to-transparent',
+            'bg-gradient-to-br from-blue-600/20 to-transparent',
           )}
         >
           <div className="absolute inset-0 bg-[#050510]/70" />
@@ -108,11 +135,13 @@ function ProjectShowcaseCard({
         {/* Header row */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-white mb-1">
-              {project.title}
-            </h3>
+            {!headerConfig && (
+              <h3 className="font-heading text-2xl md:text-3xl font-semibold text-white mb-1">
+                {project.title}
+              </h3>
+            )}
             <div className="flex items-center gap-3 flex-wrap">
-              {project.subtitle && (
+              {!headerConfig && project.subtitle && (
                 <span className={cn('text-sm font-mono', colors.text)}>
                   {project.subtitle}
                 </span>
@@ -154,7 +183,6 @@ function ProjectShowcaseCard({
                 <span
                   className={cn('absolute left-0 top-[7px] w-1.5 h-1.5 rounded-full', {
                     'bg-cyan-accent/60': project.accent === 'cyan',
-                    'bg-magenta-accent/60': project.accent === 'magenta',
                     'bg-blue-accent/60': project.accent === 'blue',
                   })}
                 />

@@ -42,11 +42,11 @@
     box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
   }
 
-  .glow-magenta {
-    box-shadow: 0 0 30px rgba(255, 0, 193, 0.15);
+  .glow-blue {
+    box-shadow: 0 0 30px rgba(77, 136, 255, 0.15);
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-accent via-blue-accent to-magenta-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-accent via-blue-accent to-cyan-accent;
   }
 }

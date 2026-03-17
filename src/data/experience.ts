@@ -31,7 +31,7 @@ export const experiences: Experience[] = [
       'Established API error handling patterns with structured error responses, input validation middleware; achieved 90%+ code coverage through comprehensive unit and integration tests.',
     ],
     tags: ['Flask', 'React', 'PostgreSQL', 'Python', 'scikit-learn', 'Docker', 'Kubernetes', 'Jenkins'],
-    accent: 'magenta',
+    accent: 'blue',
   },
   {
     id: 'treosoft',

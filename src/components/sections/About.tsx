@@ -34,21 +34,19 @@ function NumberCounter({ value, suffix = '' }: { value: number; suffix?: string 
 
 const stats = [
   { label: 'Years Experience', value: 2, suffix: '+', color: 'cyan' as const },
-  { label: 'Projects Shipped', value: 7, suffix: '+', color: 'magenta' as const },
+  { label: 'Projects Shipped', value: 7, suffix: '+', color: 'blue' as const },
   { label: 'Publications', value: 2, suffix: '', color: 'blue' as const },
   { label: 'Users Served', value: 230, suffix: '+', color: 'white' as const },
 ];
 
 const colorMap: Record<string, string> = {
   cyan: 'text-cyan-accent',
-  magenta: 'text-magenta-accent',
   blue: 'text-blue-accent',
   white: 'text-white',
 };
 
-const glowColorMap: Record<string, 'cyan' | 'magenta' | 'blue' | 'none'> = {
+const glowColorMap: Record<string, 'cyan' | 'blue' | 'none'> = {
   cyan: 'cyan',
-  magenta: 'magenta',
   blue: 'blue',
   white: 'none',
 };

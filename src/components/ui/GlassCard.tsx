@@ -7,7 +7,7 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
 interface GlassCardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
   className?: string;
-  glowColor?: 'cyan' | 'magenta' | 'blue' | 'none';
+  glowColor?: 'cyan' | 'blue' | 'none';
   hoverEffect?: boolean;
 }
 
@@ -21,7 +21,6 @@ export function GlassCard({
   const reducedMotion = useReducedMotion();
   const glowStyles = {
     cyan: 'hover:shadow-[0_0_30px_rgba(0,242,255,0.15)]',
-    magenta: 'hover:shadow-[0_0_30px_rgba(255,0,193,0.15)]',
     blue: 'hover:shadow-[0_0_30px_rgba(77,136,255,0.15)]',
     none: '',
   };

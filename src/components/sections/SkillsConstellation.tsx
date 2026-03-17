@@ -18,7 +18,9 @@ interface CategoryConfig {
   label: string;
   icon: LucideIcon;
   color: string;
+  dotColor: string;
   bgColor: string;
+  hoverGlow: string;
   direction: 'left' | 'right';
   speed: number;
 }
@@ -28,15 +30,19 @@ const categoryConfig: Record<string, CategoryConfig> = {
     label: 'AI / Machine Learning',
     icon: Brain,
     color: 'text-cyan-accent',
+    dotColor: 'bg-cyan-accent',
     bgColor: 'bg-cyan-accent/10 border-cyan-accent/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,242,255,0.12)]',
     direction: 'left',
     speed: 22,
   },
   languages: {
     label: 'Languages',
     icon: Code,
-    color: 'text-magenta-accent',
-    bgColor: 'bg-magenta-accent/10 border-magenta-accent/20',
+    color: 'text-amber-400',
+    dotColor: 'bg-amber-400',
+    bgColor: 'bg-amber-400/10 border-amber-400/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(245,158,11,0.12)]',
     direction: 'right',
     speed: 26,
   },
@@ -44,7 +50,9 @@ const categoryConfig: Record<string, CategoryConfig> = {
     label: 'Cloud & DevOps',
     icon: Cloud,
     color: 'text-blue-accent',
+    dotColor: 'bg-blue-accent',
     bgColor: 'bg-blue-accent/10 border-blue-accent/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(77,136,255,0.12)]',
     direction: 'left',
     speed: 20,
   },
@@ -52,7 +60,9 @@ const categoryConfig: Record<string, CategoryConfig> = {
     label: 'Web & Frameworks',
     icon: Globe,
     color: 'text-text-primary',
+    dotColor: 'bg-text-primary',
     bgColor: 'bg-white/5 border-white/10',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(255,255,255,0.06)]',
     direction: 'right',
     speed: 24,
   },
@@ -60,7 +70,9 @@ const categoryConfig: Record<string, CategoryConfig> = {
     label: 'Databases',
     icon: Database,
     color: 'text-cyan-accent',
+    dotColor: 'bg-cyan-accent',
     bgColor: 'bg-cyan-accent/10 border-cyan-accent/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,242,255,0.12)]',
     direction: 'left',
     speed: 28,
   },
@@ -68,7 +80,9 @@ const categoryConfig: Record<string, CategoryConfig> = {
     label: 'Libraries & Tools',
     icon: Library,
     color: 'text-blue-accent',
+    dotColor: 'bg-blue-accent',
     bgColor: 'bg-blue-accent/10 border-blue-accent/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(77,136,255,0.12)]',
     direction: 'right',
     speed: 18,
   },
@@ -82,6 +96,22 @@ const categoryOrder = [
   'databases',
   'libraries',
 ] as const;
+
+function ProficiencyDots({ level }: { level: number }) {
+  return (
+    <div className="flex gap-0.5 ml-1.5">
+      {[1, 2, 3, 4, 5].map((dot) => (
+        <div
+          key={dot}
+          className={cn(
+            'w-1 h-1 rounded-full',
+            dot <= level ? 'bg-current opacity-60' : 'bg-current opacity-15',
+          )}
+        />
+      ))}
+    </div>
+  );
+}
 
 function MarqueeRow({
   skillList,
@@ -97,6 +127,7 @@ function MarqueeRow({
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3 px-4">
+        <div className={cn('w-2 h-2 rounded-full', config.dotColor)} />
         <Icon className={cn('w-4 h-4', config.color)} />
         <span className={cn('text-sm font-heading font-medium', config.color)}>
           {config.label}
@@ -125,11 +156,13 @@ function MarqueeRow({
             <span
               key={`${skill.name}-${i}`}
               className={cn(
-                'inline-flex items-center px-4 py-2 rounded-full border text-sm font-mono whitespace-nowrap transition-all hover:scale-105',
+                'inline-flex items-center px-4 py-2.5 rounded-full border text-sm font-mono whitespace-nowrap transition-all duration-300 hover:scale-105',
                 config.bgColor,
+                config.hoverGlow,
               )}
             >
               {skill.name}
+              <ProficiencyDots level={skill.proficiency} />
             </span>
           ))}
         </motion.div>

@@ -29,7 +29,7 @@ export const projects: Project[] = [
     ],
     tags: ['Python', 'FastMCP', 'httpx', 'openFDA', 'PubMed', 'NLM', 'CMS', 'Docker'],
     githubUrl: 'https://github.com/shinegami-2002/mcp-healthcare-server',
-    accent: 'magenta',
+    accent: 'blue',
     categories: ['ai-ml'],
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
       'Trained ResNet-18 and ViT-Tiny on CIFAR-100 using transfer learning; analyzed CNN vs. Transformer representation learning via UMAP/t-SNE and CKA similarity. Applied 50% L1 unstructured pruning, pruned ViT retained 92% top-5 accuracy vs. 3% drop in pruned ResNet, quantifying model compression trade-offs.',
     ],
     tags: ['PyTorch', 'ResNet-18', 'ViT-Tiny', 'CIFAR-100', 'UMAP', 't-SNE', 'CKA'],
-    accent: 'magenta',
+    accent: 'blue',
     categories: ['research', 'ai-ml'],
   },
   {

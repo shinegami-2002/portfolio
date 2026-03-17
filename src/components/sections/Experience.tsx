@@ -11,10 +11,6 @@ const dotColors = {
     bg: 'bg-cyan-accent',
     shadow: 'shadow-[0_0_8px_2px_rgba(0,242,255,0.5)]',
   },
-  magenta: {
-    bg: 'bg-magenta-accent',
-    shadow: 'shadow-[0_0_8px_2px_rgba(255,0,193,0.5)]',
-  },
   blue: {
     bg: 'bg-blue-accent',
     shadow: 'shadow-[0_0_8px_2px_rgba(77,136,255,0.5)]',
@@ -32,7 +28,7 @@ export function Experience() {
           className="absolute left-4 md:left-6 top-0 bottom-0 w-0.5"
           style={{
             background:
-              'linear-gradient(to bottom, #00f2ff, #ff00c1, #4d88ff)',
+              'linear-gradient(to bottom, #00f2ff, #4d88ff, #00f2ff)',
           }}
         />
 
@@ -54,12 +50,13 @@ export function Experience() {
               >
                 {/* Timeline dot */}
                 <div
-                  className={`absolute left-2.5 md:left-4.5 top-6 w-3 h-3 rounded-full ${dot.bg} ${dot.shadow} ring-2 ring-deep`}
+                  className={`absolute left-[10px] md:left-[18px] top-6 w-3 h-3 rounded-full ${dot.bg} ${dot.shadow} ring-2 ring-deep`}
                 />
 
                 <TimelineCard
                   experience={exp}
                   defaultExpanded={index === 0}
+                  isFirst={index === 0}
                 />
               </motion.div>
             );

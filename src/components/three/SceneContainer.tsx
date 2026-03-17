@@ -4,9 +4,9 @@ export function SceneContainer() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-[#050510]">
       {/* Animated gradient orbs that slowly drift */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.07] blur-[120px] animate-drift bg-[#00f2ff]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.05] blur-[100px] animate-drift-reverse bg-[#ff00c1]" />
-      <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.04] blur-[150px] animate-drift-slow bg-[#4d88ff]" />
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.10] blur-[120px] animate-drift bg-[#00f2ff]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.08] blur-[100px] animate-drift-reverse bg-[#1a3a6e]" />
+      <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.06] blur-[150px] animate-drift-slow bg-[#4d88ff]" />
 
       {/* Grid lines that subtly pulse */}
       <div

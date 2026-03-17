@@ -6,7 +6,7 @@ export interface Experience {
   period: string;
   bullets: string[];
   tags: string[];
-  accent: 'cyan' | 'magenta' | 'blue';
+  accent: 'cyan' | 'blue';
   expanded?: boolean;
 }
 
@@ -19,7 +19,7 @@ export interface Project {
   bullets: string[];
   tags: string[];
   githubUrl?: string;
-  accent: 'cyan' | 'magenta' | 'blue';
+  accent: 'cyan' | 'blue';
   categories: ('ai-ml' | 'backend' | 'full-stack' | 'research')[];
 }
 

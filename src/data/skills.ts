@@ -101,7 +101,7 @@ export const skills: SkillNode[] = [
     connections: ['RAG', 'Agentic AI'],
   },
 
-  // ── Languages (magenta) — bottom-right (positive x, negative y) ──
+  // ── Languages (gold/amber) — bottom-right (positive x, negative y) ──
   {
     name: 'Python',
     category: 'languages',
