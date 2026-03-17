@@ -1,23 +1,26 @@
+'use client';
+
 export function SceneContainer() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-deep" />
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#050510]">
+      {/* Animated gradient orbs that slowly drift */}
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.07] blur-[120px] animate-drift bg-[#00f2ff]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.05] blur-[100px] animate-drift-reverse bg-[#ff00c1]" />
+      <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.04] blur-[150px] animate-drift-slow bg-[#4d88ff]" />
 
-      {/* Subtle dot grid pattern */}
+      {/* Grid lines that subtly pulse */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage:
-            'radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
+          backgroundImage: `
+            linear-gradient(rgba(0,242,255,0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,242,255,0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
         }}
       />
-
-      {/* Nebula glow effects */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-cyan-accent/[0.04] blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-magenta-accent/[0.03] blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-blue-accent/[0.02] blur-[150px]" />
 
       {/* Subtle noise texture overlay */}
       <div
@@ -32,7 +35,7 @@ export function SceneContainer() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 0%, rgba(5,5,16,0.4) 70%, rgba(5,5,16,0.8) 100%)',
+            'radial-gradient(ellipse at center, transparent 0%, rgba(5,5,16,0.5) 60%, rgba(5,5,16,0.9) 100%)',
         }}
       />
     </div>

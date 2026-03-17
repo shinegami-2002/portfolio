@@ -24,6 +24,9 @@ const config: Config = {
         'float': 'float 6s ease-in-out infinite',
         'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
         'scan-line': 'scan-line 4s linear infinite',
+        'drift': 'drift 25s ease-in-out infinite',
+        'drift-reverse': 'drift 30s ease-in-out infinite reverse',
+        'drift-slow': 'drift 20s ease-in-out infinite 2s',
       },
       keyframes: {
         shimmer: {
@@ -41,6 +44,11 @@ const config: Config = {
         'scan-line': {
           '0%': { top: '-2px' },
           '100%': { top: '100%' },
+        },
+        drift: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%': { transform: 'translate(30px, -20px) scale(1.05)' },
+          '66%': { transform: 'translate(-20px, 15px) scale(0.95)' },
         },
       },
     },
