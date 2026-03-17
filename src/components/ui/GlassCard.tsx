@@ -30,7 +30,7 @@ export function GlassCard({
     <motion.div
       className={cn(
         'glass-card p-6',
-        hoverEffect && 'transition-shadow duration-300',
+        hoverEffect && 'hover-lift transition-all duration-300',
         hoverEffect && glowStyles[glowColor],
         className
       )}

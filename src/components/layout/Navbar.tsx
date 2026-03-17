@@ -115,13 +115,17 @@ export function Navbar() {
                     <a
                       href={link.href}
                       className={cn(
-                        'relative text-sm font-body px-3 py-1.5 rounded-lg transition-colors',
+                        'relative text-sm font-body px-3 py-1.5 rounded-lg transition-colors group/nav',
                         isActive
                           ? 'text-cyan-accent'
                           : 'text-text-muted hover:text-text-primary'
                       )}
                     >
                       {link.label}
+                      {/* Hover underline that slides in from left */}
+                      {!isActive && (
+                        <span className="absolute bottom-0 left-3 right-3 h-px bg-text-primary/40 scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300 origin-left" />
+                      )}
                       {isActive && (
                         <motion.span
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-accent"
@@ -140,7 +144,7 @@ export function Navbar() {
               href="/resume/Shanmukha_Chatadi_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-heading text-cyan-accent border border-cyan-accent/30 px-3 py-1.5 rounded-lg hover:bg-cyan-accent/10 transition-colors shrink-0"
+              className="text-sm font-heading text-cyan-accent border border-cyan-accent/30 px-3 py-1.5 rounded-lg hover:bg-cyan-accent/10 hover:scale-[1.03] transition-all duration-300 shrink-0"
             >
               Resume
             </a>

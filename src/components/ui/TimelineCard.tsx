@@ -19,7 +19,7 @@ export function TimelineCard({ experience, defaultExpanded = false, isFirst = fa
 
   return (
     <div
-      className={`glass-card p-5 cursor-pointer transition-shadow duration-300 ${isFirst ? 'border-t-2 border-t-cyan-accent/40' : ''}`}
+      className={`glass-card p-5 cursor-pointer hover-lift hover-glow-cyan ${isFirst ? 'border-t-2 border-t-cyan-accent/40' : ''} group`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex justify-between items-start gap-4">
@@ -39,7 +39,7 @@ export function TimelineCard({ experience, defaultExpanded = false, isFirst = fa
             animate={{ rotate: expanded ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ChevronDown className="w-5 h-5 text-text-muted" />
+            <ChevronDown className="w-5 h-5 text-text-muted group-hover:text-cyan-accent transition-colors duration-300" />
           </motion.div>
         </div>
       </div>

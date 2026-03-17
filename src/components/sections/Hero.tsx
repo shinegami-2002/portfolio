@@ -89,7 +89,7 @@ export function Hero() {
             href="https://github.com/shinegami-2002"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-muted/50 hover:text-text-primary transition-colors"
+            className="text-text-muted/50 hover:text-cyan-accent hover:scale-125 transition-all duration-300"
             aria-label="GitHub"
           >
             <Github size={20} />
@@ -98,14 +98,14 @@ export function Hero() {
             href="https://linkedin.com/in/shanmukha-chatadi"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-muted/50 hover:text-text-primary transition-colors"
+            className="text-text-muted/50 hover:text-cyan-accent hover:scale-125 transition-all duration-300"
             aria-label="LinkedIn"
           >
             <Linkedin size={20} />
           </a>
           <a
             href="mailto:schatad@ncsu.edu"
-            className="text-text-muted/50 hover:text-text-primary transition-colors"
+            className="text-text-muted/50 hover:text-cyan-accent hover:scale-125 transition-all duration-300"
             aria-label="Email"
           >
             <Mail size={20} />

@@ -40,7 +40,7 @@ export function LeadershipAchievements() {
           {achievements.map((achievement, i) => (
             <motion.div
               key={i}
-              className="glass-card px-4 py-2 border border-gold-accent/20 rounded-full"
+              className="glass-card px-4 py-2 border border-gold-accent/20 rounded-full cursor-default transition-all duration-200 hover:scale-105 hover:border-gold-accent/40 hover:brightness-125"
               initial={reducedMotion ? {} : { opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

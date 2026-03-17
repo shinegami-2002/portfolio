@@ -21,7 +21,7 @@ export function FlipCard({ icon, title, detail }: FlipCardProps) {
 
   return (
     <div
-      className="perspective-[800px] h-48 cursor-pointer"
+      className="perspective-[800px] h-48 cursor-pointer hover-lift group"
       onClick={() => setFlipped(!flipped)}
     >
       <div
@@ -31,12 +31,12 @@ export function FlipCard({ icon, title, detail }: FlipCardProps) {
         )}
       >
         {/* Front */}
-        <div className="absolute inset-0 glass-card flex flex-col items-center justify-center gap-3 [backface-visibility:hidden] hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] transition-shadow">
+        <div className="absolute inset-0 glass-card flex flex-col items-center justify-center gap-3 [backface-visibility:hidden] hover:shadow-[0_0_20px_rgba(0,212,255,0.12)] transition-all duration-300">
           <IconComponent className="w-8 h-8 text-cyan-accent" />
           <h3 className="font-heading text-sm font-medium text-white">
             {title}
           </h3>
-          <p className="text-xs text-text-muted">Click to flip</p>
+          <p className="text-xs text-text-muted group-hover:text-text-primary transition-colors duration-300">Click to flip</p>
         </div>
 
         {/* Back */}

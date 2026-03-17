@@ -35,7 +35,7 @@ function ProjectEditorialCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
-      className="max-w-4xl mx-auto"
+      className="max-w-4xl mx-auto hover-lift group"
     >
       {/* Project number */}
       <span className="block font-mono text-4xl md:text-5xl font-bold text-white/[0.06] mb-3 select-none">
@@ -61,7 +61,7 @@ function ProjectEditorialCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm font-mono text-text-muted hover:text-white hover:border-white/25 transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm font-mono text-text-muted hover:text-white hover:border-white/25 hover:bg-white/[0.06] hover:scale-105 transition-all duration-300"
               aria-label={`View ${project.title} on GitHub`}
               onClick={(e) => e.stopPropagation()}
             >
@@ -86,7 +86,7 @@ function ProjectEditorialCard({
           <span
             key={tag}
             className={cn(
-              'inline-flex items-center px-3 py-1 rounded-full border text-xs font-mono transition-colors',
+              'inline-flex items-center px-3 py-1 rounded-full border text-xs font-mono transition-all duration-200 hover:opacity-100 hover:brightness-125',
               colors.tagBg,
               colors.tagBorder,
               colors.text,

@@ -140,7 +140,7 @@ function MarqueeRow({
             <span
               key={`${skill.name}-${i}`}
               className={cn(
-                'inline-flex items-center px-4 py-2.5 rounded-full border text-sm font-mono whitespace-nowrap transition-all duration-300 hover:scale-105',
+                'inline-flex items-center px-4 py-2.5 rounded-full border text-sm font-mono whitespace-nowrap cursor-default transition-all duration-200 hover:scale-105 hover:brightness-125 hover:border-white/30',
                 config.bgColor,
                 config.hoverGlow,
               )}
