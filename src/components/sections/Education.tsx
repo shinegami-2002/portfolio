@@ -10,7 +10,7 @@ export function Education() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {education.map((edu, i) => (
           <GlassCard key={i} glowColor="cyan">
-            <h3 className="font-heading text-base font-medium text-white">{edu.institution}</h3>
+            <h3 className="font-heading text-base font-medium text-text-primary">{edu.institution}</h3>
             <p className="text-sm text-cyan-accent mt-1">{edu.degree}</p>
             <p className="text-xs text-text-muted font-mono mt-1">GPA: {edu.gpa} | {edu.period}</p>
             {edu.coursework && edu.coursework.length > 0 && (

@@ -35,7 +35,7 @@ export function SectionWrapper({ id, children, className, title, number }: Secti
                 {number.toString().padStart(2, '0')} /
               </span>
             )}
-            <h2 className="font-heading text-5xl md:text-6xl font-semibold text-white">
+            <h2 className="font-heading text-5xl md:text-6xl font-semibold text-text-primary">
               {title}
             </h2>
           </motion.div>

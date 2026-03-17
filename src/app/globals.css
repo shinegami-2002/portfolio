@@ -3,6 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-deep: 248 248 246;
+    --color-card: 255 255 255;
+    --color-elevated: 240 240 238;
+    --color-cyan-accent: 8 145 178;
+    --color-blue-accent: 79 70 229;
+    --color-gold-accent: 180 83 9;
+    --color-text-primary: 26 26 31;
+    --color-text-muted: 107 114 128;
+  }
+
+  .dark {
+    --color-deep: 10 10 15;
+    --color-card: 17 17 22;
+    --color-elevated: 26 26 34;
+    --color-cyan-accent: 0 212 255;
+    --color-blue-accent: 107 138 253;
+    --color-gold-accent: 232 176 74;
+    --color-text-primary: 240 236 226;
+    --color-text-muted: 156 163 175;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -16,9 +38,14 @@
     min-height: 100vh;
   }
 
-  ::selection {
+  .dark ::selection {
     background-color: rgba(0, 212, 255, 0.2);
     color: #fff;
+  }
+
+  ::selection {
+    background-color: rgba(8, 145, 178, 0.2);
+    color: #1a1a1f;
   }
 
   *:focus-visible {
@@ -28,13 +55,22 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06] rounded-xl;
+    @apply bg-white/80 backdrop-blur-xl border border-gray-200/50 rounded-xl;
+  }
+
+  .dark .glass-card {
+    @apply bg-white/[0.04] border-white/[0.06];
   }
 
   .glass-nav {
-    background: rgba(10, 10, 15, 0.80);
+    background: rgba(248, 248, 246, 0.80);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    @apply border-b border-gray-200/50;
+  }
+
+  .dark .glass-nav {
+    background: rgba(10, 10, 15, 0.80);
     @apply border-b border-white/[0.06];
   }
 
@@ -60,17 +96,31 @@
   }
   .hover-lift:hover {
     transform: translateY(-4px);
+  }
+  .dark .hover-lift:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+  .hover-lift:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   }
 
   /* Subtle glow on hover */
-  .hover-glow-cyan:hover {
+  .dark .hover-glow-cyan:hover {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.12), 0 8px 30px rgba(0, 0, 0, 0.2);
   }
-  .hover-glow-gold:hover {
+  .hover-glow-cyan:hover {
+    box-shadow: 0 0 20px rgba(8, 145, 178, 0.12), 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+  .dark .hover-glow-gold:hover {
     box-shadow: 0 0 20px rgba(232, 176, 74, 0.12), 0 8px 30px rgba(0, 0, 0, 0.2);
   }
-  .hover-glow-blue:hover {
+  .hover-glow-gold:hover {
+    box-shadow: 0 0 20px rgba(180, 83, 9, 0.12), 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+  .dark .hover-glow-blue:hover {
     box-shadow: 0 0 20px rgba(107, 138, 253, 0.12), 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+  .hover-glow-blue:hover {
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.12), 0 8px 30px rgba(0, 0, 0, 0.08);
   }
 }

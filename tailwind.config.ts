@@ -1,18 +1,19 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        'deep': '#0a0a0f',
-        'card': '#111116',
-        'elevated': '#1a1a22',
-        'cyan-accent': '#00d4ff',
-        'blue-accent': '#6b8afd',
-        'gold-accent': '#e8b04a',
-        'text-primary': '#f0ece2',
-        'text-muted': '#9ca3af',
+        'deep': 'rgb(var(--color-deep) / <alpha-value>)',
+        'card': 'rgb(var(--color-card) / <alpha-value>)',
+        'elevated': 'rgb(var(--color-elevated) / <alpha-value>)',
+        'cyan-accent': 'rgb(var(--color-cyan-accent) / <alpha-value>)',
+        'blue-accent': 'rgb(var(--color-blue-accent) / <alpha-value>)',
+        'gold-accent': 'rgb(var(--color-gold-accent) / <alpha-value>)',
+        'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
       },
       fontFamily: {
         heading: ['var(--font-heading)', 'sans-serif'],
@@ -28,6 +29,7 @@ const config: Config = {
         'drift-reverse': 'drift 30s ease-in-out infinite reverse',
         'drift-slow': 'drift 20s ease-in-out infinite 2s',
         'spotlight': 'spotlight 2s ease .75s 1 forwards',
+        'blink': 'blink 1s step-end infinite',
       },
       keyframes: {
         shimmer: {
@@ -54,6 +56,10 @@ const config: Config = {
         spotlight: {
           '0%': { opacity: '0', transform: 'translate(-72%, -62%) scale(0.5)' },
           '100%': { opacity: '1', transform: 'translate(-50%, -40%) scale(1)' },
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
       },
     },

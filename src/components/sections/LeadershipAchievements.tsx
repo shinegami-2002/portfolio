@@ -15,7 +15,7 @@ export function LeadershipAchievements() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         {leadership.map((entry, i) => (
           <GlassCard key={i} glowColor="cyan">
-            <h3 className="font-heading text-sm font-medium text-white">
+            <h3 className="font-heading text-sm font-medium text-text-primary">
               {entry.title}
             </h3>
             <p className="text-xs text-gold-accent mt-1">
@@ -33,7 +33,7 @@ export function LeadershipAchievements() {
 
       {/* Achievement badges */}
       <div>
-        <h3 className="font-heading text-lg font-medium text-white mb-4 text-center">
+        <h3 className="font-heading text-lg font-medium text-text-primary mb-4 text-center">
           Achievements
         </h3>
         <div className="flex flex-wrap justify-center gap-3">

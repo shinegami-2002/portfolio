@@ -4,8 +4,8 @@ import { motion, type Variants } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/ShimmerButton';
 import { Spotlight } from '@/components/ui/spotlight';
-import { TextGenerateEffect } from '@/components/ui/text-generate';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 /* ---------- Animation variants ---------- */
 
@@ -46,10 +46,18 @@ const ctaFade: Variants = {
   },
 };
 
+const TYPEWRITER_PHRASES = [
+  'AI/ML Engineer crafting intelligent systems',
+  'Building Agentic AI Systems',
+  'Published Researcher (Springer, IEEE)',
+  'MS CS @ NC State \'26',
+];
+
 /* ---------- Hero component ---------- */
 
 export function Hero() {
   const reduced = useReducedMotion();
+  const subtitle = useTypewriter(TYPEWRITER_PHRASES, 50, 30, 2000);
 
   return (
     <section
@@ -57,15 +65,15 @@ export function Hero() {
       className="relative min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent overflow-hidden"
       aria-label="Introduction"
     >
-      {/* Spotlights */}
+      {/* Spotlights - dark mode only */}
       {!reduced && (
         <>
           <Spotlight
-            className="-top-40 left-0 md:left-60 md:-top-20"
+            className="-top-40 left-0 md:left-60 md:-top-20 hidden dark:block"
             fill="#00d4ff"
           />
           <Spotlight
-            className="-top-28 right-0 md:right-40 md:-top-16 h-[120%] w-[100%] lg:w-[60%]"
+            className="-top-28 right-0 md:right-40 md:-top-16 h-[120%] w-[100%] lg:w-[60%] hidden dark:block"
             fill="#e8b04a"
           />
         </>
@@ -80,7 +88,7 @@ export function Hero() {
         {/* Name */}
         <motion.h1
           variants={reduced ? undefined : fadeUp}
-          className="font-heading text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.05] bg-gradient-to-r from-white via-text-primary to-white/60 bg-clip-text text-transparent"
+          className="font-heading text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.05] bg-gradient-to-r from-text-primary via-text-primary to-text-primary/60 bg-clip-text text-transparent"
         >
           Shanmukha Chatadi
         </motion.h1>
@@ -92,18 +100,20 @@ export function Hero() {
           aria-hidden="true"
         />
 
-        {/* Subtitle - word-by-word fade */}
-        {reduced ? (
-          <p className="text-xl text-text-muted">
-            AI/ML Engineer crafting intelligent systems
-          </p>
-        ) : (
-          <TextGenerateEffect
-            words="AI/ML Engineer crafting intelligent systems"
-            className="text-xl text-text-muted"
-            duration={0.5}
-          />
-        )}
+        {/* Subtitle - typewriter cycling */}
+        <motion.p
+          variants={reduced ? undefined : fadeUp}
+          className="text-xl md:text-2xl text-text-muted h-8"
+        >
+          {reduced ? (
+            TYPEWRITER_PHRASES[0]
+          ) : (
+            <>
+              {subtitle}
+              <span className="animate-blink text-cyan-accent">|</span>
+            </>
+          )}
+        </motion.p>
 
         {/* One-line bio */}
         <motion.p

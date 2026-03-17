@@ -61,8 +61,8 @@ const categoryConfig: Record<string, CategoryConfig> = {
     icon: Globe,
     color: 'text-text-primary',
     dotColor: 'bg-text-primary',
-    bgColor: 'bg-white/5 border-white/10',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(255,255,255,0.06)]',
+    bgColor: 'bg-black/5 dark:bg-white/5 border-gray-300 dark:border-white/10',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,0,0,0.04)] dark:hover:shadow-[inset_0_0_12px_rgba(255,255,255,0.06)]',
     direction: 'right',
     speed: 24,
   },
@@ -119,8 +119,8 @@ function MarqueeRow({
       </div>
       <div className="overflow-hidden relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#f8f8f6] dark:from-[#0a0a0f] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#f8f8f6] dark:from-[#0a0a0f] to-transparent z-10" />
 
         <motion.div
           className="flex gap-3 w-max"
@@ -140,7 +140,7 @@ function MarqueeRow({
             <span
               key={`${skill.name}-${i}`}
               className={cn(
-                'inline-flex items-center px-4 py-2.5 rounded-full border text-sm font-mono whitespace-nowrap cursor-default transition-all duration-200 hover:scale-105 hover:brightness-125 hover:border-white/30',
+                'inline-flex items-center px-4 py-2.5 rounded-full border text-sm font-mono whitespace-nowrap cursor-default transition-all duration-200 hover:scale-105 hover:brightness-125 hover:border-gray-400 dark:hover:border-white/30',
                 config.bgColor,
                 config.hoverGlow,
               )}

@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMobile } from '@/hooks/useMobile';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -139,15 +140,18 @@ export function Navbar() {
               })}
             </ul>
 
-            {/* Right: Resume button */}
-            <a
-              href="/resume/Shanmukha_Chatadi_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-heading text-cyan-accent border border-cyan-accent/30 px-3 py-1.5 rounded-lg hover:bg-cyan-accent/10 hover:scale-[1.03] transition-all duration-300 shrink-0"
-            >
-              Resume
-            </a>
+            {/* Right: Theme toggle + Resume button */}
+            <div className="flex items-center gap-2 shrink-0">
+              <ThemeToggle />
+              <a
+                href="/resume/Shanmukha_Chatadi_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-heading text-cyan-accent border border-cyan-accent/30 px-3 py-1.5 rounded-lg hover:bg-cyan-accent/10 hover:scale-[1.03] transition-all duration-300"
+              >
+                Resume
+              </a>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>
@@ -185,7 +189,7 @@ export function Navbar() {
 
             {/* Panel */}
             <motion.nav
-              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-deep/95 backdrop-blur-xl border-l border-white/[0.06] flex flex-col"
+              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-deep/95 backdrop-blur-xl border-l border-gray-200/50 dark:border-white/[0.06] flex flex-col"
               initial={reducedMotion ? { opacity: 0 } : { x: '100%' }}
               animate={reducedMotion ? { opacity: 1 } : { x: 0 }}
               exit={reducedMotion ? { opacity: 0 } : { x: '100%' }}
@@ -197,7 +201,7 @@ export function Navbar() {
               <div className="flex justify-end p-4">
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-lg hover:bg-white/5 transition-colors"
+                  className="p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                   aria-label="Close navigation menu"
                 >
                   <X className="w-6 h-6 text-text-muted" />
@@ -223,7 +227,7 @@ export function Navbar() {
                           'block text-lg font-body py-3 px-4 rounded-lg transition-colors',
                           isActive
                             ? 'text-cyan-accent bg-cyan-accent/5'
-                            : 'text-text-muted hover:text-text-primary hover:bg-white/[0.03]'
+                            : 'text-text-muted hover:text-text-primary hover:bg-black/[0.03] dark:hover:bg-white/[0.03]'
                         )}
                       >
                         {link.label}

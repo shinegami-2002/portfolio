@@ -24,7 +24,7 @@ export function TimelineCard({ experience, defaultExpanded = false, isFirst = fa
     >
       <div className="flex justify-between items-start gap-4">
         <div className="flex-1">
-          <h3 className="font-heading text-xl font-semibold text-white">
+          <h3 className="font-heading text-xl font-semibold text-text-primary">
             {experience.company}
           </h3>
           <p className="text-base text-text-muted mt-0.5">

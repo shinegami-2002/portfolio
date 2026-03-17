@@ -44,9 +44,9 @@ export function Contact() {
         className="max-w-2xl mx-auto"
       >
         {/* Terminal */}
-        <div className="bg-black/40 border border-white/[0.08] rounded-lg p-6 font-mono text-sm transition-all duration-300 hover:border-white/[0.16] hover:shadow-[0_0_20px_rgba(0,212,255,0.06)]">
+        <div className="bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/[0.08] rounded-lg p-6 font-mono text-sm transition-all duration-300 hover:border-gray-300 dark:hover:border-white/[0.16] hover:shadow-[0_0_20px_rgba(0,212,255,0.06)]">
           {/* Terminal header */}
-          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200 dark:border-white/5">
             <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
             <div className="w-3 h-3 rounded-full bg-green-500/60"></div>

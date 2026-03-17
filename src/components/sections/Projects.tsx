@@ -38,14 +38,14 @@ function ProjectEditorialCard({
       className="max-w-4xl mx-auto hover-lift group"
     >
       {/* Project number */}
-      <span className="block font-mono text-4xl md:text-5xl font-bold text-white/[0.06] mb-3 select-none">
+      <span className="block font-mono text-4xl md:text-5xl font-bold text-text-primary/[0.06] mb-3 select-none">
         {number}
       </span>
 
       {/* Title row */}
       <div className="flex items-start justify-between gap-4 mb-2">
         <div>
-          <h3 className="font-heading text-2xl md:text-3xl font-semibold text-white">
+          <h3 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary">
             {project.title}
           </h3>
           {project.subtitle && (
@@ -61,7 +61,7 @@ function ProjectEditorialCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm font-mono text-text-muted hover:text-white hover:border-white/25 hover:bg-white/[0.06] hover:scale-105 transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-white/10 text-sm font-mono text-text-muted hover:text-text-primary hover:border-gray-400 dark:hover:border-white/25 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] hover:scale-105 transition-all duration-300"
               aria-label={`View ${project.title} on GitHub`}
               onClick={(e) => e.stopPropagation()}
             >
@@ -73,7 +73,7 @@ function ProjectEditorialCard({
       </div>
 
       {/* Divider */}
-      <div className="w-full h-px bg-white/[0.08] my-4" />
+      <div className="w-full h-px bg-gray-200 dark:bg-white/[0.08] my-4" />
 
       {/* Description */}
       <p className="text-base text-text-primary/70 leading-relaxed mb-5">

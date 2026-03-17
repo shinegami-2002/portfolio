@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Syne, Inter, JetBrains_Mono } from 'next/font/google';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import './globals.css';
 
 const syne = Syne({
@@ -42,15 +43,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <body>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-deep focus:text-cyan-accent focus:ring-2 focus:ring-cyan-accent focus:rounded"
-        >
-          Skip to content
-        </a>
-        {children}
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-deep focus:text-cyan-accent focus:ring-2 focus:ring-cyan-accent focus:rounded"
+          >
+            Skip to content
+          </a>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ export function Publications() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {publications.map((pub, i) => (
           <GlassCard key={i} glowColor={pub.publisher === 'springer' ? 'cyan' : 'blue'}>
-            <h3 className="font-heading text-lg font-medium text-white mb-2">{pub.title}</h3>
+            <h3 className="font-heading text-lg font-medium text-text-primary mb-2">{pub.title}</h3>
             <p className="text-sm text-text-muted italic mb-2">{pub.authors}</p>
             <p className="text-sm text-text-primary/70">{pub.venue}, {pub.year}</p>
             <div className="flex items-center gap-3 mt-3">
