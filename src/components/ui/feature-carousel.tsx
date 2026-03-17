@@ -247,8 +247,20 @@ export function FeatureCarousel() {
                   />
                   <div className="absolute inset-0 bg-card/90 backdrop-blur-sm" />
 
+                  {/* GitHub OG image */}
+                  {feature.project.githubUrl && (
+                    <div className="relative w-full h-36 md:h-44 overflow-hidden border-b border-white/[0.06]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`https://opengraph.githubassets.com/1/shinegami-2002/${feature.project.githubUrl.split('/').pop()}`}
+                        alt={feature.project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
                   {/* Card content */}
-                  <div className="relative h-full flex flex-col p-6 md:p-8">
+                  <div className="relative flex-1 flex flex-col p-6 md:p-8">
                     {/* Top: icon + index */}
                     <div className="flex items-center justify-between mb-5">
                       <div

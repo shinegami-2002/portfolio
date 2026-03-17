@@ -1,71 +1,40 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-import { Component, type ReactNode } from 'react';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
-
-const Scene = dynamic(() => import('./Scene').then((mod) => mod.Scene), {
-  ssr: false,
-  loading: () => null,
-});
-
-class R3FErrorBoundary extends Component<
-  { children: ReactNode; fallback: ReactNode },
-  { hasError: boolean }
-> {
-  state = { hasError: false };
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error) {
-    console.error('R3F Error:', error);
-  }
-
-  render() {
-    if (this.state.hasError) return this.props.fallback;
-    return this.props.children;
-  }
-}
-
-function hasWebGL(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    const canvas = document.createElement('canvas');
-    return !!(canvas.getContext('webgl') || canvas.getContext('webgl2'));
-  } catch {
-    return false;
-  }
-}
-
 export function SceneContainer() {
-  const reducedMotion = useReducedMotion();
-
-  const cssBackground = (
-    <div
-      className="fixed inset-0 -z-10"
-      style={{
-        background: `radial-gradient(ellipse at 20% 20%, rgba(0,242,255,0.08) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 80%, rgba(255,0,193,0.06) 0%, transparent 50%),
-          radial-gradient(ellipse at 50% 50%, rgba(77,136,255,0.05) 0%, transparent 60%),
-          radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.6) 0%, transparent 40%),
-          radial-gradient(ellipse at 30% 70%, rgba(140,0,255,0.04) 0%, transparent 45%),
-          #050510`,
-      }}
-    />
-  );
-
-  if (reducedMotion || (typeof window !== 'undefined' && !hasWebGL())) {
-    return cssBackground;
-  }
-
   return (
-    <>
-      {cssBackground}
-      <R3FErrorBoundary fallback={null}>
-        <Scene />
-      </R3FErrorBoundary>
-    </>
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-deep" />
+
+      {/* Subtle dot grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
+
+      {/* Nebula glow effects */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-cyan-accent/[0.04] blur-[120px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-magenta-accent/[0.03] blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-blue-accent/[0.02] blur-[150px]" />
+
+      {/* Subtle noise texture overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Vignette */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 0%, rgba(5,5,16,0.4) 70%, rgba(5,5,16,0.8) 100%)',
+        }}
+      />
+    </div>
   );
 }

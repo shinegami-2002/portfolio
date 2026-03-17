@@ -33,7 +33,7 @@ function NumberCounter({ value, suffix = '' }: { value: number; suffix?: string 
 }
 
 const stats = [
-  { label: 'Years Experience', value: 3, suffix: '+', color: 'cyan' as const },
+  { label: 'Years Experience', value: 2, suffix: '+', color: 'cyan' as const },
   { label: 'Projects Shipped', value: 7, suffix: '+', color: 'magenta' as const },
   { label: 'Publications', value: 2, suffix: '', color: 'blue' as const },
   { label: 'Users Served', value: 230, suffix: '+', color: 'white' as const },
