@@ -4,6 +4,7 @@ import { motion, type Variants } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/ShimmerButton';
 import { Spotlight } from '@/components/ui/spotlight';
+import { Boxes } from '@/components/ui/background-boxes';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useTypewriter } from '@/hooks/useTypewriter';
 
@@ -65,7 +66,14 @@ export function Hero() {
       className="relative min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent overflow-hidden"
       aria-label="Introduction"
     >
-      {/* Spotlights - dark mode only */}
+      {/* Interactive background boxes - dark mode only */}
+      <div className="absolute inset-0 z-0 overflow-hidden hidden dark:block">
+        <Boxes />
+        {/* Radial mask so boxes fade at edges */}
+        <div className="absolute inset-0 w-full h-full bg-[#0a0a0f] [mask-image:radial-gradient(ellipse_at_center,transparent_30%,white_80%)] pointer-events-none" />
+      </div>
+
+      {/* Spotlights */}
       {!reduced && (
         <>
           <Spotlight
