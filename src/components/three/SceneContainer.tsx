@@ -1,4 +1,6 @@
-'use client';
+"use client";
+
+import { Boxes } from "@/components/ui/background-boxes";
 
 export function SceneContainer() {
   return (
@@ -8,34 +10,18 @@ export function SceneContainer() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[100px] animate-drift-reverse bg-[#e8b04a]" />
       <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.05] blur-[150px] animate-drift-slow bg-[#6b8afd]" />
 
-      {/* Grid lines that subtly pulse */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(240,236,226,0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(240,236,226,0.2) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
-        }}
-      />
+      {/* Interactive background boxes grid */}
+      <Boxes />
 
-      {/* Subtle noise texture overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Mask overlay - fades boxes toward edges, keeps center visible */}
+      <div className="absolute inset-0 w-full h-full bg-[#0a0a0f] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
       {/* Vignette */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 z-30 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 0%, rgba(10,10,15,0.5) 60%, rgba(10,10,15,0.9) 100%)',
+            "radial-gradient(ellipse at center, transparent 0%, rgba(10,10,15,0.4) 50%, rgba(10,10,15,0.85) 100%)",
         }}
       />
     </div>
