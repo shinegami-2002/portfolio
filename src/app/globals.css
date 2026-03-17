@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --color-deep: 248 248 246;
-    --color-card: 255 255 255;
-    --color-elevated: 240 240 238;
-    --color-cyan-accent: 8 145 178;
-    --color-blue-accent: 79 70 229;
-    --color-gold-accent: 180 83 9;
-    --color-text-primary: 26 26 31;
-    --color-text-muted: 107 114 128;
+    --color-deep: 245 243 238;
+    --color-card: 255 253 250;
+    --color-elevated: 237 235 230;
+    --color-cyan-accent: 14 116 144;
+    --color-blue-accent: 67 56 202;
+    --color-gold-accent: 161 98 7;
+    --color-text-primary: 28 25 23;
+    --color-text-muted: 87 83 78;
   }
 
   .dark {
@@ -55,23 +55,23 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-xl border border-gray-200/50 rounded-xl;
+    @apply bg-white/70 backdrop-blur-xl border border-stone-200/60 rounded-xl shadow-sm;
   }
 
   .dark .glass-card {
-    @apply bg-white/[0.04] border-white/[0.06];
+    @apply bg-white/[0.04] border-white/[0.06] shadow-none;
   }
 
   .glass-nav {
-    background: rgba(248, 248, 246, 0.80);
+    background: rgba(245, 243, 238, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    @apply border-b border-gray-200/50;
+    @apply border-b border-stone-200/60 shadow-sm;
   }
 
   .dark .glass-nav {
     background: rgba(10, 10, 15, 0.80);
-    @apply border-b border-white/[0.06];
+    @apply border-b border-white/[0.06] shadow-none;
   }
 
   .glow-cyan {

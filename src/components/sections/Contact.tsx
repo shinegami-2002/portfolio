@@ -10,8 +10,8 @@ const contactLines = [
   { key: 'email', value: 'schatad@ncsu.edu', color: 'text-cyan-accent', href: 'mailto:schatad@ncsu.edu' },
   { key: 'linkedin', value: 'linkedin.com/in/shanmukha-chatadi', color: 'text-blue-accent', href: 'https://linkedin.com/in/shanmukha-chatadi' },
   { key: 'github', value: 'github.com/shinegami-2002', color: 'text-blue-accent', href: 'https://github.com/shinegami-2002' },
-  { key: 'location', value: 'Raleigh, NC', color: 'text-text-primary', href: null },
-  { key: 'status', value: 'Open to opportunities', color: 'text-green-400', href: null },
+  { key: 'location', value: 'Raleigh, NC (Open to Relocation)', color: 'text-text-primary', href: null },
+  { key: 'status', value: 'Open to opportunities', color: 'text-green-400 dark:text-green-400', href: null },
 ];
 
 export function Contact() {

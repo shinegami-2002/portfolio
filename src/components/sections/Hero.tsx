@@ -120,7 +120,7 @@ export function Hero() {
           variants={reduced ? undefined : delayedFade}
           className="text-sm font-mono text-text-muted/60"
         >
-          MS CS @ NC State &middot; Published in Springer &amp; IEEE &middot; Currently at MiHIN
+          Raleigh, NC &middot; Open to Relocation &middot; MS CS @ NC State &middot; Currently at MiHIN
         </motion.p>
 
         {/* CTA buttons */}
