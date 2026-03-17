@@ -37,14 +37,14 @@ export function Contact() {
   }, [triggered, reducedMotion]);
 
   return (
-    <SectionWrapper id="contact" title="Contact">
+    <SectionWrapper id="contact" title="Contact" number={9}>
       <motion.div
         onViewportEnter={() => setTriggered(true)}
         viewport={{ once: true }}
         className="max-w-2xl mx-auto"
       >
         {/* Terminal */}
-        <div className="bg-black/40 border border-cyan-accent/10 rounded-lg p-6 font-mono text-sm">
+        <div className="bg-black/40 border border-white/[0.08] rounded-lg p-6 font-mono text-sm">
           {/* Terminal header */}
           <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
             <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
@@ -55,7 +55,7 @@ export function Contact() {
 
           {/* Command */}
           <div className="text-text-muted mb-3">
-            <span className="text-cyan-accent">shanmukha</span>
+            <span className="text-gold-accent">shanmukha</span>
             <span className="text-text-muted">@</span>
             <span className="text-blue-accent">portfolio</span>
             {' '}

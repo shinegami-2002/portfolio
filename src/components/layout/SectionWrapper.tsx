@@ -9,9 +9,10 @@ interface SectionWrapperProps {
   children: React.ReactNode;
   className?: string;
   title?: string;
+  number?: number;
 }
 
-export function SectionWrapper({ id, children, className, title }: SectionWrapperProps) {
+export function SectionWrapper({ id, children, className, title, number }: SectionWrapperProps) {
   const reducedMotion = useReducedMotion();
 
   return (
@@ -22,15 +23,22 @@ export function SectionWrapper({ id, children, className, title }: SectionWrappe
     >
       <div className="max-w-[1200px] mx-auto">
         {title && (
-          <motion.h2
-            className="font-heading text-4xl md:text-5xl font-semibold text-white mb-8 text-center"
+          <motion.div
+            className="mb-6"
             initial={reducedMotion ? {} : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
           >
-            {title}
-          </motion.h2>
+            {number && (
+              <span className="block text-sm font-mono text-text-muted/40 mb-2">
+                {number.toString().padStart(2, '0')} /
+              </span>
+            )}
+            <h2 className="font-heading text-5xl md:text-6xl font-semibold text-white">
+              {title}
+            </h2>
+          </motion.div>
         )}
         {children}
       </div>

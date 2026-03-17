@@ -5,14 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'deep': '#050510',
-        'card': '#0a0a1a',
-        'elevated': '#0f172a',
-        'cyan-accent': '#00f2ff',
-        'magenta-accent': '#ff00c1',
-        'blue-accent': '#4d88ff',
-        'text-primary': '#e0e6f0',
-        'text-muted': '#8899a6',
+        'deep': '#0a0a0f',
+        'card': '#111116',
+        'elevated': '#1a1a22',
+        'cyan-accent': '#00d4ff',
+        'blue-accent': '#6b8afd',
+        'gold-accent': '#e8b04a',
+        'text-primary': '#f0ece2',
+        'text-muted': '#9ca3af',
       },
       fontFamily: {
         heading: ['var(--font-heading)', 'sans-serif'],

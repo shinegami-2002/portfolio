@@ -5,7 +5,7 @@ export function Footer() {
         &copy; {new Date().getFullYear()} Shanmukha Chatadi
       </p>
       <p className="text-xs text-text-muted/50 mt-1">
-        Built with Next.js, React Three Fiber, and a lot of caffeine
+        Built with Next.js and a lot of caffeine
       </p>
     </footer>
   );

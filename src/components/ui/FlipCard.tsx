@@ -31,7 +31,7 @@ export function FlipCard({ icon, title, detail }: FlipCardProps) {
         )}
       >
         {/* Front */}
-        <div className="absolute inset-0 glass-card flex flex-col items-center justify-center gap-3 [backface-visibility:hidden] hover:shadow-[0_0_20px_rgba(0,242,255,0.1)] transition-shadow">
+        <div className="absolute inset-0 glass-card flex flex-col items-center justify-center gap-3 [backface-visibility:hidden] hover:shadow-[0_0_20px_rgba(0,212,255,0.1)] transition-shadow">
           <IconComponent className="w-8 h-8 text-cyan-accent" />
           <h3 className="font-heading text-sm font-medium text-white">
             {title}

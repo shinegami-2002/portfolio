@@ -15,31 +15,33 @@ interface TimelineCardProps {
 export function TimelineCard({ experience, defaultExpanded = false, isFirst = false }: TimelineCardProps) {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
-  const accentColors = {
-    cyan: { border: 'border-cyan-accent/20', leftBorder: 'border-l-cyan-accent/40', text: 'text-cyan-accent', tag: 'cyan' as const },
-    blue: { border: 'border-blue-accent/20', leftBorder: 'border-l-blue-accent/40', text: 'text-blue-accent', tag: 'blue' as const },
-  };
-  const accent = accentColors[experience.accent];
+  const tagVariant = experience.accent === 'cyan' ? 'cyan' as const : 'blue' as const;
 
   return (
     <div
-      className={`glass-card p-5 cursor-pointer border-l-2 ${accent.leftBorder} ${accent.border} ${isFirst ? 'shadow-[0_0_25px_rgba(0,242,255,0.08)]' : ''}`}
+      className={`glass-card p-5 cursor-pointer transition-shadow duration-300 ${isFirst ? 'border-t-2 border-t-cyan-accent/40' : ''}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex justify-between items-start gap-4">
-        <div>
-          <h3 className="font-heading text-lg font-semibold text-white">{experience.title}</h3>
-          <p className={`text-sm ${accent.text}`}>{experience.company}</p>
-          <p className="text-xs text-text-muted font-mono">
-            {experience.location} | {experience.period}
+        <div className="flex-1">
+          <h3 className="font-heading text-xl font-semibold text-white">
+            {experience.company}
+          </h3>
+          <p className="text-base text-text-muted mt-0.5">
+            {experience.title}
           </p>
         </div>
-        <motion.div
-          animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <ChevronDown className="w-5 h-5 text-text-muted" />
-        </motion.div>
+        <div className="flex items-center gap-3 shrink-0">
+          <p className="text-sm font-mono text-text-muted/60 text-right">
+            {experience.location}<br />{experience.period}
+          </p>
+          <motion.div
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronDown className="w-5 h-5 text-text-muted" />
+          </motion.div>
+        </div>
       </div>
 
       <AnimatePresence initial={false}>
@@ -63,7 +65,7 @@ export function TimelineCard({ experience, defaultExpanded = false, isFirst = fa
             </ul>
             <div className="flex flex-wrap gap-1.5 mt-4">
               {experience.tags.map((tag) => (
-                <TechTag key={tag} variant={accent.tag} size="sm">
+                <TechTag key={tag} variant={tagVariant} size="sm">
                   {tag}
                 </TechTag>
               ))}

@@ -32,17 +32,17 @@ const categoryConfig: Record<string, CategoryConfig> = {
     color: 'text-cyan-accent',
     dotColor: 'bg-cyan-accent',
     bgColor: 'bg-cyan-accent/10 border-cyan-accent/20',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,242,255,0.12)]',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,212,255,0.12)]',
     direction: 'left',
     speed: 22,
   },
   languages: {
     label: 'Languages',
     icon: Code,
-    color: 'text-amber-400',
-    dotColor: 'bg-amber-400',
-    bgColor: 'bg-amber-400/10 border-amber-400/20',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(245,158,11,0.12)]',
+    color: 'text-gold-accent',
+    dotColor: 'bg-gold-accent',
+    bgColor: 'bg-gold-accent/10 border-gold-accent/20',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(232,176,74,0.12)]',
     direction: 'right',
     speed: 26,
   },
@@ -52,7 +52,7 @@ const categoryConfig: Record<string, CategoryConfig> = {
     color: 'text-blue-accent',
     dotColor: 'bg-blue-accent',
     bgColor: 'bg-blue-accent/10 border-blue-accent/20',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(77,136,255,0.12)]',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(107,138,253,0.12)]',
     direction: 'left',
     speed: 20,
   },
@@ -72,7 +72,7 @@ const categoryConfig: Record<string, CategoryConfig> = {
     color: 'text-cyan-accent',
     dotColor: 'bg-cyan-accent',
     bgColor: 'bg-cyan-accent/10 border-cyan-accent/20',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,242,255,0.12)]',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(0,212,255,0.12)]',
     direction: 'left',
     speed: 28,
   },
@@ -82,7 +82,7 @@ const categoryConfig: Record<string, CategoryConfig> = {
     color: 'text-blue-accent',
     dotColor: 'bg-blue-accent',
     bgColor: 'bg-blue-accent/10 border-blue-accent/20',
-    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(77,136,255,0.12)]',
+    hoverGlow: 'hover:shadow-[inset_0_0_12px_rgba(107,138,253,0.12)]',
     direction: 'right',
     speed: 18,
   },
@@ -96,22 +96,6 @@ const categoryOrder = [
   'databases',
   'libraries',
 ] as const;
-
-function ProficiencyDots({ level }: { level: number }) {
-  return (
-    <div className="flex gap-0.5 ml-1.5">
-      {[1, 2, 3, 4, 5].map((dot) => (
-        <div
-          key={dot}
-          className={cn(
-            'w-1 h-1 rounded-full',
-            dot <= level ? 'bg-current opacity-60' : 'bg-current opacity-15',
-          )}
-        />
-      ))}
-    </div>
-  );
-}
 
 function MarqueeRow({
   skillList,
@@ -135,8 +119,8 @@ function MarqueeRow({
       </div>
       <div className="overflow-hidden relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#050510] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#050510] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10" />
 
         <motion.div
           className="flex gap-3 w-max"
@@ -162,7 +146,6 @@ function MarqueeRow({
               )}
             >
               {skill.name}
-              <ProficiencyDots level={skill.proficiency} />
             </span>
           ))}
         </motion.div>
@@ -182,7 +165,7 @@ export function SkillsConstellation() {
   );
 
   return (
-    <SectionWrapper id="skills" title="Skills">
+    <SectionWrapper id="skills" title="Skills" number={4}>
       <div className="space-y-2">
         {categoryOrder.map((category) => {
           const config = categoryConfig[category];

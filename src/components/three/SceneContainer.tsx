@@ -2,19 +2,19 @@
 
 export function SceneContainer() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#050510]">
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#0a0a0f]">
       {/* Animated gradient orbs that slowly drift */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.10] blur-[120px] animate-drift bg-[#00f2ff]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.08] blur-[100px] animate-drift-reverse bg-[#1a3a6e]" />
-      <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.06] blur-[150px] animate-drift-slow bg-[#4d88ff]" />
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-[0.08] blur-[120px] animate-drift bg-[#00d4ff]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[100px] animate-drift-reverse bg-[#e8b04a]" />
+      <div className="absolute top-[40%] left-[50%] w-[700px] h-[700px] rounded-full opacity-[0.05] blur-[150px] animate-drift-slow bg-[#6b8afd]" />
 
       {/* Grid lines that subtly pulse */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(0,242,255,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,242,255,0.3) 1px, transparent 1px)
+            linear-gradient(rgba(240,236,226,0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(240,236,226,0.2) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
           maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
@@ -35,7 +35,7 @@ export function SceneContainer() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 0%, rgba(5,5,16,0.5) 60%, rgba(5,5,16,0.9) 100%)',
+            'radial-gradient(ellipse at center, transparent 0%, rgba(10,10,15,0.5) 60%, rgba(10,10,15,0.9) 100%)',
         }}
       />
     </div>

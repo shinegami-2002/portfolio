@@ -10,7 +10,7 @@ export function BeyondTheCode() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <SectionWrapper id="beyond" title="Beyond the Code">
+    <SectionWrapper id="beyond" title="Beyond the Code" number={8}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {funFacts.map((fact, i) => (
           <motion.div

@@ -5,7 +5,7 @@ import { publications } from '@/data/publications';
 
 export function Publications() {
   return (
-    <SectionWrapper id="publications" title="Publications">
+    <SectionWrapper id="publications" title="Publications" number={5}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {publications.map((pub, i) => (
           <GlassCard key={i} glowColor={pub.publisher === 'springer' ? 'cyan' : 'blue'}>

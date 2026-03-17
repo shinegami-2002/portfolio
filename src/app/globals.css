@@ -17,7 +17,7 @@
   }
 
   ::selection {
-    background-color: rgba(0, 242, 255, 0.2);
+    background-color: rgba(0, 212, 255, 0.2);
     color: #fff;
   }
 
@@ -28,22 +28,26 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-xl;
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06] rounded-xl;
   }
 
   .glass-nav {
-    background: rgba(5, 5, 16, 0.80);
+    background: rgba(10, 10, 15, 0.80);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     @apply border-b border-white/[0.06];
   }
 
   .glow-cyan {
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
   }
 
   .glow-blue {
-    box-shadow: 0 0 30px rgba(77, 136, 255, 0.15);
+    box-shadow: 0 0 30px rgba(107, 138, 253, 0.15);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(232, 176, 74, 0.15);
   }
 
   .text-gradient {

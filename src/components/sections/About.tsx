@@ -34,28 +34,28 @@ function NumberCounter({ value, suffix = '' }: { value: number; suffix?: string 
 
 const stats = [
   { label: 'Years Experience', value: 2, suffix: '+', color: 'cyan' as const },
-  { label: 'Projects Shipped', value: 7, suffix: '+', color: 'blue' as const },
+  { label: 'Projects Shipped', value: 7, suffix: '+', color: 'gold' as const },
   { label: 'Publications', value: 2, suffix: '', color: 'blue' as const },
-  { label: 'Users Served', value: 230, suffix: '+', color: 'white' as const },
+  { label: 'Users Served', value: 230, suffix: '+', color: 'cyan' as const },
 ];
 
 const colorMap: Record<string, string> = {
   cyan: 'text-cyan-accent',
   blue: 'text-blue-accent',
-  white: 'text-white',
+  gold: 'text-gold-accent',
 };
 
-const glowColorMap: Record<string, 'cyan' | 'blue' | 'none'> = {
+const glowColorMap: Record<string, 'cyan' | 'blue' | 'gold' | 'none'> = {
   cyan: 'cyan',
   blue: 'blue',
-  white: 'none',
+  gold: 'gold',
 };
 
 export function About() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <SectionWrapper id="about" title="About">
+    <SectionWrapper id="about" title="About" number={1}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Left column: summary */}
         <motion.div

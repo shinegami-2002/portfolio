@@ -6,7 +6,7 @@ import { education } from '@/data/education';
 
 export function Education() {
   return (
-    <SectionWrapper id="education" title="Education">
+    <SectionWrapper id="education" title="Education" number={6}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {education.map((edu, i) => (
           <GlassCard key={i} glowColor="cyan">

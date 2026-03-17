@@ -96,7 +96,7 @@ export function Navbar() {
             {/* Left: Logo */}
             <a
               href="#"
-              className="font-heading text-lg font-semibold text-cyan-accent shrink-0"
+              className="font-heading text-lg font-semibold text-text-primary shrink-0"
               onClick={(e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -118,7 +118,7 @@ export function Navbar() {
                         'relative text-sm font-body px-3 py-1.5 rounded-lg transition-colors',
                         isActive
                           ? 'text-cyan-accent'
-                          : 'text-text-muted hover:text-cyan-accent'
+                          : 'text-text-muted hover:text-text-primary'
                       )}
                     >
                       {link.label}
@@ -160,7 +160,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation menu"
           >
-            <Menu className="w-6 h-6 text-cyan-accent" />
+            <Menu className="w-6 h-6 text-text-primary" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -219,7 +219,7 @@ export function Navbar() {
                           'block text-lg font-body py-3 px-4 rounded-lg transition-colors',
                           isActive
                             ? 'text-cyan-accent bg-cyan-accent/5'
-                            : 'text-text-muted hover:text-cyan-accent hover:bg-white/[0.03]'
+                            : 'text-text-muted hover:text-text-primary hover:bg-white/[0.03]'
                         )}
                       >
                         {link.label}
