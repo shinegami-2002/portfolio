@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shanmukha Chatadi — Applied AI/ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  html, body { background: #0a0906; color: #f4ede1; font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html { overflow-x: clip; }
+  body { overflow-x: clip; }
+  ::selection { background: #d4a373; color: #0a0906; }
+  a { color: inherit; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+  html { scroll-behavior: auto; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  img { max-width: 100%; display: block; }
+  #root { min-height: 100vh; }
+
+  /* Global entrance keyframes — used by Fade and Margin.
+     Defined once globally (not per-component) so re-renders don't restart frame 0. */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marginInRight {
+    from { opacity: 0; transform: rotate(var(--rot, -2deg)) translateX(20px); }
+    to { opacity: 0.85; transform: rotate(var(--rot, -2deg)) translateX(0); }
+  }
+  @keyframes marginInLeft {
+    from { opacity: 0; transform: rotate(var(--rot, -2deg)) translateX(-20px); }
+    to { opacity: 0.85; transform: rotate(var(--rot, -2deg)) translateX(0); }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="prim.jsx"></script>
+<script type="text/babel" src="hero.jsx"></script>
+<script type="text/babel" src="askme.jsx"></script>
+<script type="text/babel" src="signature.jsx"></script>
+<script type="text/babel" src="shader.jsx"></script>
+<script type="text/babel" src="projects.jsx"></script>
+<script type="text/babel" src="hobbies.jsx"></script>
+<script type="text/babel" src="cv.jsx"></script>
+
+<script type="text/babel">
+function App() {
+  const ref = React.useRef(null);
+  const [p, setP] = React.useState(0);
+  React.useEffect(() => {
+    const onS = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setP(h > 0 ? window.scrollY / h : 0);
+    };
+    onS(); window.addEventListener('scroll', onS, { passive: true });
+    return () => window.removeEventListener('scroll', onS);
+  }, []);
+  React.useEffect(() => {
+    // Console easter egg — for the recruiters who actually pop the devtools
+    const banner = `%c
+   ┌─────────────────────────────────────────────┐
+   │                                             │
+   │   You found it. Hi.                         │
+   │                                             │
+   │   I built this site the way I build         │
+   │   software: with intention, with seams,     │
+   │   with receipts.                            │
+   │                                             │
+   │   The "Ask Me" terminal is real RAG over    │
+   │   my project descriptions — try asking it   │
+   │   something specific.                       │
+   │                                             │
+   │   If you're hiring for an applied AI/ML     │
+   │   role and you're reading this in the       │
+   │   console, you're already my kind of        │
+   │   person. shanmukhachatadi@gmail.com        │
+   │                                             │
+   └─────────────────────────────────────────────┘
+`;
+    console.log(banner, 'color:#d4a373;font-family:JetBrains Mono,monospace;font-size:12px;line-height:1.5;');
+    console.log('%c→ try shan.about() for more', 'color:#9a8f7c;font-family:JetBrains Mono,monospace;font-size:11px;');
+    window.shan = {
+      about() {
+        console.log('%cBuilt with React, vanilla CSS, and a lot of opinions about Comic Sans (none of them positive). Source: this is a single-page app with 8 .jsx files. No framework, no build step, no telemetry.', 'color:#f4ede1;font-family:JetBrains Mono,monospace;');
+        return 'curious? shanmukhachatadi@gmail.com';
+      },
+      stack() {
+        console.table({
+          Frontend: 'React 18 + Babel standalone (no build)',
+          Fonts: 'Instrument Serif, Inter, JetBrains Mono',
+          AskMe: 'Embedding-free retrieval (term overlap) + window.claude.complete',
+          Hosting: 'Vercel',
+          Total_LOC: '~1500',
+        });
+        return 'all hand-written, no AI scaffolding';
+      },
+      hire() {
+        console.log('%c✦ available for full-time AI/ML eng roles, summer 2026 onward', 'color:#d4a373;font-weight:600;font-family:JetBrains Mono,monospace;');
+        return 'shanmukhachatadi@gmail.com';
+      },
+    };
+  }, []);
+  return (
+    <div ref={ref}>
+      <Cursor />
+      <Nav p={p} />
+      <Hero />
+      <Kinetic />
+      <AskMe />
+      <Signature />
+      <Projects />
+      <Hobbies />
+      <CV />
+      <Contact />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
