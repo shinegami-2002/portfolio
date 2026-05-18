@@ -1,0 +1,93 @@
+# Shanmukha Chatadi — Applied AI/ML Engineer
+
+> I build agentic AI systems, production LLM pipelines, and the scalable cloud plumbing that keeps them honest.
+
+- Location: Raleigh, NC
+- Status: Open to full-time AI/ML roles from summer 2026
+- Email: schatad@ncsu.edu
+- LinkedIn: linkedin.com/in/shanmukha-chatadi
+- GitHub: github.com/shinegami-2002
+- Website: shanmukha-chatadi.vercel.app
+
+## Education
+
+- MS Computer Science (Data Science Track), North Carolina State University — GPA 3.71, Aug 2024 – Jun 2026
+  Courses: Deep Learning, Machine Learning, Neural Networks, Algorithms, Software Engineering, DBMS
+- BTech Computer Science & Engineering, National Institute of Technology Puducherry — GPA 8.48/10, Dec 2020 – Mar 2024
+
+## Experience
+
+### AI Research Intern — MiHIN (Michigan Health Information Network) · Aug 2025 – Present
+Architected production Document AI / RAG platform on AWS Bedrock, OpenSearch Serverless, Pinecone, and Lambda, enabling 230+ employees to query 1TB+ enterprise documents at 75% lower cost. Engineered NLP retrieval pipeline with Titan V2 embeddings, configurable chunking, and Claude Sonnet via Bedrock; cut ungrounded LLM responses by 30%. Integrated AI workflows through secure REST APIs with API Gateway, Lambda, and Cognito (SSO + MFA + audit logging) enforcing PHI access controls; reduced mean time to detection by 60%. Led AI Task Force training enabling 5+ teams to deploy generative AI.
+Tech: AWS Bedrock, RAG, OpenSearch, Pinecone, Lambda, Claude Sonnet, Cognito, CloudWatch, HITRUST
+
+### Software Engineer — Rygen BioPharma · Mar 2023 – Aug 2024
+Built full-stack platform with Flask, React, and PostgreSQL for 4+ research teams, cutting manual reporting time by 40%. Built Python ETL pipelines (Pandas, NumPy) processing 100K+ records daily; cut data errors by 50%. Shipped Dockerized microservices to AWS with Jenkins CI/CD; 200+ tests at 85%+ coverage, cutting release cycles from 2 days to under 3 hours. Automated weekly R&D reporting with Python, Pandas, scikit-learn, and Power BI dashboards; saved researchers 10+ hours per week.
+Tech: Python, Flask, React, PostgreSQL, Pandas, Docker, Jenkins, AWS, Power BI
+
+### Data Science Intern — TreoSoft IT Solutions · Jun 2022 – Sep 2022
+Shipped FP-Growth product-bundling system with Flask REST APIs and PostgreSQL; mined association rules on 100K+ transactions, driving a 15% net sales increase.
+Tech: Python, FP-Growth, Flask, PostgreSQL, Pandas, Matplotlib
+
+## Selected Projects
+
+### ScholarAgent — Multi-Agent Research Assistant (Jan – Mar 2025)
+A LangGraph pipeline that reads 10K+ papers, grades its own answers, and refuses to hallucinate. 7-node state machine: router, retriever, grader, rewriter, generator, hallucination-check, responder. ChromaDB over 10K+ arXiv/PubMed abstracts with HF sentence-transformer embeddings. Gemini does final synthesis with citation spans. 30% drop in unsupported claims vs. plain RAG baseline. Corrective RAG loop re-queries when grader fails. Next.js + FastAPI UI streams responses with per-claim source links.
+Tech: LangGraph, ChromaDB, Gemini, FastAPI, Next.js 14, TypeScript
+Source: github.com/shinegami-2002/scholar-agent
+
+### MCP Healthcare Server — Model Context Protocol Server (Feb – Mar 2025)
+Six healthcare tools any MCP-compatible LLM can call, wired to four federal APIs (openFDA, PubMed, ClinicalTrials.gov, NLM). Drug safety lookup, clinical trial search, ICD-10 resolution, PubMed search, drug-interaction checks, medical term lookups. Async httpx with retries, schema validation on every response. Fully typed, documented, and covered by integration tests.
+Tech: Python, FastMCP, httpx, openFDA, PubMed, NLM
+Source: github.com/shinegami-2002/mcp-healthcare-server
+
+### LinkVault — Go REST API Platform (Mar 2025)
+Production-grade link-saving API with JWT + API key dual auth, Redis-backed sliding-window rate limiter, Postgres full-text search with tsvector indexes. Sub-50ms p95 on search over 100k synthetic links. Zero-downtime migrations, structured logging, graceful shutdown. End-to-end tests covering auth flows and rate-limit behavior.
+Tech: Go, Chi v5, PostgreSQL, Redis, JWT, Docker
+Source: github.com/shinegami-2002/linkvault
+
+### Distributed Task Queue — Go, gRPC, Kubernetes (Feb – Mar 2025)
+Celery-style task queue built from scratch in Go. gRPC + Protobuf service interface between producers / workers / dispatcher. Redis sorted sets as priority queue. Postgres for durable state. Deployed on K8s with Helm charts; HPA scales workers on custom Prometheus metric (queue depth). Priority + retry + dead-letter semantics, no dropped work.
+Tech: Go, gRPC, Protobuf, Redis, PostgreSQL, Kubernetes, Helm
+Source: github.com/shinegami-2002/distributed-task-queue
+
+### Representational Fingerprinting in Pruned Networks — CSC 591/791, NC State (Spring 2026)
+Showed that magnitude pruning leaves a detectable, behaviorally meaningful "fingerprint" inside a neural network's representations — even when accuracy stays the same. 11 ResNet-18 configurations on CIFAR-100 with matched accuracy (only 1.48pp spread), but internal representations diverged significantly (CKA 0.73–0.95). CKA predicts which models share mistakes (Pearson r = +0.949) and which disagree (r = −0.964). Linear probe identifies pruning schedule from a single image's activations at 89.2% accuracy (chance = 25%). Multi-seed experiments, random-zeroing controls, 100K-permutation Mantel tests.
+Lead author contributions: PyTorch training pipeline, H100 training schedule design, all core analyses (linear-CKA, error-geometry, decodability, divergence-trajectory), all paper figures, statistical controls, and paper write-up.
+Tech: PyTorch, ResNet-18, CIFAR-100, Linear CKA, Mantel Test, 3× NVIDIA H100 (RunPod), scikit-learn, NumPy, SciPy, Matplotlib
+
+### LLM-Driven Procedural Content Generation — AAAI 2026 (2025)
+Using open-source LLMs (Phi-3, Gemma-2, Qwen-2.5) to generate playable game levels with constraint satisfaction checks. Trained a ViT to score generated levels on playability and structure. Model-agnostic prompt compiler with swappable backbones. Competition submission for LLMs4PCG @ AAAI 2026.
+Tech: Phi-3, Gemma-2, Qwen-2.5, Prompt Engineering, ViT, PCG
+
+### AI ChatBot — Multi-Provider LLM Service (Jan – Apr 2025)
+Provider-agnostic chat backend with graceful failover across OpenAI, Groq, and others. FastAPI + LangChain orchestration, async APIs, circuit-breaker-style provider failover. Transparent failover — user never sees a provider go down. Clean separation of provider adapters, add a new one in ~30 lines.
+Tech: Python, FastAPI, LangChain, Docker, Node.js, Groq
+Source: github.com/shinegami-2002/AI_ChatBot
+
+## Skills
+
+AI/ML: RAG, Agentic AI, LLMs, NLP, Multi-Agent, MCP, Deep Learning, Transformers, Computer Vision, MLOps, HITL
+Languages: Python, TypeScript, Go, SQL, C++, Java, Bash
+Cloud & DevOps: AWS Bedrock, Lambda, API Gateway, Cognito, Docker, Kubernetes, GitHub Actions, Jenkins
+Frameworks: Next.js, React, FastAPI, Flask, Node.js, Chi v5, gRPC
+Data: Postgres, MongoDB, Redis, OpenSearch, ChromaDB, Vector DBs
+Libraries: LangGraph, LangChain, PyTorch, TensorFlow, Hugging Face, FastMCP, Helm, Prometheus
+
+## Publications
+
+1. "Potato Disease Classification Using Diverse Feature Extraction Methods and Machine Learning Models" — C. Shanmukha Srinivas Sai et al. — HIS 2023, Springer (2023)
+2. "Tea Leaf Disease Classification with Ensemble Stacking" — Somesh K, C. Shanmukha Srinivas Sai et al. — ICDLAIR 2024, IEEE (2024)
+
+## Leadership
+
+- President, Rotaract Club, NIT Puducherry (2022–2023) — 10+ community events, blood donation camps, awareness campaigns
+- Vice-President, ACE (CS Association), NIT Puducherry (2022–2023) — Workshops, hackathons, and industry talks
+- Co-founder, Zer01Coded, NIT Puducherry (2021–2022) — Founded coding club; taught Python to 150+ students
+
+## Achievements
+
+- First Position, Blind Coding Challenge, Gyanith Tech Fest (2023)
+- Third Prize, Hackathon, NIE Mysore, ~90 competitors (2023)
+- All India Rank 206, Inter NIT Coding Marathon, MNIT Bhopal (2022)
+- 99.1 Percentile, JEE-Mains, top 1% of 1M+ students (2020)

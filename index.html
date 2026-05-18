@@ -19,6 +19,140 @@
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shanmukha Chatadi",
+  "jobTitle": "Applied AI/ML Engineer",
+  "description": "I build agentic AI systems, production LLM pipelines, and the scalable cloud plumbing that keeps them honest.",
+  "url": "https://shanmukha-chatadi.vercel.app",
+  "email": "schatad@ncsu.edu",
+  "sameAs": [
+    "https://linkedin.com/in/shanmukha-chatadi",
+    "https://github.com/shinegami-2002"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Raleigh",
+    "addressRegion": "NC",
+    "addressCountry": "US"
+  },
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "North Carolina State University",
+      "department": "Computer Science",
+      "description": "MS Computer Science, Data Science Track · GPA 3.71 · Aug 2024 – Jun 2026"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "National Institute of Technology Puducherry",
+      "department": "Computer Science & Engineering",
+      "description": "BTech Computer Science & Engineering · GPA 8.48/10 · Dec 2020 – Mar 2024"
+    }
+  ],
+  "hasOccupation": [
+    {
+      "@type": "Occupation",
+      "name": "AI Research Intern",
+      "occupationLocation": { "@type": "Place", "name": "MiHIN — Michigan Health Information Network, Lansing, MI" },
+      "description": "Architected production Document AI / RAG platform on AWS Bedrock, OpenSearch Serverless, Pinecone, and Lambda, enabling 230+ employees to query 1TB+ enterprise documents at 75% lower cost. Engineered NLP retrieval pipeline with Titan V2 embeddings and Claude Sonnet via Bedrock; cut ungrounded LLM responses by 30%. Integrated secure REST APIs with Cognito enforcing PHI access controls; reduced mean time to detection by 60%.",
+      "estimatedSalary": [],
+      "skills": "AWS Bedrock, RAG, OpenSearch, Pinecone, Lambda, Claude Sonnet, Cognito, CloudWatch, HITRUST"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Software Engineer",
+      "occupationLocation": { "@type": "Place", "name": "Rygen BioPharma, Hyderabad, India" },
+      "description": "Built full-stack platform with Flask, React, and PostgreSQL for 4+ research teams, cutting manual reporting by 40%. Python ETL pipelines processing 100K+ records daily; cut data errors by 50%. Dockerized microservices on AWS with Jenkins CI/CD at 85%+ coverage.",
+      "skills": "Python, Flask, React, PostgreSQL, Pandas, Docker, Jenkins, AWS, Power BI"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Data Science Intern",
+      "occupationLocation": { "@type": "Place", "name": "TreoSoft IT Solutions, Bengaluru, India" },
+      "description": "Shipped FP-Growth product-bundling system with Flask REST APIs and PostgreSQL; mined association rules on 100K+ transactions, driving a 15% net sales increase.",
+      "skills": "Python, FP-Growth, Flask, PostgreSQL, Pandas, Matplotlib"
+    }
+  ],
+  "knowsAbout": [
+    "RAG", "Agentic AI", "LLMs", "NLP", "Multi-Agent Systems", "MCP", "Deep Learning",
+    "Transformers", "Computer Vision", "MLOps", "Python", "TypeScript", "Go", "SQL", "C++",
+    "AWS Bedrock", "Lambda", "Docker", "Kubernetes", "Next.js", "React", "FastAPI", "Flask",
+    "gRPC", "PostgreSQL", "MongoDB", "Redis", "OpenSearch", "ChromaDB", "Vector Databases",
+    "LangGraph", "LangChain", "PyTorch", "TensorFlow", "Hugging Face", "Prometheus"
+  ],
+  "makesOffer": [
+    {
+      "@type": "CreativeWork",
+      "name": "ScholarAgent",
+      "description": "Multi-agent LangGraph research assistant. 7-node state machine that reads 10K+ papers, grades its own retrievals, and refuses to hallucinate. 30% drop in unsupported claims vs. plain RAG baseline.",
+      "url": "https://github.com/shinegami-2002/scholar-agent",
+      "keywords": "LangGraph, ChromaDB, Gemini, FastAPI, Next.js 14, TypeScript"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "MCP Healthcare Server",
+      "description": "Six healthcare tools any MCP-compatible LLM can call, wired to four federal APIs (openFDA, PubMed, ClinicalTrials.gov, NLM). Schema-validated responses, fully typed and tested.",
+      "url": "https://github.com/shinegami-2002/mcp-healthcare-server",
+      "keywords": "Python, FastMCP, httpx, openFDA, PubMed, NLM"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "LinkVault",
+      "description": "Production-grade Go REST API with JWT + API key dual auth, Redis sliding-window rate limiter, Postgres full-text search. Sub-50ms p95 on 100k links.",
+      "url": "https://github.com/shinegami-2002/linkvault",
+      "keywords": "Go, Chi v5, PostgreSQL, Redis, JWT, Docker"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Distributed Task Queue",
+      "description": "Celery-style task queue in Go with gRPC + Protobuf, Redis sorted sets as priority queue, Postgres for durable state. K8s HPA scales workers on custom Prometheus metric.",
+      "url": "https://github.com/shinegami-2002/distributed-task-queue",
+      "keywords": "Go, gRPC, Protobuf, Redis, PostgreSQL, Kubernetes, Helm"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Representational Fingerprinting in Pruned Networks",
+      "description": "Showed that magnitude pruning leaves a detectable fingerprint inside a neural network's representations — even when accuracy stays the same. 11 ResNet-18 configs on CIFAR-100 on 3x H100s. CKA predicts shared mistakes at r=+0.95. Linear probe identifies pruning from one image at 89.2% (chance 25%). CSC 591/791 at NC State, Spring 2026.",
+      "keywords": "PyTorch, ResNet-18, CIFAR-100, Linear CKA, Mantel Test, H100, scikit-learn"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "LLM-Driven Procedural Content Generation",
+      "description": "Using open-source LLMs (Phi-3, Gemma-2, Qwen-2.5) to generate playable game levels with constraint satisfaction. ViT validator scores levels on playability. Competition submission for LLMs4PCG @ AAAI 2026.",
+      "keywords": "Phi-3, Gemma-2, Qwen-2.5, Prompt Engineering, ViT, PCG"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "AI ChatBot",
+      "description": "Provider-agnostic chat backend with circuit-breaker-style failover across OpenAI, Groq, and others. Transparent failover — user never sees a provider go down.",
+      "url": "https://github.com/shinegami-2002/AI_ChatBot",
+      "keywords": "Python, FastAPI, LangChain, Docker, Node.js, Groq"
+    }
+  ],
+  "authorOf": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Potato Disease Classification Using Diverse Feature Extraction Methods and Machine Learning Models",
+      "author": "C. Shanmukha Srinivas Sai et al.",
+      "publisher": "Springer",
+      "isPartOf": { "@type": "PublicationEvent", "name": "HIS 2023 — Hybrid Intelligent Systems" },
+      "datePublished": "2023"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Tea Leaf Disease Classification with Ensemble Stacking",
+      "author": "Somesh K, C. Shanmukha Srinivas Sai et al.",
+      "publisher": "IEEE",
+      "isPartOf": { "@type": "PublicationEvent", "name": "ICDLAIR 2024" },
+      "datePublished": "2024"
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
