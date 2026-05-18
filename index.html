@@ -168,6 +168,7 @@
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   img { max-width: 100%; display: block; }
   #root { min-height: 100vh; }
+  .seo-only { display: none !important; }
 
   /* Global entrance keyframes — used by Fade and Margin.
      Defined once globally (not per-component) so re-renders don't restart frame 0. */
@@ -187,7 +188,7 @@
 </head>
 <body>
 <div id="root">
-  <!-- Static HTML for SEO / crawlers / LLMs — React replaces this on mount -->
+  <div class="seo-only">
   <header>
     <h1>Shanmukha Chatadi</h1>
     <p><strong>Applied AI/ML Engineer</strong> · Raleigh, NC · Open to opportunities</p>
@@ -282,6 +283,7 @@
     <p>LinkedIn: <a href="https://linkedin.com/in/shanmukha-chatadi">linkedin.com/in/shanmukha-chatadi</a></p>
     <p>GitHub: <a href="https://github.com/shinegami-2002">github.com/shinegami-2002</a></p>
   </footer>
+  </div>
 </div>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
