@@ -24,9 +24,9 @@ function Nav({ p }) {
           <a href="#cv" style={{ color: 'inherit', textDecoration: 'none' }}>CV</a>
           <a href="#contact" style={{ color: 'inherit', textDecoration: 'none' }}>CONTACT</a>
         </div>
-        <div style={{ ...S.mono, display: 'flex', alignItems: 'center', gap: 8, color: C.ink2, fontSize: 11, letterSpacing: '0.24em' }}>
+        <div style={{ ...S.mono, display: 'flex', alignItems: 'center', gap: 8, color: C.ink2, fontSize: mob ? 9 : 11, letterSpacing: '0.24em' }}>
           <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#8bc34a', boxShadow: '0 0 8px #8bc34a' }} />
-          OPEN TO WORK
+          {mob ? 'OPEN' : 'OPEN TO WORK'}
         </div>
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 1, background: C.line }}>
@@ -96,10 +96,13 @@ function Hero() {
 
       {/* Portrait — sits to the right of the headline, Polaroid frame */}
       <div style={{
-        display: mob ? 'none' : 'block',
-        position: 'absolute', top: '28%', right: 'max(220px, 18vw)', zIndex: 3,
-        width: 'min(240px, 18vw)',
-        transform: `translateY(${p * -30}px) rotate(3deg)`,
+        position: mob ? 'relative' : 'absolute',
+        top: mob ? 'auto' : '28%',
+        right: mob ? 'auto' : 'max(220px, 18vw)',
+        zIndex: 3,
+        width: mob ? '160px' : 'min(240px, 18vw)',
+        margin: mob ? '20px auto 0' : undefined,
+        transform: mob ? 'rotate(2deg)' : `translateY(${p * -30}px) rotate(3deg)`,
         animation: 'fadeUp 1400ms cubic-bezier(.2,.8,.2,1) 400ms forwards',
         opacity: 0,
       }}>

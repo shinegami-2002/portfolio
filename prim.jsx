@@ -165,11 +165,13 @@ function Parallax({ src, speed = 0.3, style = {}, children, overlay = 0.4 }) {
 }
 // Custom cursor — amber orb with lag, grows near interactive targets, inverts over cream sections
 function Cursor() {
+  const mob = useIsMobile();
   const dotRef = React.useRef(null);
   const ringRef = React.useRef(null);
   const [label, setLabel] = React.useState('');
   const [mode, setMode] = React.useState('default'); // default | link | drag | light
   React.useEffect(() => {
+    if (mob) return;
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
     let rx = mx, ry = my; // ring lags
     let dx = mx, dy = my;
@@ -222,6 +224,8 @@ function Cursor() {
   const dotBG = isLight ? '#0a0906' : '#d4a373';
   const ringBorder = isLight ? '#0a0906' : '#d4a373';
 
+  if (mob) return null;
+
   return (
     <React.Fragment>
       {/* ring */}
@@ -246,7 +250,7 @@ function Cursor() {
         boxShadow: isLight ? 'none' : '0 0 24px #d4a37366',
         transition: 'width 250ms, height 250ms, background 200ms',
       }} />
-      <style>{`@media (hover: none), (max-width: 767px) { [data-cursor-root] { display:none !important; } } @media (hover: hover) and (min-width: 768px) { * { cursor: none !important; } }`}</style>
+      <style>{`* { cursor: none !important; }`}</style>
     </React.Fragment>
   );
 }
