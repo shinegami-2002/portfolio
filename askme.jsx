@@ -156,7 +156,7 @@ ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
         {/* Terminal card */}
         <div style={{
           background: '#0f0d08', border: `1px solid ${C.line}`,
-          display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 360px', minHeight: 520,
+          display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 360px', minHeight: mob ? 'auto' : 520,
           position: 'relative', overflow: 'hidden',
         }}>
           <SummoningCircle status={status} />
@@ -176,7 +176,7 @@ ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
             </div>
 
             {/* Conversation body */}
-            <div style={{ flex: 1, padding: 28, overflow: 'auto', minHeight: 280 }}>
+            <div style={{ flex: 1, padding: mob ? 16 : 28, overflow: 'auto', minHeight: mob ? 120 : 280 }}>
               {/* Status / streaming */}
               {status !== 'idle' && (
                 <div style={{ marginBottom: 28 }}>
@@ -306,9 +306,9 @@ ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
           </div>
         </div>
 
-        <div style={{ marginTop: 24, ...S.mono, color: C.muted, fontSize: 11, display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ marginTop: 24, ...S.mono, color: C.muted, fontSize: mob ? 9 : 11, display: 'flex', flexDirection: mob ? 'column' : 'row', justifyContent: 'space-between', gap: mob ? 4 : 0 }}>
           <span>ANSWERED BY ME · LIVE RETRIEVAL · CORPUS = MY WORK</span>
-          <span>NO MOCK DATA — HIT ENTER TO SEE</span>
+          {!mob && <span>NO MOCK DATA — HIT ENTER TO SEE</span>}
         </div>
       </div>
     </section>
@@ -404,7 +404,9 @@ function SummoningCircle({ status }) {
   const rot = (t * 8) % 360;
   const counterRot = -((t * 5) % 360);
   return (
-    <div aria-hidden="true" style={{
+    const mob = useIsMobile();
+    if (mob) return null;
+    return (<div aria-hidden="true" style={{
       position: 'absolute', right: '20%', top: '50%',
       transform: 'translate(50%, -50%)',
       width: 460, height: 460, pointerEvents: 'none',
@@ -469,8 +471,7 @@ function SummoningCircle({ status }) {
           );
         })}
       </svg>
-    </div>
-  );
+    </div>);
 }
 
 Object.assign(window, { AskMe, SummoningCircle });
