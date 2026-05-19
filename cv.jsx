@@ -42,36 +42,36 @@ function CV() {
       <div style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div style={{ ...S.mono, color: C.muted }}>№ 04 / CURRICULUM</div>
         <Fade>
-          <div style={{ ...S.serif, fontSize: 'clamp(64px, 10vw, 160px)', lineHeight: 0.9, letterSpacing: '-0.04em', marginTop: 16 }}>
+          <div style={{ ...S.serif, fontSize: 'clamp(36px, 10vw, 160px)', lineHeight: 0.9, letterSpacing: '-0.04em', marginTop: 16 }}>
             The <em style={{ color: C.accent }}>paper</em> trail.
           </div>
         </Fade>
 
         {/* Experience */}
         <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 140, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
-          <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>
+          <div style={{ ...S.mono, color: C.muted, position: mob ? 'relative' : 'sticky', top: mob ? 'auto' : 120, alignSelf: 'start' }}>
             — EXPERIENCE
           </div>
           <div>
             {d.experience.map((e, i) => (
               <Fade key={i} delay={i * 60}>
                 <div style={{
-                  display: 'grid', gridTemplateColumns: '1fr 240px', gap: 32,
-                  padding: '40px 0', borderBottom: `1px solid ${C.line}`, alignItems: 'baseline',
+                  display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 240px', gap: mob ? 8 : 32,
+                  padding: mob ? '24px 0' : '40px 0', borderBottom: `1px solid ${C.line}`, alignItems: 'baseline',
                 }}>
                   <div>
-                    <div style={{ ...S.serif, fontSize: 36, lineHeight: 1.1 }}>{e.role}</div>
-                    <div style={{ ...S.mono, color: C.accent, marginTop: 10 }}>{e.company} · {e.location}</div>
+                    <div style={{ ...S.serif, fontSize: mob ? 24 : 36, lineHeight: 1.1 }}>{e.role}</div>
+                    <div style={{ ...S.mono, color: C.accent, marginTop: 10, fontSize: mob ? 10 : 11 }}>{e.company} · {e.location}</div>
                     <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0 0' }}>
                       {(e.bullets || []).map((b, j) => (
-                        <li key={j} style={{ display: 'flex', gap: 16, padding: '6px 0', fontSize: 15, lineHeight: 1.55, color: C.ink2, maxWidth: 780 }}>
+                        <li key={j} style={{ display: 'flex', gap: 12, padding: '6px 0', fontSize: mob ? 13 : 15, lineHeight: 1.55, color: C.ink2 }}>
                           <span style={{ color: C.accent, flexShrink: 0 }}>→</span>
                           <span>{b}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div style={{ ...S.mono, color: C.muted, textAlign: 'right' }}>{e.period}</div>
+                  <div style={{ ...S.mono, color: C.muted, textAlign: mob ? 'left' : 'right', fontSize: mob ? 10 : 11, order: mob ? -1 : 0 }}>{e.period}</div>
                 </div>
               </Fade>
             ))}
@@ -80,7 +80,7 @@ function CV() {
 
         {/* Education */}
         <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
-          <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— EDUCATION</div>
+          <div style={{ ...S.mono, color: C.muted, position: mob ? 'relative' : 'sticky', top: mob ? 'auto' : 120, alignSelf: 'start' }}>— EDUCATION</div>
           <div>
             {d.education.map((ed, i) => (
               <Fade key={i}>
@@ -101,7 +101,7 @@ function CV() {
 
         {/* Skills */}
         <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
-          <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— STACK</div>
+          <div style={{ ...S.mono, color: C.muted, position: mob ? 'relative' : 'sticky', top: mob ? 'auto' : 120, alignSelf: 'start' }}>— STACK</div>
           <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(2, 1fr)', gap: 40 }}>
             {Object.entries(d.skills).map(([cat, items], i) => (
               <Fade key={cat} delay={i * 40}>
@@ -118,7 +118,7 @@ function CV() {
 
         {/* Publications */}
         <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
-          <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— PAPERS</div>
+          <div style={{ ...S.mono, color: C.muted, position: mob ? 'relative' : 'sticky', top: mob ? 'auto' : 120, alignSelf: 'start' }}>— PAPERS</div>
           <div>
             {d.publications.map((pub, i) => (
               <Fade key={i}>
@@ -185,7 +185,7 @@ function Contact() {
           </Fade>
         </div>
 
-        <div style={{ marginTop: 140, display: 'flex', justifyContent: 'space-between', ...S.mono, color: C.muted, alignItems: 'baseline' }}>
+        <div style={{ marginTop: mob ? 60 : 140, display: 'flex', flexDirection: mob ? 'column' : 'row', justifyContent: 'space-between', alignItems: mob ? 'center' : 'baseline', gap: mob ? 16 : 0, ...S.mono, color: C.muted, textAlign: mob ? 'center' : undefined }}>
           <span>© MMXXVI · SHANMUKHA CHATADI</span>
           <span style={{ ...S.serif, fontSize: 32, fontStyle: 'italic', color: C.accent, letterSpacing: 0 }}>fin.</span>
           <span>DESIGNED & BUILT BY HAND</span>
