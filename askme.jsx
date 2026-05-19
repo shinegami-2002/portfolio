@@ -2,6 +2,7 @@
 // Retrieves from a corpus of Shanmukha's work, answers via Claude, cites sources.
 
 function AskMe() {
+  const mob = useIsMobile();
   const d = window.PORTFOLIO_DATA;
   const suggestions = [
     "What's your experience with RAG systems?",
@@ -125,11 +126,11 @@ ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
   return (
     <section id="about" style={{
       background: C.bg, color: C.ink,
-      padding: '140px 40px', borderTop: `1px solid ${C.line}`,
+      padding: mob ? '60px 16px' : '140px 40px', borderTop: `1px solid ${C.line}`,
     }}>
       <div style={{ maxWidth: 1600, margin: '0 auto', position: 'relative' }}>
         {/* Header */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'start', marginBottom: 72 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 1fr', gap: mob ? 20 : 60, alignItems: 'start', marginBottom: 72 }}>
           <div style={{ position: 'relative' }}>
             <div style={{ ...S.mono, color: C.muted, fontSize: 11, letterSpacing: '0.32em' }}>№ 02 · ASK ME ANYTHING</div>
             <div style={{ ...S.serif, fontSize: 'clamp(48px, 6vw, 96px)', lineHeight: 1, letterSpacing: '-0.03em', marginTop: 36 }}>
@@ -155,7 +156,7 @@ ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
         {/* Terminal card */}
         <div style={{
           background: '#0f0d08', border: `1px solid ${C.line}`,
-          display: 'grid', gridTemplateColumns: '1fr 360px', minHeight: 520,
+          display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 360px', minHeight: 520,
           position: 'relative', overflow: 'hidden',
         }}>
           <SummoningCircle status={status} />

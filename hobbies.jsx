@@ -2,6 +2,7 @@
 // Lives between Projects and CV (where Stats used to be).
 
 function Hobbies() {
+  const mob = useIsMobile();
   // Each photo: src, caption (handwritten), tag (hobby), rotation, scale, x/y offset (percent of section).
   // Hand-tuned to overlap nicely without ever fully covering each other.
   const photos = [
@@ -29,10 +30,10 @@ function Hobbies() {
   return (
     <section style={{
       position: 'relative', background: C.bg, color: C.ink, overflow: 'hidden',
-      padding: '140px 0 100px',
+      padding: mob ? '60px 0 40px' : '140px 0 100px',
     }}>
       {/* Section header */}
-      <div style={{ padding: '0 60px 40px', maxWidth: 1800, margin: '0 auto', position: 'relative' }}>
+      <div style={{ padding: mob ? '0 16px 24px' : '0 60px 40px', maxWidth: 1800, margin: '0 auto', position: 'relative' }}>
         <div style={{ ...S.mono, color: C.muted, fontSize: 11, letterSpacing: '0.32em' }}>
           № 04 — MARGINALIA
         </div>
@@ -56,16 +57,24 @@ function Hobbies() {
       {/* Collage canvas — fixed aspect so positions stay predictable */}
       <div style={{
         position: 'relative', maxWidth: 1800, margin: '60px auto 0',
-        height: 'clamp(820px, 86vw, 1300px)',
-        padding: '0 40px',
+        height: mob ? 'auto' : 'clamp(820px, 86vw, 1300px)',
+        padding: mob ? '0 16px' : '0 40px',
       }}>
-        <div style={{ position: 'absolute', inset: '0 40px', perspective: '1200px' }}>
+        <div style={{
+          position: mob ? 'relative' : 'absolute',
+          inset: mob ? undefined : '0 40px',
+          perspective: '1200px',
+          display: mob ? 'grid' : 'block',
+          gridTemplateColumns: mob ? '1fr 1fr' : undefined,
+          gap: mob ? 12 : undefined,
+        }}>
           {photos.map((ph, i) => {
             const isHover = hovered === i;
             const isOther = hovered !== null && !isHover;
             return (
               <Polaroid key={i}
                 {...ph}
+                mob={mob}
                 idx={i}
                 isHover={isHover}
                 isOther={isOther}
@@ -79,7 +88,7 @@ function Hobbies() {
 
       {/* Footer caption */}
       <div style={{
-        marginTop: 40, padding: '0 60px', maxWidth: 1800, margin: '40px auto 0',
+        marginTop: 40, padding: mob ? '0 16px' : '0 60px', maxWidth: 1800, margin: '40px auto 0',
         display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
         ...S.mono, color: C.muted, fontSize: 11, letterSpacing: '0.3em',
       }}>
@@ -90,7 +99,7 @@ function Hobbies() {
   );
 }
 
-function Polaroid({ src, caption, tag, x, y, r, scale, idx, isHover, isOther, onEnter, onLeave }) {
+function Polaroid({ src, caption, tag, x, y, r, scale, idx, isHover, isOther, onEnter, onLeave, mob }) {
   // Base width 220px scaled per-photo, centered around x/y as percentages
   const baseW = 240;
   const w = baseW * scale;
@@ -99,10 +108,15 @@ function Polaroid({ src, caption, tag, x, y, r, scale, idx, isHover, isOther, on
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       style={{
-        position: 'absolute',
-        left: `${x}%`, top: `${y}%`,
-        width: w,
-        transform: `translate(-50%, -50%) rotate(${isHover ? 0 : r}deg) scale(${isHover ? 1.18 : 1})`,
+        position: mob ? 'relative' : 'absolute',
+        left: mob ? 'auto' : `${x}%`,
+        top: mob ? 'auto' : `${y}%`,
+        width: mob ? '100%' : w,
+        maxWidth: mob ? 200 : undefined,
+        margin: mob ? '0 auto' : undefined,
+        transform: mob
+          ? `rotate(${isHover ? 0 : r}deg)`
+          : `translate(-50%, -50%) rotate(${isHover ? 0 : r}deg) scale(${isHover ? 1.18 : 1})`,
         transition: 'transform 600ms cubic-bezier(.2,.8,.2,1), opacity 400ms, filter 400ms',
         opacity: isOther ? 0.35 : 1,
         filter: isOther ? 'saturate(0.7) brightness(0.85)' : 'none',

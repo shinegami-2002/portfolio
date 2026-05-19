@@ -1,6 +1,7 @@
 // CV, Stack, Contact — editorial finale
 
 function Stats() {
+  const mob = useIsMobile();
   const items = [
     { n: 230, suf: '+', label: 'Users on RAG platform' },
     { n: 75, suf: '%', label: 'Cost reduction vs competitors' },
@@ -8,7 +9,7 @@ function Stats() {
     { n: 3.92, suf: '/4', label: 'GPA at NC State' },
   ];
   return (
-    <section style={{ background: C.cream, color: C.bg, padding: '140px 40px', borderTop: `1px solid ${C.bg}` }}>
+    <section style={{ background: C.cream, color: C.bg, padding: mob ? '60px 16px' : '140px 40px', borderTop: `1px solid ${C.bg}` }}>
       <div style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div style={{ ...S.mono, color: C.bg, opacity: 0.6 }}>№ 03 / BY THE NUMBERS</div>
         <Fade>
@@ -16,11 +17,11 @@ function Stats() {
             The measured <em style={{ color: C.neon }}>footprint</em> of the last eighteen months.
           </div>
         </Fade>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40, marginTop: 100 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 40, marginTop: 100 }}>
           {items.map((it, i) => (
             <Fade key={i} delay={i * 100}>
               <div style={{ borderTop: `1px solid ${C.bg}`, paddingTop: 20 }}>
-                <div style={{ ...S.serif, fontSize: 'clamp(80px, 10vw, 160px)', lineHeight: 0.9, letterSpacing: '-0.04em' }}>
+                <div style={{ ...S.serif, fontSize: 'clamp(40px, 10vw, 160px)', lineHeight: 0.9, letterSpacing: '-0.04em' }}>
                   <Counter to={it.n} suffix={it.suf} />
                 </div>
                 <div style={{ ...S.mono, marginTop: 20, color: C.bg, opacity: 0.7 }}>{it.label}</div>
@@ -34,9 +35,10 @@ function Stats() {
 }
 
 function CV() {
+  const mob = useIsMobile();
   const d = window.PORTFOLIO_DATA;
   return (
-    <section id="cv" style={{ background: C.bg, color: C.ink, padding: '160px 40px 100px' }}>
+    <section id="cv" style={{ background: C.bg, color: C.ink, padding: mob ? '60px 16px 60px' : '160px 40px 100px' }}>
       <div style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div style={{ ...S.mono, color: C.muted }}>№ 04 / CURRICULUM</div>
         <Fade>
@@ -46,7 +48,7 @@ function CV() {
         </Fade>
 
         {/* Experience */}
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 80, marginTop: 140, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 140, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
           <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>
             — EXPERIENCE
           </div>
@@ -77,7 +79,7 @@ function CV() {
         </div>
 
         {/* Education */}
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
           <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— EDUCATION</div>
           <div>
             {d.education.map((ed, i) => (
@@ -98,9 +100,9 @@ function CV() {
         </div>
 
         {/* Skills */}
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
           <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— STACK</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 40 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(2, 1fr)', gap: 40 }}>
             {Object.entries(d.skills).map(([cat, items], i) => (
               <Fade key={cat} delay={i * 40}>
                 <div>
@@ -115,7 +117,7 @@ function CV() {
         </div>
 
         {/* Publications */}
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mob ? '1fr' : '200px 1fr', gap: mob ? 20 : 80, marginTop: 100, borderTop: `1px solid ${C.line}`, paddingTop: 60 }}>
           <div style={{ ...S.mono, color: C.muted, position: 'sticky', top: 120, alignSelf: 'start' }}>— PAPERS</div>
           <div>
             {d.publications.map((pub, i) => (
@@ -134,6 +136,7 @@ function CV() {
 }
 
 function Contact() {
+  const mob = useIsMobile();
   const d = window.PORTFOLIO_DATA;
   const ref = React.useRef(null), p = useScrollP(ref);
   return (
@@ -147,15 +150,15 @@ function Contact() {
       }} />
       <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${C.bg} 0%, rgba(10,9,6,0.7) 40%, ${C.bg} 100%)` }} />
 
-      <div style={{ position: 'relative', padding: '180px 40px 100px', maxWidth: 1600, margin: '0 auto' }}>
+      <div style={{ position: 'relative', padding: mob ? '60px 16px 60px' : '180px 40px 100px', maxWidth: 1600, margin: '0 auto' }}>
         <div style={{ ...S.mono, color: C.muted }}>№ 05 / CONTACT</div>
         <Fade>
-          <div style={{ ...S.serif, fontSize: 'clamp(80px, 14vw, 240px)', lineHeight: 0.85, letterSpacing: '-0.05em', marginTop: 24 }}>
+          <div style={{ ...S.serif, fontSize: 'clamp(36px, 14vw, 240px)', lineHeight: 0.85, letterSpacing: '-0.05em', marginTop: 24 }}>
             Let's <em style={{ color: C.accent }}>talk.</em>
           </div>
         </Fade>
 
-        <div style={{ marginTop: 80, display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 60, alignItems: 'end' }}>
+        <div style={{ marginTop: 80, display: 'grid', gridTemplateColumns: mob ? '1fr' : '1.5fr 1fr', gap: 60, alignItems: 'end' }}>
           <Fade delay={200}>
             <div style={{ ...S.serif, fontSize: 'clamp(28px, 3vw, 44px)', lineHeight: 1.3, fontStyle: 'italic', color: C.ink, maxWidth: 900 }}>
               If you're building agentic systems, research-to-ship pipelines, or AI infrastructure that needs to be honest. I'd love to hear from you.

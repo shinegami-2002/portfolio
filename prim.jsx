@@ -246,9 +246,20 @@ function Cursor() {
         boxShadow: isLight ? 'none' : '0 0 24px #d4a37366',
         transition: 'width 250ms, height 250ms, background 200ms',
       }} />
-      <style>{`@media (hover: none) { [data-cursor-root] { display:none !important; } } * { cursor: none !important; }`}</style>
+      <style>{`@media (hover: none), (max-width: 767px) { [data-cursor-root] { display:none !important; } } @media (hover: hover) and (min-width: 768px) { * { cursor: none !important; } }`}</style>
     </React.Fragment>
   );
 }
 
-Object.assign(window, { C, S, useScrollP, usePinP, useSeen, Counter, Reveal, Fade, Margin, Marq, Parallax, Cursor });
+function useIsMobile(bp = 768) {
+  const [m, setM] = React.useState(() => window.innerWidth < bp);
+  React.useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${bp - 1}px)`);
+    const h = (e) => setM(e.matches);
+    mq.addEventListener('change', h);
+    return () => mq.removeEventListener('change', h);
+  }, [bp]);
+  return m;
+}
+
+Object.assign(window, { C, S, useScrollP, usePinP, useSeen, Counter, Reveal, Fade, Margin, Marq, Parallax, Cursor, useIsMobile });

@@ -1,10 +1,11 @@
 // Hero + Principles + Kinetic marquee — clean rebuild
 
 function Nav({ p }) {
+  const mob = useIsMobile();
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      padding: '20px 40px',
+      padding: '20px clamp(16px, 5vw, 40px)',
       background: `linear-gradient(180deg, ${C.bg}f0, ${C.bg}b0 60%, transparent)`,
       color: C.ink, pointerEvents: 'none',
       backdropFilter: 'blur(8px)',
@@ -17,7 +18,7 @@ function Nav({ p }) {
           <span style={{ color: C.muted }}>—</span>
           <span style={{ color: C.muted }}>2026</span>
         </div>
-        <div style={{ display: 'flex', gap: 36, ...S.mono, color: C.ink2, fontSize: 11, letterSpacing: '0.24em' }}>
+        <div style={{ display: mob ? 'none' : 'flex', gap: 36, ...S.mono, color: C.ink2, fontSize: 11, letterSpacing: '0.24em' }}>
           <a href="#work" style={{ color: 'inherit', textDecoration: 'none' }}>WORK</a>
           <a href="#about" style={{ color: 'inherit', textDecoration: 'none' }}>ABOUT</a>
           <a href="#cv" style={{ color: 'inherit', textDecoration: 'none' }}>CV</a>
@@ -73,6 +74,7 @@ function NowPlaying() {
 }
 
 function Hero() {
+  const mob = useIsMobile();
   const d = window.PORTFOLIO_DATA;
   const ref = React.useRef(null);
   const p = useScrollP(ref);
@@ -94,6 +96,7 @@ function Hero() {
 
       {/* Portrait — sits to the right of the headline, Polaroid frame */}
       <div style={{
+        display: mob ? 'none' : 'block',
         position: 'absolute', top: '28%', right: 'max(220px, 18vw)', zIndex: 3,
         width: 'min(240px, 18vw)',
         transform: `translateY(${p * -30}px) rotate(3deg)`,
@@ -127,7 +130,7 @@ function Hero() {
 
       <div style={{
         position: 'relative', zIndex: 2,
-        padding: '140px 60px 60px',
+        padding: mob ? '100px 20px 40px' : '140px 60px 60px',
         minHeight: '100vh',
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         maxWidth: 1800, margin: '0 auto',
@@ -149,7 +152,7 @@ function Hero() {
 
           <div style={{
             ...S.serif,
-            fontSize: 'clamp(64px, 11.5vw, 200px)',
+            fontSize: 'clamp(36px, 11.5vw, 200px)',
             lineHeight: 0.92,
             letterSpacing: '-0.045em',
             marginTop: 36,
@@ -227,6 +230,7 @@ function Kinetic() {
 
 // Principles — three alternating panels with full-bleed imagery
 function Manifesto() {
+  const mob = useIsMobile();
   const d = window.PORTFOLIO_DATA;
   const items = [
     { n: '01', word: 'Research', italic: 'that ships.', body: 'Most research dies on a notebook. I take it the rest of the way — through deployment, monitoring, and the messy feedback loops that separate a demo from a product.', image: d.images.data },
@@ -238,7 +242,7 @@ function Manifesto() {
       <div style={{ padding: '120px 60px 40px', maxWidth: 1800, margin: '0 auto' }}>
         <div style={{ ...S.mono, color: C.muted }}>№ 02 · PRINCIPLES</div>
         <Fade>
-          <div style={{ ...S.serif, fontSize: 'clamp(48px, 6vw, 96px)', lineHeight: 1, letterSpacing: '-0.03em', marginTop: 20, maxWidth: 1200 }}>
+          <div style={{ ...S.serif, fontSize: 'clamp(28px, 6vw, 96px)', lineHeight: 1, letterSpacing: '-0.03em', marginTop: 20, maxWidth: 1200 }}>
             Three rules I <em style={{ color: C.accent }}>design against</em>.
           </div>
         </Fade>
@@ -247,18 +251,18 @@ function Manifesto() {
       {items.map((item, i) => (
         <div key={i} style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: mob ? '1fr' : '1fr 1fr',
           borderTop: `1px solid ${C.line}`,
         }}>
           {/* Text panel */}
           <div style={{
-            padding: '100px 60px',
+            padding: mob ? '40px 20px' : '100px 60px',
             order: i % 2 === 0 ? 1 : 2,
             display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 560,
           }}>
             <Fade>
               <div style={{ ...S.mono, color: C.accent, marginBottom: 28 }}>PRINCIPLE № {item.n}</div>
-              <div style={{ ...S.serif, fontSize: 'clamp(56px, 6vw, 104px)', lineHeight: 0.95, letterSpacing: '-0.03em' }}>
+              <div style={{ ...S.serif, fontSize: 'clamp(32px, 6vw, 104px)', lineHeight: 0.95, letterSpacing: '-0.03em' }}>
                 {item.word}<br/>
                 <span style={{ fontStyle: 'italic', color: C.accent }}>{item.italic}</span>
               </div>
@@ -269,7 +273,7 @@ function Manifesto() {
           </div>
           {/* Image panel */}
           <div style={{
-            order: i % 2 === 0 ? 2 : 1, minHeight: 560,
+            order: i % 2 === 0 ? 2 : 1, minHeight: mob ? 300 : 560,
             backgroundImage: `url(${item.image})`,
             backgroundSize: 'cover', backgroundPosition: 'center',
             position: 'relative',

@@ -3,6 +3,7 @@
 // Abstract type/shape composition, not a diagram.
 
 function Signature() {
+  const mob = useIsMobile();
   const ref = React.useRef(null);
   // Pin duration: 5 stages × 80vh + 60vh buffer
   const p = usePinP(ref);
@@ -40,12 +41,12 @@ function Signature() {
       background: C.bg, color: C.ink, position: 'relative',
     }}>
       <div style={{
-        position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-        display: 'grid', gridTemplateColumns: '1fr 1fr',
+        position: mob ? 'relative' : 'sticky', top: 0, height: '100vh', overflow: 'hidden',
+        display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 1fr',
       }}>
         {/* LEFT: narrative */}
         <div style={{
-          padding: '80px 60px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          padding: mob ? '40px 16px' : '80px 60px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           borderRight: `1px solid ${C.line}`,
         }}>
           <div>

@@ -1,6 +1,7 @@
 // Projects — cinematic full-bleed horizontal gallery with real imagery
 
 function Projects() {
+  const mob = useIsMobile();
   const ref = React.useRef(null);
   const p = usePinP(ref);
   const d = window.PORTFOLIO_DATA;
@@ -11,18 +12,18 @@ function Projects() {
   // sub-progress within the active card 0→1 (used for image cross-fade easing)
   const sub = Math.min(1, Math.max(0, (activeFloat - active)));
   return (
-    <section id="work" ref={ref} style={{ height: `${n * 120}vh`, position: 'relative', background: C.bg }}>
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', color: C.ink }}>
+    <section id="work" ref={ref} style={{ height: mob ? 'auto' : `${n * 120}vh`, position: 'relative', background: C.bg }}>
+      <div style={{ position: mob ? 'relative' : 'sticky', top: mob ? 'auto' : 0, height: mob ? 'auto' : '100vh', overflow: 'hidden', color: C.ink }}>
         {/* WebGL aurora — colour shifts as you scroll between projects */}
         <ShaderBg active={active} progress={sub} intensity={0.9} />
         <div style={{
           position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
-          padding: '100px 40px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+          padding: mob ? '70px 16px 16px' : '100px 40px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
           background: `linear-gradient(180deg, ${C.bg}ee, transparent)`,
         }}>
           <div>
             <div style={{ ...S.mono, color: C.muted }}>№ 02 / SELECTED WORK</div>
-            <div style={{ ...S.serif, fontSize: 'clamp(40px, 5vw, 72px)', lineHeight: 1, marginTop: 10 }}>
+            <div style={{ ...S.serif, fontSize: 'clamp(24px, 5vw, 72px)', lineHeight: 1, marginTop: 10 }}>
               Things I've <em style={{ color: C.accent }}>shipped</em>.
             </div>
           </div>
@@ -35,22 +36,23 @@ function Projects() {
         </div>
 
         <div style={{
-          display: 'flex', height: '100vh', width: `${n * 100}vw`,
-          transform: `translateX(-${p * (n - 1) * 100}vw)`,
+          display: 'flex', flexDirection: mob ? 'column' : 'row',
+          height: mob ? 'auto' : '100vh', width: mob ? '100%' : `${n * 100}vw`,
+          transform: mob ? 'none' : `translateX(-${p * (n - 1) * 100}vw)`,
           willChange: 'transform',
         }}>
           {projects.map((pr, i) => (
             <article key={pr.n} style={{
-              width: '100vw', flexShrink: 0, position: 'relative', overflow: 'hidden',
-              background: C.bg,
+              width: mob ? '100%' : '100vw', flexShrink: 0, position: 'relative', overflow: 'hidden',
+              background: C.bg, minHeight: mob ? 'auto' : undefined,
             }}>
               {/* Two-pane editorial layout: image left, story right */}
               <div style={{
-                position: 'relative', height: '100%', display: 'grid',
-                gridTemplateColumns: '0.95fr 1.05fr', paddingTop: 130,
+                position: 'relative', height: mob ? 'auto' : '100%', display: 'grid',
+                gridTemplateColumns: mob ? '1fr' : '0.95fr 1.05fr', paddingTop: mob ? 60 : 130,
               }}>
                 {/* LEFT: image plate with project numeral */}
-                <div style={{ position: 'relative', overflow: 'hidden', borderRight: `1px solid ${C.line}` }}>
+                <div style={{ position: 'relative', overflow: 'hidden', height: mob ? '250px' : 'auto', borderRight: mob ? 'none' : `1px solid ${C.line}` }}>
                   <div style={{
                     position: 'absolute', inset: 0,
                     backgroundImage: `url(${pr.image})`, backgroundSize: 'cover', backgroundPosition: 'center',
@@ -62,7 +64,7 @@ function Projects() {
                   {/* Giant numeral */}
                   <div style={{
                     position: 'absolute', left: 48, bottom: 48,
-                    ...S.serif, fontSize: 'clamp(180px, 22vw, 360px)', lineHeight: 0.85,
+                    ...S.serif, fontSize: 'clamp(60px, 22vw, 360px)', lineHeight: 0.85,
                     color: C.cream, fontStyle: 'italic', letterSpacing: '-0.04em',
                     mixBlendMode: 'overlay', opacity: 0.95,
                     textShadow: i === active ? `0 0 80px ${C.accent}66, 0 0 160px ${C.accent}33` : 'none',
@@ -82,6 +84,7 @@ function Projects() {
                     position: 'absolute', right: 32, bottom: 32, width: 220,
                     background: 'rgba(10,9,6,0.7)', backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(244,237,225,0.18)',
+                    display: mob ? 'none' : 'block',
                   }}>
                     <ProjectPreview idx={i} active={i === active} />
                   </div>
@@ -89,9 +92,9 @@ function Projects() {
 
                 {/* RIGHT: story column — generous breathing room, no internal scroll */}
                 <div style={{
-                  padding: '20px 64px 60px 64px',
+                  padding: mob ? '20px 16px 30px' : '20px 64px 60px 64px',
                   display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                  height: 'calc(100vh - 130px)',
+                  height: mob ? 'auto' : 'calc(100vh - 130px)',
                 }}>
                   {/* Top: title block */}
                   <div>
@@ -99,7 +102,7 @@ function Projects() {
                       {pr.subtitle}
                     </div>
                     <h2 style={{
-                      ...S.serif, fontSize: 'clamp(56px, 6.5vw, 104px)', lineHeight: 0.92,
+                      ...S.serif, fontSize: 'clamp(28px, 6.5vw, 104px)', lineHeight: 0.92,
                       letterSpacing: '-0.025em', color: C.cream, margin: '14px 0 0',
                       fontWeight: 400,
                     }}>
@@ -160,11 +163,11 @@ function Projects() {
           ))}
         </div>
 
-        <div style={{ position: 'absolute', left: 40, right: 40, bottom: 30, display: 'flex', gap: 4, zIndex: 5 }}>
+        {!mob && <div style={{ position: 'absolute', left: 40, right: 40, bottom: 30, display: 'flex', gap: 4, zIndex: 5 }}>
           {projects.map((_, i) => (
             <div key={i} style={{ flex: 1, height: 2, background: i <= active ? C.accent : C.line, transition: 'background 400ms' }} />
           ))}
-        </div>
+        </div>}
       </div>
     </section>
   );
