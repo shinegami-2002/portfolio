@@ -101,7 +101,7 @@ function Hero() {
         right: mob ? 'auto' : 'max(220px, 18vw)',
         zIndex: 3,
         width: mob ? '160px' : 'min(240px, 18vw)',
-        margin: mob ? '20px auto 0' : undefined,
+        margin: mob ? '80px auto 0' : undefined,
         transform: mob ? 'rotate(2deg)' : `translateY(${p * -30}px) rotate(3deg)`,
         animation: 'fadeUp 1400ms cubic-bezier(.2,.8,.2,1) 400ms forwards',
         opacity: 0,

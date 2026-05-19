@@ -35,18 +35,59 @@ function Signature() {
   const active = Math.min(stages.length - 1, Math.floor(stageFloat));
   const stageProg = stageFloat - active; // 0..1 within current stage
 
+  if (mob) {
+    return (
+      <section id="process" style={{ background: C.bg, color: C.ink, padding: '60px 16px' }}>
+        <div style={{ maxWidth: 1600, margin: '0 auto' }}>
+          <div style={{ ...S.mono, color: C.muted }}>№ 03 · SIGNATURE</div>
+          <Fade>
+            <div style={{ ...S.serif, fontSize: 'clamp(36px, 10vw, 72px)', lineHeight: 1, marginTop: 20, letterSpacing: '-0.03em' }}>
+              How I <em style={{ color: C.accent }}>work</em>.
+            </div>
+          </Fade>
+          <div style={{ fontSize: 14, lineHeight: 1.6, color: C.ink2, marginTop: 18 }}>
+            The anatomy of a RAG system I'd be proud to ship — every stage earns its place.
+          </div>
+
+          <div style={{ marginTop: 48 }}>
+            {stages.map((s, i) => (
+              <Fade key={i} delay={i * 80}>
+                <div style={{ padding: '28px 0', borderTop: `1px solid ${C.line}` }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
+                    <span style={{ ...S.mono, color: C.accent, fontSize: 11 }}>{s.n}</span>
+                    <span style={{ ...S.serif, fontSize: 32, fontStyle: 'italic', color: C.cream, lineHeight: 1.1 }}>
+                      {s.label.toLowerCase()}
+                    </span>
+                  </div>
+                  <div style={{ marginTop: 14 }}>
+                    <div style={{ ...S.serif, fontSize: 22, lineHeight: 1.2, color: C.cream }}>{s.heading}</div>
+                    <div style={{ fontSize: 14, lineHeight: 1.55, color: C.ink2, marginTop: 10 }}>{s.body}</div>
+                  </div>
+                </div>
+              </Fade>
+            ))}
+            <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: 16, ...S.mono, color: C.muted, fontSize: 10, display: 'flex', justifyContent: 'space-between' }}>
+              <span>4 STAGES</span>
+              <span>CHUNK → EMBED → RETRIEVE → GROUND</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="process" ref={ref} style={{
       height: `${stages.length * 100 + 60}vh`,
       background: C.bg, color: C.ink, position: 'relative',
     }}>
       <div style={{
-        position: mob ? 'relative' : 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-        display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 1fr',
+        position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
+        display: 'grid', gridTemplateColumns: '1fr 1fr',
       }}>
         {/* LEFT: narrative */}
         <div style={{
-          padding: mob ? '40px 16px' : '80px 60px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          padding: '80px 60px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           borderRight: `1px solid ${C.line}`,
         }}>
           <div>
