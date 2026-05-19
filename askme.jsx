@@ -403,10 +403,9 @@ function SummoningCircle({ status }) {
   }, []);
   const rot = (t * 8) % 360;
   const counterRot = -((t * 5) % 360);
-  return (
-    const mob = useIsMobile();
-    if (mob) return null;
-    return (<div aria-hidden="true" style={{
+  const mob = useIsMobile();
+  if (mob) return null;
+  return (<div aria-hidden="true" style={{
       position: 'absolute', right: '20%', top: '50%',
       transform: 'translate(50%, -50%)',
       width: 460, height: 460, pointerEvents: 'none',
