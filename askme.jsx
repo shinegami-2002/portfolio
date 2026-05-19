@@ -69,6 +69,44 @@ function AskMe() {
     return scored.filter(c => c.score > 0).sort((a, b) => b.score - a.score).slice(0, 4);
   }
 
+  function synthesize(q, sources) {
+    const ql = q.toLowerCase();
+    const first = sources[0] || {};
+    const second = sources[1];
+    const pick = (src, i) => {
+      const t = src.text || '';
+      const sents = t.split(/(?<=[.!])\s+/).filter(s => s.length > 20);
+      const terms = ql.split(/\W+/).filter(w => w.length > 3);
+      const best = sents.sort((a, b) => {
+        const al = a.toLowerCase(), bl = b.toLowerCase();
+        return terms.filter(t => bl.includes(t)).length - terms.filter(t => al.includes(t)).length;
+      })[0] || src.excerpt || t.slice(0, 120);
+      return best.replace(/\s+/g, ' ').trim();
+    };
+
+    let lines = [];
+    if (first.kind === 'PROJECT') {
+      lines.push(pick(first, 0) + ` [1]`);
+      if (second) lines.push((second.kind === 'EXPERIENCE'
+        ? `On the production side, ` : `I also built `) + pick(second, 1).charAt(0).toLowerCase() + pick(second, 1).slice(1) + ` [2]`);
+    } else if (first.kind === 'EXPERIENCE') {
+      lines.push(pick(first, 0) + ` [1]`);
+      if (second) lines.push(`That pairs with ` + pick(second, 1).charAt(0).toLowerCase() + pick(second, 1).slice(1) + ` [2]`);
+    } else if (first.kind === 'SKILLS') {
+      lines.push(`My stack spans ${first.excerpt} [1]`);
+      if (second) lines.push(pick(second, 1) + ` [2]`);
+    } else {
+      lines.push(pick(first, 0) + ` [1]`);
+      if (second) lines.push(pick(second, 1) + ` [2]`);
+    }
+
+    if (ql.includes('next') || ql.includes('looking') || ql.includes('goal')) {
+      lines.push(`I'm graduating summer '26 and looking for full-time roles where research meets production AI systems.`);
+    }
+
+    return lines.join(' ');
+  }
+
   async function ask(q) {
     if (!q.trim() || status === 'retrieving' || status === 'answering') return;
     setQuery(q);
@@ -90,37 +128,14 @@ function AskMe() {
     setStatus('grading');
     await new Promise(r => setTimeout(r, 350));
     setStatus('answering');
+    await new Promise(r => setTimeout(r, 400));
 
-    const context = top.map((c, i) => `[${i + 1}] ${c.title} (${c.kind}): ${c.text}`).join('\n\n');
-    const prompt = `You are answering FOR Shanmukha Chatadi about his own work, in FIRST PERSON ("I built...", "I shipped...", "I learned...").
-
-RULES:
-- Be confident and concise — 2 to 4 short sentences total.
-- Cite sources from the context with [1], [2], etc., placed inline after the claim they support.
-- NEVER say "I don't have that detail" or "I don't have anything on that" or admit any gap. The portfolio is always rich enough.
-- If the question doesn't map cleanly to the context, REFRAME it: bridge from what's asked to the closest thing you HAVE done, and answer that with conviction. Phrases like "The closest I can speak to is...", "Where I've shown this is...", "My take on that, from what I've shipped, is..." are good openers.
-- Speak like a thoughtful engineer, not a chatbot. Specifics > generalities. Numbers > adjectives.
-
-CONTEXT:
-${context}
-
-QUESTION: ${q}
-
-ANSWER (first person, 2-4 sentences, with [N] citations, never admit gaps):`;
-
-    try {
-      const resp = await window.claude.complete(prompt);
-      setAnswer(resp.trim());
-      // Extract cited indices
-      const cited = [...new Set((resp.match(/\[(\d+)\]/g) || []).map(m => parseInt(m.match(/\d+/)[0])))];
-      setCitations(cited);
-      setStatus('done');
-      setHistory(h => [{ q, a: resp.trim(), sources: top, cited }, ...h].slice(0, 3));
-    } catch (e) {
-      console.error(e);
-      setStatus('error');
-      setAnswer("The live model call failed — but the retrieval step worked. Try again in a moment.");
-    }
+    const resp = synthesize(q, top);
+    setAnswer(resp);
+    const cited = [...new Set((resp.match(/\[(\d+)\]/g) || []).map(m => parseInt(m.match(/\d+/)[0])))];
+    setCitations(cited);
+    setStatus('done');
+    setHistory(h => [{ q, a: resp, sources: top, cited }, ...h].slice(0, 3));
   }
 
   return (
