@@ -6,6 +6,10 @@ import { useActivePane } from "./lib/useActivePane";
 import { Trace } from "./trace/Trace";
 import { Flagship } from "./panes/Flagship";
 import { QueueSim } from "./sims/QueueSim";
+import { ScholarSim } from "./sims/ScholarSim";
+import { MihinSim } from "./sims/MihinSim";
+import { McpSim } from "./sims/McpSim";
+import { PruningSim } from "./sims/PruningSim";
 import { flagships } from "./content/flagships";
 import "./styles/console.css";
 import "./styles/panes.css";
@@ -14,6 +18,10 @@ import "./styles/sims.css";
 import "./styles/flagship.css";
 
 const SIMS: Record<string, React.ReactNode> = {
+  mihin: <MihinSim />,
+  scholar: <ScholarSim />,
+  mcp: <McpSim />,
+  pruning: <PruningSim />,
   queue: <QueueSim />,
 };
 

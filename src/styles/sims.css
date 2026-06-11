@@ -241,3 +241,391 @@
     display: none;
   }
 }
+
+/* ============ scholar sim ============ */
+.ssim {
+  display: grid;
+  gap: 12px;
+}
+.ssim__controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.ssim__controls .chip:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.ssim__clock {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.ssim__svg {
+  width: 100%;
+  height: auto;
+}
+.ssim__edge {
+  stroke: var(--line-2);
+  stroke-width: 1;
+  transition: stroke 200ms ease;
+}
+.ssim__edge--on {
+  stroke: var(--signal);
+  filter: drop-shadow(0 0 4px rgba(var(--signal-rgb), 0.6));
+}
+.ssim__edge--danger {
+  stroke: var(--danger);
+}
+.ssim__node circle {
+  fill: var(--surface-2);
+  stroke: var(--line-2);
+  stroke-width: 1;
+  transition: all 200ms ease;
+}
+.ssim__node text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  fill: var(--faint);
+}
+.ssim__node--active circle {
+  stroke: var(--signal);
+  fill: var(--signal-dim);
+  filter: drop-shadow(0 0 8px rgba(var(--signal-rgb), 0.7));
+}
+.ssim__node--active text {
+  fill: var(--signal);
+}
+.ssim__node--fail circle {
+  stroke: var(--danger);
+  fill: rgba(255, 107, 94, 0.12);
+  filter: drop-shadow(0 0 8px rgba(255, 107, 94, 0.6));
+}
+.ssim__node--fail text {
+  fill: var(--danger);
+}
+.ssim__node--done circle {
+  stroke: var(--signal);
+  fill: var(--surface-2);
+}
+.ssim__node--done text {
+  fill: var(--muted);
+}
+.ssim__doc rect {
+  stroke-width: 1;
+  fill: transparent;
+  transition: transform 400ms ease;
+}
+.ssim__doc text {
+  font-size: 7px;
+  font-family: var(--font-mono);
+}
+.ssim__doc--ok rect {
+  stroke: var(--signal);
+}
+.ssim__doc--ok text {
+  fill: var(--signal);
+}
+.ssim__doc--fail rect {
+  stroke: var(--danger);
+}
+.ssim__doc--fail text {
+  fill: var(--danger);
+}
+.ssim__note {
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  min-height: 30px;
+}
+.ssim__note--done {
+  color: var(--signal);
+}
+
+/* ============ mihin sim ============ */
+.msim {
+  display: grid;
+  gap: 14px;
+}
+.msim__tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.msim__tab--on {
+  border-color: var(--signal);
+  color: var(--signal);
+  box-shadow: var(--glow-soft);
+}
+.msim__hint {
+  font-size: 9.5px;
+  color: var(--faint);
+  text-transform: none;
+}
+.msim__svg {
+  width: 100%;
+  height: auto;
+}
+.msim__rail {
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+.msim__hop rect {
+  fill: var(--surface-2);
+  stroke: var(--line-2);
+  transition: stroke 300ms ease;
+}
+.msim__hop text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  fill: var(--faint);
+}
+.msim__hop--on rect {
+  stroke: var(--signal);
+}
+.msim__hop--on text {
+  fill: var(--ink);
+}
+.msim__badge {
+  fill: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  animation: stampIn 240ms steps(2);
+}
+.msim__packet {
+  fill: var(--signal);
+  filter: drop-shadow(0 0 6px rgba(var(--signal-rgb), 0.9));
+}
+.msim__packet--resp {
+  fill: var(--signal-2);
+}
+.msim__latency {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  fill: var(--faint);
+  letter-spacing: 0.08em;
+}
+.msim__a2a {
+  stroke: var(--line-2);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+  transition: stroke 400ms ease;
+}
+.msim__a2a--on {
+  stroke: var(--signal);
+  animation: a2aFlow 1.2s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(var(--signal-rgb), 0.5));
+}
+@keyframes a2aFlow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+.msim__agent rect {
+  fill: var(--surface-2);
+  stroke: var(--line-2);
+}
+.msim__agent text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  fill: var(--muted);
+}
+.msim__card rect {
+  fill: var(--signal-dim);
+  stroke: var(--signal);
+  animation: podPop 420ms var(--ease-snap);
+}
+.msim__card text {
+  fill: var(--signal);
+  font-size: 10px;
+}
+.msim__mcp rect {
+  fill: transparent;
+  stroke: var(--line-2);
+  transition: stroke 300ms ease;
+}
+.msim__mcp text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  fill: var(--faint);
+  letter-spacing: 0.1em;
+}
+.msim__mcp--on rect {
+  stroke: var(--signal-2);
+  filter: drop-shadow(0 0 6px rgba(107, 184, 255, 0.5));
+}
+.msim__mcp--on text {
+  fill: var(--signal-2);
+}
+.msim__counters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  font-size: 9.5px;
+}
+.msim__counters b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ============ mcp sim ============ */
+.csim {
+  display: grid;
+  gap: 12px;
+}
+.csim__presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.csim__presets .chip:disabled {
+  opacity: 0.4;
+}
+.csim__tools {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 9px;
+}
+.csim__tool {
+  color: var(--faint);
+  transition: color 200ms ease;
+}
+.csim__tool--on {
+  color: var(--signal);
+  text-shadow: 0 0 8px rgba(var(--signal-rgb), 0.5);
+}
+.csim__term {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  min-height: 120px;
+  max-height: 150px;
+  overflow: hidden;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--muted);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.csim__dim {
+  color: var(--faint);
+}
+.csim__result {
+  border-left: 2px solid var(--signal);
+  padding: 8px 14px;
+  display: grid;
+  gap: 4px;
+}
+.csim__resultHead {
+  color: var(--signal);
+}
+.csim__resultLine {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ============ pruning sim ============ */
+.psim {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.psim__matrix {
+  display: grid;
+  grid-template-columns: 34px repeat(11, 1fr);
+  gap: 2px;
+}
+.psim__corner {
+  font-size: 8px;
+  align-self: center;
+}
+.psim__axis {
+  font-size: 7.5px;
+  text-align: center;
+  color: var(--faint);
+  align-self: center;
+}
+.psim__axis--row {
+  text-align: right;
+  padding-right: 4px;
+}
+.psim__cell {
+  aspect-ratio: 1;
+  border: none;
+  transition: outline 100ms ease;
+  outline: 1px solid transparent;
+  min-width: 0;
+  padding: 0;
+}
+.psim__cell--sel {
+  outline: 1px solid var(--ink);
+}
+.psim__read {
+  margin-top: 10px;
+  font-size: 9.5px;
+  color: var(--signal);
+  min-height: 26px;
+  text-transform: none;
+}
+.psim__scatter {
+  width: 100%;
+  height: auto;
+}
+.psim__axisline {
+  stroke: var(--line-2);
+}
+.psim__pt {
+  fill: var(--signal-2);
+  opacity: 0.75;
+}
+.psim__fit {
+  stroke: var(--signal);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+.psim__r {
+  fill: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.psim__axlabel {
+  fill: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+}
+.psim__probe {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+.psim__probeN {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--ink);
+}
+.psim__note {
+  margin-top: 10px;
+  font-size: 8.5px;
+  color: var(--faint);
+}
+
+@media (max-width: 980px) {
+  .psim {
+    grid-template-columns: 1fr;
+  }
+}
