@@ -199,6 +199,39 @@
   animation: blink 0.9s steps(1) infinite;
 }
 
+.qsim__podWrap {
+  position: relative;
+}
+.qsim__flight {
+  position: absolute;
+  inset: -54px 0 0 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.qsim__dot {
+  position: absolute;
+  top: 0;
+  left: var(--fromX);
+  width: 5px;
+  height: 5px;
+  background: var(--signal);
+  box-shadow: 0 0 8px rgba(var(--signal-rgb), 0.8);
+  animation: dotFly var(--life) cubic-bezier(0.4, 0.1, 0.6, 1) forwards;
+}
+@keyframes dotFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--toX) - var(--fromX)), 52px) scale(0.4);
+    opacity: 0;
+  }
+}
+
 .qsim__log {
   border-top: 1px dashed var(--line);
   padding-top: 10px;

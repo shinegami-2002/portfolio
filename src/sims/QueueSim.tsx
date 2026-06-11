@@ -4,6 +4,7 @@ import { pulseSignal } from "../lib/scrollBus";
 import { SimShell } from "./SimShell";
 
 type Ev = { id: number; kind: "retry" | "dlq" | "scale"; text: string };
+type Dot = { id: number; born: number; lane: number; toPod: number };
 
 type S = {
   depth: number;
@@ -17,6 +18,9 @@ type S = {
   events: Ev[];
   evId: number;
   failCarry: number;
+  dots: Dot[];
+  dotId: number;
+  spawnCarry: number;
 };
 
 const init = (): S => ({
@@ -31,7 +35,12 @@ const init = (): S => ({
   events: [],
   evId: 0,
   failCarry: 0,
+  dots: [],
+  dotId: 0,
+  spawnCarry: 0,
 });
+
+const DOT_LIFE = 1.1; // seconds from spawn to absorbed-by-pod
 
 /** Drag the load. Watch HPA do its job. Real semantics: lag, retries, dead-letters. */
 export function QueueSim() {
@@ -93,6 +102,19 @@ function Body({
         ].slice(0, 4);
       }
     }
+    // flying task dots: spawn ∝ load, fly queue→pod, capped pool
+    st.spawnCarry += load * 6 * dt;
+    while (st.spawnCarry >= 1 && st.dots.length < 12) {
+      st.spawnCarry -= 1;
+      st.dots.push({
+        id: st.dotId++,
+        born: t,
+        lane: Math.random(),
+        toPod: Math.floor(Math.random() * st.workers),
+      });
+    }
+    st.dots = st.dots.filter((d) => t - d.born < DOT_LIFE);
+
     // HPA with reaction lag
     st.target = Math.max(2, Math.min(8, Math.ceil(st.depth / 11)));
     if (t - st.lastScale > 1.4 && st.workers !== st.target) {
@@ -162,12 +184,28 @@ function Body({
         <span className="mono-label">
           WORKERS × {st.workers} {st.target !== st.workers && <i>→ {st.target}</i>}
         </span>
-        <div className="qsim__podGrid">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className={`qsim__pod ${i < st.workers ? "qsim__pod--on" : ""}`}>
-              <span className="qsim__podBlink" />
-            </div>
-          ))}
+        <div className="qsim__podWrap">
+          <div className="qsim__podGrid">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className={`qsim__pod ${i < st.workers ? "qsim__pod--on" : ""}`}>
+                <span className="qsim__podBlink" />
+              </div>
+            ))}
+          </div>
+          {/* tasks in flight: queue bar above → assigned pod below */}
+          <div className="qsim__flight" aria-hidden="true">
+            {st.dots.map((d) => (
+              <span
+                key={d.id}
+                className="qsim__dot"
+                style={{
+                  ["--fromX" as never]: `${8 + d.lane * 84}%`,
+                  ["--toX" as never]: `${6 + d.toPod * 46}px`,
+                  ["--life" as never]: `${DOT_LIFE}s`,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

@@ -179,7 +179,18 @@
 }
 .flag__svcbarRule {
   flex: 1;
-  height: 1px;
-  background: var(--bg);
-  opacity: 0.35;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--bg) 0 8px, transparent 8px 16px);
+  opacity: 0.4;
+  animation: svcFlow 1.4s linear infinite;
+}
+@keyframes svcFlow {
+  to {
+    background-position: 16px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flag__svcbarRule {
+    animation: none;
+  }
 }

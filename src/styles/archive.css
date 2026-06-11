@@ -31,7 +31,13 @@
   transition: background var(--dur-fast) ease;
 }
 .arch__head:hover {
-  background: var(--surface);
+  background: var(--signal);
+}
+.arch__head:hover .arch__name,
+.arch__head:hover .arch__one,
+.arch__head:hover .arch__year,
+.arch__head:hover .arch__plus {
+  color: var(--bg);
 }
 .arch__row--open .arch__head {
   background: var(--surface);
@@ -100,6 +106,13 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   filter: saturate(0.92);
+  transition: transform 1400ms var(--ease-out);
+}
+.field__shot:hover img {
+  transform: scale(1.07);
+}
+.field__shot {
+  overflow: hidden;
 }
 .field__shot figcaption {
   display: flex;

@@ -5,7 +5,9 @@ import { StatusHeader } from "./components/StatusHeader";
 import { Hero } from "./panes/Hero";
 import { Pane } from "./components/Pane";
 import { Keymap } from "./components/Keymap";
+import { StatusBar } from "./components/StatusBar";
 import { useActivePane } from "./lib/useActivePane";
+import { useChannel } from "./lib/useChannel";
 import { Trace } from "./trace/Trace";
 import { Flagship } from "./panes/Flagship";
 import { Archive } from "./panes/Archive";
@@ -36,6 +38,7 @@ const SIMS: Record<string, React.ReactNode> = {
 
 export default function App() {
   const { active, progress } = useActivePane();
+  useChannel();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [booted, setBooted] = useState(false);
   const openPalette = useCallback(() => setPaletteOpen(true), []);
@@ -77,6 +80,7 @@ export default function App() {
           <Contact />
         </Pane>
       </main>
+      <StatusBar active={active} progress={progress} />
       <button className="fab" onClick={openPalette} aria-label="ASK — open command palette">
         ⌘ ASK
       </button>

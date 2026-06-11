@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { subscribeSignal } from "../lib/scrollBus";
 import { reducedMotion } from "../lib/springs";
-import { useTheme } from "../lib/theme";
 
 const FS = `
 precision mediump float;
@@ -30,15 +29,23 @@ function hexToRgb(hex: string): [number, number, number] {
   ];
 }
 
-/** The oscilloscope behind everything — measures the visitor, energizes on activity. */
+/** The oscilloscope behind everything — measures the visitor, energizes on activity,
+ *  and retunes its color to the active channel. */
 export function SignalLayer() {
   const ref = useRef<HTMLCanvasElement>(null);
-  const [theme] = useTheme();
   const tintRef = useRef<[number, number, number]>([0.24, 0.94, 0.69]);
+  const targetTint = useRef<[number, number, number]>([0.24, 0.94, 0.69]);
 
   useEffect(() => {
-    tintRef.current = hexToRgb(theme === "paper" ? "#00805f" : "#3df0b0");
-  }, [theme]);
+    const readTint = () => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue("--signal").trim();
+      if (/^#[0-9a-f]{6}$/i.test(v)) targetTint.current = hexToRgb(v);
+    };
+    readTint();
+    const mo = new MutationObserver(readTint);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-ch", "data-theme"] });
+    return () => mo.disconnect();
+  }, []);
 
   useEffect(() => {
     if (reducedMotion()) return;
@@ -97,10 +104,14 @@ export function SignalLayer() {
     const tick = (now: number) => {
       if (!document.hidden) {
         resize();
+        // lerp the tint toward the active channel color
+        const t = tintRef.current;
+        const g2 = targetTint.current;
+        for (let i = 0; i < 3; i++) t[i] += (g2[i] - t[i]) * 0.06;
         gl.uniform1f(uT, (now - start) / 1000);
         gl.uniform1f(uAmp, amp);
         gl.uniform2f(uRes, canvas.width, canvas.height);
-        gl.uniform3f(uTint, ...tintRef.current);
+        gl.uniform3f(uTint, t[0], t[1], t[2]);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);

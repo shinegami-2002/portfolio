@@ -102,6 +102,23 @@ function RequestPath({ k }: { k: number }) {
           </g>
         );
       })}
+      {/* phosphor trail behind the packet */}
+      {[0.05, 0.1, 0.16].map((lag, i) => {
+        const kk = Math.max(0, k - lag);
+        const o2 = Math.min(1, kk * 2);
+        const b2 = Math.max(0, kk * 2 - 1);
+        const tx = kk < 0.5 ? 50 + o2 * 550 : 600 - b2 * 550;
+        return (
+          <circle
+            key={i}
+            cx={tx}
+            cy={84}
+            r={4 - i}
+            className={`msim__packet ${k >= 0.5 ? "msim__packet--resp" : ""}`}
+            opacity={0.3 - i * 0.09}
+          />
+        );
+      })}
       <circle cx={px} cy={84} r={5} className={`msim__packet ${k >= 0.5 ? "msim__packet--resp" : ""}`} />
       <text x={600} y={132} textAnchor="end" className="msim__latency">
         {latency}ms · audit-logged
