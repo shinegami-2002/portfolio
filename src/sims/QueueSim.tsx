@@ -1,0 +1,184 @@
+import { useRef, useState } from "react";
+import { useRafLoop } from "../lib/springs";
+import { pulseSignal } from "../lib/scrollBus";
+import { SimShell } from "./SimShell";
+
+type Ev = { id: number; kind: "retry" | "dlq" | "scale"; text: string };
+
+type S = {
+  depth: number;
+  workers: number;
+  target: number;
+  lastScale: number;
+  done: number;
+  retries: number;
+  dlq: number;
+  rate: number;
+  events: Ev[];
+  evId: number;
+  failCarry: number;
+};
+
+const init = (): S => ({
+  depth: 6,
+  workers: 2,
+  target: 2,
+  lastScale: 0,
+  done: 0,
+  retries: 0,
+  dlq: 0,
+  rate: 0,
+  events: [],
+  evId: 0,
+  failCarry: 0,
+});
+
+/** Drag the load. Watch HPA do its job. Real semantics: lag, retries, dead-letters. */
+export function QueueSim() {
+  const [load, setLoad] = useState(0.35);
+  const s = useRef<S>(init());
+  const [, force] = useState(0);
+
+  return (
+    <SimShell
+      name="DISTRIBUTED-QUEUE"
+      readout={(x) => `t+${(x * 60).toFixed(0)}s · depth ${s.current.depth.toFixed(0)}`}
+    >
+      {(running) => <Body running={running} load={load} setLoad={setLoad} s={s} force={force} />}
+    </SimShell>
+  );
+}
+
+function Body({
+  running,
+  load,
+  setLoad,
+  s,
+  force,
+}: {
+  running: boolean;
+  load: number;
+  setLoad: (n: number) => void;
+  s: React.MutableRefObject<S>;
+  force: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  useRafLoop((t, dt) => {
+    const st = s.current;
+    // arrivals
+    const arrivals = load * 26 * dt;
+    st.depth += arrivals;
+    // processing
+    const cap = st.workers * 4.2 * dt;
+    const processed = Math.min(st.depth, cap);
+    st.depth -= processed;
+    st.done += processed;
+    st.rate += (processed / Math.max(dt, 1e-4) - st.rate) * 0.08;
+    // failures: 8% of processed fail; 2 retries then DLQ
+    st.failCarry += processed * 0.08;
+    if (st.failCarry >= 1) {
+      const n = Math.floor(st.failCarry);
+      st.failCarry -= n;
+      st.retries += n;
+      st.depth += n * 0.7; // most retries re-enter the queue
+      if (Math.random() < 0.3) {
+        st.dlq += 1;
+        st.events = [
+          { id: st.evId++, kind: "dlq" as const, text: `task#${(st.done | 0) + 17} → dead-letter after 2 retries` },
+          ...st.events,
+        ].slice(0, 4);
+      } else if (Math.random() < 0.4) {
+        st.events = [
+          { id: st.evId++, kind: "retry" as const, text: `task#${(st.done | 0) + 9} retry · backoff ${(1 + Math.random() * 3).toFixed(1)}s` },
+          ...st.events,
+        ].slice(0, 4);
+      }
+    }
+    // HPA with reaction lag
+    st.target = Math.max(2, Math.min(8, Math.ceil(st.depth / 11)));
+    if (t - st.lastScale > 1.4 && st.workers !== st.target) {
+      st.workers += Math.sign(st.target - st.workers);
+      st.lastScale = t;
+      st.events = [
+        { id: st.evId++, kind: "scale" as const, text: `hpa: queue_depth=${st.depth.toFixed(0)} → workers=${st.workers}` },
+        ...st.events,
+      ].slice(0, 4);
+      pulseSignal(0.25);
+    }
+    st.depth = Math.max(0, Math.min(100, st.depth));
+    force((n) => n + 1);
+  }, running);
+
+  const st = s.current;
+  const depthPct = Math.min(100, st.depth);
+
+  return (
+    <div className="qsim">
+      <div className="qsim__row">
+        <label className="qsim__load">
+          <span className="mono-label">LOAD</span>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={load}
+            onChange={(e) => setLoad(parseFloat(e.target.value))}
+            aria-label="Producer load"
+          />
+          <span className="mono-label qsim__loadV">{Math.round(load * 26)}/s</span>
+        </label>
+        <div className="qsim__tickers mono-label">
+          <span>
+            THROUGHPUT <b>{st.rate.toFixed(1)}/s</b>
+          </span>
+          <span>
+            P95 <b>{(40 + depthPct * 6).toFixed(0)}ms</b>
+          </span>
+          <span>
+            RETRIES <b>{st.retries | 0}</b>
+          </span>
+          <span className={st.dlq > 0 ? "qsim__dlqCount" : ""}>
+            DLQ <b>{st.dlq}</b>
+          </span>
+        </div>
+      </div>
+
+      <div className="qsim__queue">
+        <span className="mono-label">QUEUE</span>
+        <div className="qsim__bar">
+          <div
+            className={`qsim__fill ${depthPct > 80 ? "qsim__fill--hot" : ""}`}
+            style={{ width: `${depthPct}%` }}
+          />
+          {/* depth ruler ticks */}
+          {[25, 50, 75].map((p) => (
+            <span key={p} className="qsim__rule" style={{ left: `${p}%` }} />
+          ))}
+        </div>
+        <span className="mono-label qsim__depth">{st.depth.toFixed(0)}</span>
+      </div>
+
+      <div className="qsim__pods">
+        <span className="mono-label">
+          WORKERS × {st.workers} {st.target !== st.workers && <i>→ {st.target}</i>}
+        </span>
+        <div className="qsim__podGrid">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className={`qsim__pod ${i < st.workers ? "qsim__pod--on" : ""}`}>
+              <span className="qsim__podBlink" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="qsim__log">
+        {st.events.length === 0 && <div className="qsim__ev mono-label">— no incidents yet. push the load.</div>}
+        {st.events.map((e) => (
+          <div key={e.id} className={`qsim__ev mono-label qsim__ev--${e.kind}`}>
+            {e.kind === "dlq" ? "✗" : e.kind === "retry" ? "↻" : "▲"} {e.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,243 @@
+/* ============ sim shell ============ */
+.sim {
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+}
+.sim__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.sim__name {
+  font-size: 10px;
+}
+.sim__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9.5px;
+}
+.sim__status .dot {
+  background: var(--faint);
+}
+.sim__status--run {
+  color: var(--signal);
+}
+.sim__status--run .dot {
+  background: var(--signal);
+  box-shadow: var(--glow);
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+.sim__body {
+  position: relative;
+  padding: 18px;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+/* crosshair probe */
+.sim__probe {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sim__probeV,
+.sim__probeH {
+  position: absolute;
+  background: rgba(var(--signal-rgb), 0.25);
+}
+.sim__probeV {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.sim__probeH {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.sim__probeTip {
+  position: absolute;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  color: var(--signal);
+  padding: 3px 7px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+/* ============ queue sim ============ */
+.qsim {
+  display: grid;
+  gap: 16px;
+}
+.qsim__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.qsim__load {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 220px;
+}
+.qsim__load input[type="range"] {
+  flex: 1;
+  max-width: 280px;
+  accent-color: var(--signal);
+  cursor: grab;
+}
+.qsim__load input[type="range"]:active {
+  cursor: grabbing;
+}
+.qsim__loadV {
+  color: var(--signal);
+  min-width: 38px;
+}
+.qsim__tickers {
+  display: flex;
+  gap: 18px;
+  font-size: 10px;
+  flex-wrap: wrap;
+}
+.qsim__tickers b {
+  color: var(--ink);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.qsim__dlqCount b {
+  color: var(--danger);
+}
+
+.qsim__queue {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.qsim__bar {
+  flex: 1;
+  height: 14px;
+  border: 1px solid var(--line-2);
+  position: relative;
+  background: var(--bg);
+}
+.qsim__fill {
+  height: 100%;
+  background: var(--signal);
+  box-shadow: var(--glow);
+  transition: width 120ms linear, background 300ms ease;
+}
+.qsim__fill--hot {
+  background: var(--alert);
+}
+.qsim__rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.qsim__depth {
+  min-width: 30px;
+  text-align: right;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.qsim__pods {
+  display: grid;
+  gap: 10px;
+}
+.qsim__pods i {
+  color: var(--alert);
+  font-style: normal;
+}
+.qsim__podGrid {
+  display: flex;
+  gap: 8px;
+}
+.qsim__pod {
+  width: 38px;
+  height: 30px;
+  border: 1px solid var(--line);
+  position: relative;
+  transition: border-color 300ms ease;
+}
+.qsim__pod--on {
+  border-color: var(--signal);
+  background: var(--signal-dim);
+  animation: podPop 420ms var(--ease-snap);
+}
+@keyframes podPop {
+  0% {
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.qsim__podBlink {
+  display: none;
+}
+.qsim__pod--on .qsim__podBlink {
+  display: block;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  background: var(--signal);
+  animation: blink 0.9s steps(1) infinite;
+}
+
+.qsim__log {
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  display: grid;
+  gap: 5px;
+  min-height: 86px;
+}
+.qsim__ev {
+  font-size: 9.5px;
+  text-transform: none;
+  letter-spacing: 0.06em;
+}
+.qsim__ev--dlq {
+  color: var(--danger);
+  animation: rowShudder 320ms ease;
+}
+.qsim__ev--retry {
+  color: var(--alert);
+}
+.qsim__ev--scale {
+  color: var(--signal);
+}
+@keyframes rowShudder {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 820px) {
+  .qsim__podGrid {
+    flex-wrap: wrap;
+  }
+  .sim__probe {
+    display: none;
+  }
+}
