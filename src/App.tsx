@@ -3,8 +3,10 @@ import { StatusHeader } from "./components/StatusHeader";
 import { Hero } from "./panes/Hero";
 import { Pane } from "./components/Pane";
 import { useActivePane } from "./lib/useActivePane";
+import { Trace } from "./trace/Trace";
 import "./styles/console.css";
 import "./styles/panes.css";
+import "./styles/trace.css";
 
 export default function App() {
   const { active, progress } = useActivePane();
@@ -19,9 +21,7 @@ export default function App() {
       <main>
         <Hero />
         <Pane id="trace" number="01" title="The Trace" aside="2022 → NOW">
-          <p data-stamp style={{ color: "var(--muted)" }}>
-            trace coming online…
-          </p>
+          <Trace />
         </Pane>
         <Pane id="work" number="02" title="Flagship Systems" aside="5 SERVICES">
           <p data-stamp style={{ color: "var(--muted)" }}>
