@@ -8,6 +8,8 @@ export const flagships: Flagship[] = [
     period: "2025 — present",
     oneLiner:
       "The AI platform of Michigan's statewide health information exchange — I prototyped it, wrote the governance that made it legal, and now push its production code.",
+    pullQuote: "Something breaks essentially every day. I'm the one who answers.",
+    layout: "wide",
     chips: [],
     metrics: [
       { value: 230, suffix: "+", label: "daily users" },
@@ -26,7 +28,7 @@ export const flagships: Flagship[] = [
     logLines: [
       "the hardest retrieval problem was messy heterogeneous enterprise documents — configurable chunking, dedup at ingestion, and a human-in-the-loop eval loop got ungrounded answers down 30%",
       "taking ownership of a production codebase I didn't write — and extending it with A2A + MCP without disrupting active users — has been the most valuable engineering experience of the role",
-      "something breaks essentially every day; I'm the one who answers. 10+ internal builders ship their own bots on the platform because they can get unblocked fast",
+      "10+ internal builders ship their own bots on the platform because they can get unblocked fast",
     ],
     tags: ["AWS Bedrock", "AgentCore", "A2A", "MCP", "Strands SDK", "OpenSearch", "Pinecone", "Cognito", "HITRUST", "HIPAA"],
   },
@@ -37,12 +39,13 @@ export const flagships: Flagship[] = [
     period: "2025",
     oneLiner:
       "A research assistant that detects and corrects its own failures before you ever see an answer.",
+    pullQuote: "An agent whose reasoning is inspectable earns trust a black box never does.",
+    layout: "split",
     chips: [{ label: "GITHUB", href: "https://github.com/shinegami-2002/scholar-agent", kind: "github" }],
     metrics: [
       { value: 35, prefix: "+", suffix: "%", label: "groundedness vs naive RAG" },
       { value: 10, suffix: "K+", label: "papers indexed" },
       { value: 99, suffix: "%", label: "cascade uptime" },
-      { value: 21, suffix: "+", label: "hermetic tests" },
     ],
     problem:
       "A single retrieve-then-generate pass fails quietly: weak retrieval in, hallucinated answer out, nobody notices.",
@@ -55,7 +58,7 @@ export const flagships: Flagship[] = [
       "Next.js 14 frontend renders each agent step live.",
     logLines: [
       "agent pipelines multiply failure modes, so every node boundary needs a contract — typed Pydantic models per node made the graph debuggable: a failure points at a node, not at a blob of prompt text",
-      "watching a rejected generation get retried in the UI turned out to matter as much as accuracy — an agent whose reasoning is inspectable earns trust a black box never does",
+      "watching a rejected generation get retried live in the UI turned out to matter as much as accuracy",
       "the suite runs deterministically offline with mocked LLM responses; CI doesn't need API keys",
     ],
     tags: ["LangGraph", "ChromaDB", "Gemini", "Pydantic", "FastAPI", "WebSockets", "Next.js 14", "TypeScript"],
@@ -67,12 +70,13 @@ export const flagships: Flagship[] = [
     period: "2025",
     oneLiner:
       "Six healthcare tools any MCP client can call — wired to four federal APIs, no keys required. The demo below hits the real ones.",
+    pullQuote: "In agentic systems, documentation is functionally part of the API.",
+    layout: "split",
     chips: [{ label: "GITHUB", href: "https://github.com/shinegami-2002/mcp-healthcare-server", kind: "github" }],
     metrics: [
       { value: 6, label: "tools exposed" },
       { value: 4, label: "federal APIs" },
       { value: 70, suffix: "K+", label: "ICD-10 codes searchable" },
-      { value: 21, label: "hermetic unit tests" },
     ],
     problem:
       "Ask an LLM a medical question and it will confidently hallucinate drug interactions and billing codes — while " +
@@ -83,7 +87,7 @@ export const flagships: Flagship[] = [
       "clinical literature search (PubMed E-utilities). Async httpx, concurrent requests, sub-second typical calls, " +
       "every response normalized into structured output designed for an LLM reader. Every data source keyless by design.",
     logLines: [
-      "in MCP, documentation is functionally part of the API — a one-sentence improvement to a tool description measurably changed how often Claude picked the right tool",
+      "a one-sentence improvement to a tool description measurably changed how often Claude picked the right tool",
       "the consumer is a language model: responses must be self-describing, not terse JSON that assumes a human read the docs",
       "21 respx-mocked tests, CI across Python 3.11–3.13 — the repo is treated as a product, not a demo",
     ],
@@ -96,12 +100,15 @@ export const flagships: Flagship[] = [
     period: "2026",
     oneLiner:
       "Two pruned networks with identical accuracy are not the same network — and you can prove it from a single image.",
+    pullQuote: "When you prune leaves a detectable signature in what the network learns.",
+    layout: "figure",
+    figCaption:
+      "FIG. 1 — Pairwise CKA across the 11-config grid (left); CKA similarity predicts shared mistakes at r = +0.95 (right). Reconstructed from study results.",
     chips: [],
     metrics: [
       { value: 0.95, prefix: "r = +", label: "CKA predicts shared mistakes", decimals: 2 },
       { value: 89.2, suffix: "%", label: "probe accuracy (chance: 25%)", decimals: 1 },
       { value: 11, label: "configs on 3× H100" },
-      { value: 1.48, suffix: "pp", label: "accuracy spread (held tight)", decimals: 2 },
     ],
     problem:
       "Magnitude pruning is everywhere, and everyone checks only accuracy. What does pruning change inside the " +
@@ -113,7 +120,7 @@ export const flagships: Flagship[] = [
       "a 100K-permutation Mantel test, and partial correlations to keep the claims statistically defensible.",
     logLines: [
       "CKA similarity predicted pairwise mistake overlap at r = +0.95 — models with similar internals fail on the same inputs",
-      "pruning timing is decodable from behavior on ONE held-out image at 89.2% balanced accuracy. when you prune leaves a detectable signature",
+      "pruning timing is decodable from behavior on ONE held-out image at 89.2% balanced accuracy (chance: 25%)",
       "practical upshot: equal-accuracy compressed models fail on different users' inputs, and ensembles of differently-pruned models gain real diversity",
     ],
     tags: ["PyTorch", "ResNet-18", "CIFAR-100", "Linear CKA", "Mantel test", "3× H100", "forward hooks"],
@@ -125,10 +132,11 @@ export const flagships: Flagship[] = [
     period: "2025",
     oneLiner:
       "A Celery-class task queue built from scratch in Go — because queue semantics are something you earn, not read about.",
+    pullQuote: "Throughput rises with worker count until Postgres becomes the bottleneck — past that, more workers just deepen contention.",
+    layout: "split",
     chips: [{ label: "GITHUB", href: "https://github.com/shinegami-2002/distributed-task-queue", kind: "github" }],
     metrics: [
       { value: 8, label: "workers, HPA-scaled" },
-      { value: 2, label: "retry budget before DLQ" },
       { value: 100, suffix: "%", label: "drain on graceful shutdown" },
     ],
     problem:
@@ -141,7 +149,7 @@ export const flagships: Flagship[] = [
       "a custom Prometheus metric — queue depth, not CPU, because CPU lies during I/O-bound work.",
     logLines: [
       "every behavior sounds simple stated in one sentence and took real design to get correct under concurrency",
-      "the load tester taught me backpressure viscerally: throughput rises with worker count until Postgres becomes the bottleneck — past that, more workers just deepen contention",
+      "the load tester taught me backpressure viscerally — race conditions only appear when you push hard enough",
       "this is why I have earned answers when system-design interviews reach for 'build a job queue' — I've made every mistake the question probes for",
     ],
     tags: ["Go", "gRPC", "Protobuf", "Redis", "PostgreSQL", "Kubernetes", "Helm", "Prometheus", "Grafana"],

@@ -44,11 +44,11 @@
   --ink: #14181c;
   --muted: #5c6670;
   --faint: #66707a;
-  --signal: #00805f;
-  --signal-dim: rgba(0, 128, 95, 0.1);
+  --signal: #00734f;
+  --signal-dim: rgba(0, 115, 79, 0.1);
   --signal-2: #0b66d0;
-  --alert: #b45309;
-  --danger: #c2402f;
+  --alert: #9c4a06;
+  --danger: #b03a2a;
   --line: #d8d6ce;
   --line-2: #c8c5bb;
   --glow: 0 0 10px rgba(0, 128, 95, 0.22);

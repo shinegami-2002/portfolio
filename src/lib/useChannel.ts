@@ -30,10 +30,13 @@ export function useChannel(): void {
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          visible.set((e.target as HTMLElement).id, e.isIntersecting ? e.intersectionRatio : 0);
+          // score by viewport coverage, not section coverage — tall sections
+          // (mobile) could otherwise never reach a ratio threshold
+          const cov = e.isIntersecting ? e.intersectionRect.height / window.innerHeight : 0;
+          visible.set((e.target as HTMLElement).id, cov);
         }
         let best: string | null = null;
-        let bestV = 0.18; // needs meaningful presence to retune
+        let bestV = 0.32; // needs meaningful viewport presence to retune
         for (const [id, v] of visible) {
           if (v > bestV) {
             bestV = v;
@@ -42,7 +45,7 @@ export function useChannel(): void {
         }
         apply(best ? best.replace("work-", "") : null);
       },
-      { threshold: [0, 0.2, 0.45, 0.7] },
+      { threshold: [0, 0.15, 0.3, 0.5, 0.75] },
     );
 
     for (const ch of CHANNELS) {

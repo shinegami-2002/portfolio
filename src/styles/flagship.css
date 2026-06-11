@@ -78,8 +78,8 @@
   margin-bottom: 8px;
 }
 .flag__spec p {
-  color: var(--muted);
-  font-size: 14px;
+  color: color-mix(in srgb, var(--ink) 80%, var(--muted));
+  font-size: 15.5px;
   line-height: 1.65;
   max-width: 64ch;
 }
@@ -127,7 +127,7 @@
 }
 .flag__logText {
   color: var(--muted);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.55;
   max-width: 92ch;
 }
@@ -182,7 +182,7 @@
   height: 3px;
   background: repeating-linear-gradient(90deg, var(--bg) 0 8px, transparent 8px 16px);
   opacity: 0.4;
-  animation: svcFlow 1.4s linear infinite;
+  animation: svcFlow 1.4s linear 4;
 }
 @keyframes svcFlow {
   to {
@@ -192,5 +192,50 @@
 @media (prefers-reduced-motion: reduce) {
   .flag__svcbarRule {
     animation: none;
+  }
+}
+
+/* ---- pull quote: the line worth remembering, set huge in channel ink ---- */
+.flag__pull {
+  margin: 26px 0 0;
+  font-family: var(--font-sans);
+  font-variation-settings: "wdth" 78;
+  font-weight: 560;
+  font-size: clamp(21px, 2.4vw, 30px);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--signal);
+  max-width: 30ch;
+}
+
+/* ---- layout variants: the rhythm changes per system ---- */
+.flag--wide .flag__grid,
+.flag--figure .flag__grid {
+  grid-template-columns: 1fr;
+}
+.flag--wide .flag__specs,
+.flag--figure .flag__specs {
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 56px);
+}
+.flag--figure .flag__simCol {
+  border: 1px solid var(--line-2);
+  padding: clamp(12px, 2vw, 28px);
+  background: var(--surface);
+}
+.flag__figcap {
+  margin-top: 14px;
+  font-size: 10.5px;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.06em;
+  max-width: 86ch;
+  line-height: 1.6;
+}
+
+@media (max-width: 980px) {
+  .flag--wide .flag__specs,
+  .flag--figure .flag__specs {
+    grid-template-columns: 1fr;
   }
 }

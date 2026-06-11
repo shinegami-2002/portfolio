@@ -1,31 +1,38 @@
 import type { ReactNode } from "react";
 import type { Flagship as FlagshipT } from "../content/types";
 import { useInView } from "../lib/useInView";
-import { GlyphDecode } from "../components/GlyphDecode";
 import { NumberTicker } from "../components/NumberTicker";
 import { Chip } from "../components/Chip";
 
-/** One flagship = one internal service page: header, live sim, spec rows, incident log. */
+/**
+ * One flagship = one internal service page. Three layouts so the rhythm
+ * changes per system: wide (control room), split (side-by-side), figure (paper).
+ */
 export function Flagship({ f, sim }: { f: FlagshipT; sim: ReactNode }) {
   const { ref, seen } = useInView<HTMLElement>(0.06);
   return (
-    <article id={`work-${f.id}`} ref={ref} className={`flag pane ${seen ? "pane--on" : ""}`} data-ch={f.id}>
+    <article
+      id={`work-${f.id}`}
+      ref={ref}
+      className={`flag flag--${f.layout} pane ${seen ? "pane--on" : ""}`}
+      data-ch={f.id}
+    >
       <div className="pane__inner">
         <div className="flag__svcbar">
           <span>▸ SVC/{f.id.toUpperCase()}</span>
           <span className="flag__svcbarRule" />
-          <span>{f.status} · {f.period.toUpperCase()}</span>
+          <span>
+            {f.status} · {f.period.toUpperCase()}
+          </span>
         </div>
+
         <header className="flag__head">
           <div className="flag__title">
             <span className={`flag__chip flag__chip--${f.status.toLowerCase()}`}>
               {f.status === "PROD" && <span className="dot dot--live" />}
               {f.status}
             </span>
-            <h3 className="flag__name">
-              <GlyphDecode text={f.name} go={seen} />
-            </h3>
-            <span className="flag__period mono-label">{f.period}</span>
+            <h3 className="flag__name">{f.name}</h3>
           </div>
           {f.chips.length > 0 && (
             <div className="flag__links">
@@ -40,15 +47,22 @@ export function Flagship({ f, sim }: { f: FlagshipT; sim: ReactNode }) {
           {f.oneLiner}
         </p>
 
+        <blockquote className="flag__pull" data-stamp style={{ ["--stagger" as never]: "1" }}>
+          “{f.pullQuote}”
+        </blockquote>
+
         <div className="flag__grid">
-          <div className="flag__simCol">{sim}</div>
+          <div className="flag__simCol">
+            {sim}
+            {f.figCaption && <p className="flag__figcap mono-label">{f.figCaption}</p>}
+          </div>
 
           <div className="flag__specs">
-            <div className="flag__spec" data-stamp style={{ ["--stagger" as never]: "1" }}>
+            <div className="flag__spec" data-stamp style={{ ["--stagger" as never]: "2" }}>
               <span className="flag__specK mono-label">PROBLEM</span>
               <p>{f.problem}</p>
             </div>
-            <div className="flag__spec" data-stamp style={{ ["--stagger" as never]: "2" }}>
+            <div className="flag__spec" data-stamp style={{ ["--stagger" as never]: "3" }}>
               <span className="flag__specK mono-label">APPROACH</span>
               <p>{f.approach}</p>
             </div>
@@ -66,7 +80,7 @@ export function Flagship({ f, sim }: { f: FlagshipT; sim: ReactNode }) {
           ))}
         </div>
 
-        <div className="flag__log" data-stamp style={{ ["--stagger" as never]: "3" }}>
+        <div className="flag__log" data-stamp style={{ ["--stagger" as never]: "4" }}>
           <span className="mono-label flag__logHead">INCIDENT LOG</span>
           {f.logLines.map((l, i) => (
             <div className="flag__logLine" key={i}>

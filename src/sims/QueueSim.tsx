@@ -7,6 +7,7 @@ type Ev = { id: number; kind: "retry" | "dlq" | "scale"; text: string };
 type Dot = { id: number; born: number; lane: number; toPod: number };
 
 type S = {
+  t: number; // sim-time, accumulated — survives pause/resume
   depth: number;
   workers: number;
   target: number;
@@ -24,6 +25,7 @@ type S = {
 };
 
 const init = (): S => ({
+  t: 0,
   depth: 6,
   workers: 2,
   target: 2,
@@ -44,35 +46,33 @@ const DOT_LIFE = 1.1; // seconds from spawn to absorbed-by-pod
 
 /** Drag the load. Watch HPA do its job. Real semantics: lag, retries, dead-letters. */
 export function QueueSim() {
-  const [load, setLoad] = useState(0.35);
-  const s = useRef<S>(init());
-  const [, force] = useState(0);
-
+  const depthRef = useRef(6);
   return (
     <SimShell
       name="DISTRIBUTED-QUEUE"
-      readout={(x) => `t+${(x * 60).toFixed(0)}s · depth ${s.current.depth.toFixed(0)}`}
+      readout={(x) => `t+${(x * 60).toFixed(0)}s · depth ${depthRef.current.toFixed(0)}`}
     >
-      {(running) => <Body running={running} load={load} setLoad={setLoad} s={s} force={force} />}
+      {(running) => <Body running={running} depthRef={depthRef} />}
     </SimShell>
   );
 }
 
 function Body({
   running,
-  load,
-  setLoad,
-  s,
-  force,
+  depthRef,
 }: {
   running: boolean;
-  load: number;
-  setLoad: (n: number) => void;
-  s: React.MutableRefObject<S>;
-  force: React.Dispatch<React.SetStateAction<number>>;
+  depthRef: React.MutableRefObject<number>;
 }) {
-  useRafLoop((t, dt) => {
-    const st = s.current;
+  const [load, setLoad] = useState(0.35);
+  const s = useRef<S | null>(null);
+  if (s.current === null) s.current = init();
+  const [, force] = useState(0);
+
+  useRafLoop((_, dt) => {
+    const st = s.current!;
+    st.t += dt;
+    const t = st.t;
     // arrivals
     const arrivals = load * 26 * dt;
     st.depth += arrivals;
@@ -88,7 +88,7 @@ function Body({
       const n = Math.floor(st.failCarry);
       st.failCarry -= n;
       st.retries += n;
-      st.depth += n * 0.7; // most retries re-enter the queue
+      st.depth += n * 0.7;
       if (Math.random() < 0.3) {
         st.dlq += 1;
         st.events = [
@@ -127,6 +127,7 @@ function Body({
       pulseSignal(0.25);
     }
     st.depth = Math.max(0, Math.min(100, st.depth));
+    depthRef.current = st.depth;
     force((n) => n + 1);
   }, running);
 
@@ -172,7 +173,6 @@ function Body({
             className={`qsim__fill ${depthPct > 80 ? "qsim__fill--hot" : ""}`}
             style={{ width: `${depthPct}%` }}
           />
-          {/* depth ruler ticks */}
           {[25, 50, 75].map((p) => (
             <span key={p} className="qsim__rule" style={{ left: `${p}%` }} />
           ))}
@@ -192,7 +192,6 @@ function Body({
               </div>
             ))}
           </div>
-          {/* tasks in flight: queue bar above → assigned pod below */}
           <div className="qsim__flight" aria-hidden="true">
             {st.dots.map((d) => (
               <span

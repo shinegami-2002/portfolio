@@ -99,17 +99,28 @@ export function SignalLayer() {
       amp = Math.min(1, 0.1 + velocity * 1.6 + pulse);
     });
 
+    // the scope earns its keep in the hero: prominent at the top, ambient below
+    const heroBoost = (): number => {
+      const heroK = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.9));
+      const paper = document.documentElement.dataset.theme === "paper";
+      const base = paper ? 0.06 : 0.09;
+      const boost = paper ? 0.1 : 0.17;
+      canvas.style.opacity = (base + heroK * boost).toFixed(3);
+      return heroK;
+    };
+
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
       if (!document.hidden) {
         resize();
+        const heroK = heroBoost();
         // lerp the tint toward the active channel color
         const t = tintRef.current;
         const g2 = targetTint.current;
         for (let i = 0; i < 3; i++) t[i] += (g2[i] - t[i]) * 0.06;
         gl.uniform1f(uT, (now - start) / 1000);
-        gl.uniform1f(uAmp, amp);
+        gl.uniform1f(uAmp, Math.min(1, amp + heroK * 0.3));
         gl.uniform2f(uRes, canvas.width, canvas.height);
         gl.uniform3f(uTint, t[0], t[1], t[2]);
         gl.clearColor(0, 0, 0, 0);

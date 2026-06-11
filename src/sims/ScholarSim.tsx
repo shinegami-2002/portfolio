@@ -46,8 +46,8 @@ function Body({ running }: { running: boolean }) {
   // the graph runs itself the first time it scrolls into view
   useEffect(() => {
     if (!running || autoRan.current) return;
-    autoRan.current = true;
     const t = setTimeout(() => {
+      autoRan.current = true;
       tRef.current = 0;
       setElapsed(0);
       setPlaying(true);

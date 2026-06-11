@@ -331,8 +331,8 @@
 }
 .ssim__node--fail circle {
   stroke: var(--danger);
-  fill: rgba(255, 107, 94, 0.12);
-  filter: drop-shadow(0 0 8px rgba(255, 107, 94, 0.6));
+  fill: color-mix(in srgb, var(--danger) 12%, transparent);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--danger) 60%, transparent));
 }
 .ssim__node--fail text {
   fill: var(--danger);
@@ -490,7 +490,7 @@
 }
 .msim__mcp--on rect {
   stroke: var(--signal-2);
-  filter: drop-shadow(0 0 6px rgba(107, 184, 255, 0.5));
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--signal-2) 50%, transparent));
 }
 .msim__mcp--on text {
   fill: var(--signal-2);
@@ -547,7 +547,7 @@
   line-height: 1.6;
   color: var(--muted);
   white-space: pre-wrap;
-  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 .csim__dim {
   color: var(--faint);

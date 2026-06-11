@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { profile } from "../content/profile";
-import { NumberTicker } from "../components/NumberTicker";
 
 function Currently() {
   const [i, setI] = useState(0);
@@ -23,11 +22,6 @@ export function Hero() {
     <section id="hero" className="hero" aria-label="Introduction">
       <div className="hero__bloom" aria-hidden="true" />
       <div className="hero__inner">
-        <div className="hero__meta mono-label" data-boot-line>
-          <span>// OPERATOR CONSOLE</span>
-          <span className="hero__metaRight">EST. 2022 · REV 2026.06</span>
-        </div>
-
         <div className="hero__grid">
           <div className="hero__main">
             <h1 className="hero__name">
@@ -70,16 +64,8 @@ export function Hero() {
         </div>
 
         <div className="hero__metrics">
-          {profile.heroMetrics.map((m) => (
-            <div className="hero__metric" key={m.label}>
-              <span className="hero__metricN">
-                <NumberTicker m={m} />
-              </span>
-              <span className="hero__metricL mono-label">{m.label}</span>
-            </div>
-          ))}
           <div className="hero__scrollHint mono-label" aria-hidden="true">
-            SCROLL ▾ OR ⌘K
+            SCROLL ▾ OR ⌘K TO ASK
           </div>
         </div>
       </div>

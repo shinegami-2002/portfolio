@@ -69,8 +69,9 @@ export function Palette({ open, onClose }: { open: boolean; onClose: () => void 
 
   const isQuestion = q.trim().length > 0 && filtered.length === 0;
 
-  // reset on open
+  // reset on open; invalidate any in-flight ask either way
   useEffect(() => {
+    runId.current++;
     if (open) {
       setQ("");
       setAnswer(null);
@@ -82,9 +83,9 @@ export function Palette({ open, onClose }: { open: boolean; onClose: () => void 
     }
   }, [open]);
 
-  // typewriter for the answer text
+  // typewriter for the answer text — stops the moment the palette closes
   useEffect(() => {
-    if (!answer) return;
+    if (!answer || !open) return;
     if (reducedMotion()) {
       setShownSteps(answer.steps.length);
       setTyped(answer.text);
@@ -108,7 +109,7 @@ export function Palette({ open, onClose }: { open: boolean; onClose: () => void 
     return () => {
       alive = false;
     };
-  }, [answer]);
+  }, [answer, open]);
 
   const ask = async (text: string) => {
     const id = ++runId.current;

@@ -319,3 +319,13 @@ body::after {
     display: none;
   }
 }
+
+/* bigger touch targets on mobile */
+@media (max-width: 820px) {
+  .chip {
+    padding: 11px 14px;
+  }
+  .qsim__load input[type="range"] {
+    height: 34px;
+  }
+}

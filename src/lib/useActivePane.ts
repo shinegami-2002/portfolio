@@ -45,7 +45,8 @@ export function useActivePane(): { active: PaneId; progress: number } {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         const h = document.documentElement.scrollHeight - window.innerHeight;
-        setProgress(h > 0 ? window.scrollY / h : 0);
+        // quantized to 0.5% so unchanged values bail out of re-rendering the app tree
+        setProgress(h > 0 ? Math.round((window.scrollY / h) * 200) / 200 : 0);
       });
     };
     onScroll();

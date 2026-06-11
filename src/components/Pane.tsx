@@ -1,10 +1,9 @@
 import type { ReactNode } from "react";
 import { useInView } from "../lib/useInView";
-import { GlyphDecode } from "./GlyphDecode";
 
 /**
- * Section shell. On first sight: border traces on, number+title decode,
- * children marked [data-stamp] stagger in dot-matrix style.
+ * Section shell. On first sight: border traces on, children marked
+ * [data-stamp] stagger in dot-matrix style.
  */
 export function Pane({
   id,
@@ -25,9 +24,7 @@ export function Pane({
       <div className="pane__inner">
         <header className="pane__head">
           <span className="pane__num mono-label">{number}</span>
-          <h2 className="pane__title">
-            <GlyphDecode text={title} go={seen} />
-          </h2>
+          <h2 className="pane__title">{title}</h2>
           {aside && <span className="pane__aside mono-label">{aside}</span>}
         </header>
         {children}

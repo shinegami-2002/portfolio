@@ -19,20 +19,20 @@ const EDU = [
 const PROJECTS: { id: string; label: string; start: number; end: number; row: number; ch: string }[] = [
   { id: "work-queue", label: "task-queue", start: 2025.0, end: 2025.25, row: 0, ch: "queue" },
   { id: "work-mcp", label: "mcp-server", start: 2025.1, end: 2025.4, row: 1, ch: "mcp" },
-  { id: "work-scholar", label: "scholar-agent", start: 2025.15, end: 2025.5, row: 0, ch: "scholar" },
+  { id: "work-scholar", label: "scholar-agent", start: 2025.28, end: 2025.62, row: 2, ch: "scholar" },
   { id: "work-pruning", label: "pruning-study", start: 2026.0, end: 2026.42, row: 0, ch: "pruning" },
   { id: "archive", label: "undergrad dl research", start: 2023.0, end: 2023.9, row: 0, ch: "scholar" },
   { id: "archive", label: "chimera-ar", start: 2025.55, end: 2025.8, row: 1, ch: "pruning" },
 ];
 
 /** Point events — diamonds. From the BTech CV + later milestones. */
-const EVENTS: { t: number; label: string; up?: boolean }[] = [
+const EVENTS: { t: number; label: string; up?: boolean; flip?: boolean }[] = [
   { t: 2021.7, label: "co-founded zer01coded · taught python to 150+" },
   { t: 2022.6, label: "president, rotaract · vp, ace", up: true },
   { t: 2023.95, label: "HIS 2023 paper (springer) — first author" },
   { t: 2024.5, label: "ICDLAIR 2024 paper", up: true },
   { t: 2025.6, label: "openai parameter golf — 0.8128 bpb" },
-  { t: 2026.08, label: "AAAI 2026 — llms4pcg", up: true },
+  { t: 2026.08, label: "AAAI 2026 — llms4pcg", up: true, flip: true },
 ];
 
 export function Trace() {
@@ -123,10 +123,23 @@ export function Trace() {
         {EVENTS.map((ev) => (
           <div key={ev.label} className="trace__event" style={{ left: x(ev.t) }}>
             <span className="trace__diamond" />
-            <span className={`trace__evLabel mono-label ${ev.up ? "trace__evLabel--up" : ""}`}>{ev.label}</span>
+            <span
+              className={`trace__evLabel mono-label ${ev.up ? "trace__evLabel--up" : ""} ${ev.flip ? "trace__evLabel--flip" : ""}`}
+            >
+              {ev.label}
+            </span>
           </div>
         ))}
       </div>
+
+      {/* mobile: events as a legend list instead of absolute labels */}
+      <ul className="trace__evLegend mono-label" aria-hidden="true">
+        {EVENTS.map((ev) => (
+          <li key={ev.label}>
+            <span className="trace__diamond trace__diamond--inline" /> {Math.floor(ev.t)} — {ev.label}
+          </li>
+        ))}
+      </ul>
 
       {/* role detail */}
       <div className="trace__detail">

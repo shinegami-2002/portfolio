@@ -20,6 +20,11 @@ export type Flagship = {
   status: "PROD" | "OSS" | "RESEARCH";
   period: string;
   oneLiner: string;
+  /** the line a visitor should still remember an hour later — set huge */
+  pullQuote: string;
+  /** wide = control-room sim full width · split = sim/specs side by side · figure = paper-figure treatment */
+  layout: "wide" | "split" | "figure";
+  figCaption?: string;
   chips: ChipT[];
   metrics: Metric[];
   problem: string;
