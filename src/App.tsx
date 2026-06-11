@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { StatusHeader } from "./components/StatusHeader";
 import { Hero } from "./panes/Hero";
 import { Pane } from "./components/Pane";
+import { Keymap } from "./components/Keymap";
 import { useActivePane } from "./lib/useActivePane";
 import { Trace } from "./trace/Trace";
 import { Flagship } from "./panes/Flagship";
+import { Archive } from "./panes/Archive";
+import { FieldLog } from "./panes/FieldLog";
+import { Contact } from "./panes/Contact";
+import { Palette } from "./palette/Palette";
 import { QueueSim } from "./sims/QueueSim";
 import { ScholarSim } from "./sims/ScholarSim";
 import { MihinSim } from "./sims/MihinSim";
@@ -16,6 +21,8 @@ import "./styles/panes.css";
 import "./styles/trace.css";
 import "./styles/sims.css";
 import "./styles/flagship.css";
+import "./styles/palette.css";
+import "./styles/archive.css";
 
 const SIMS: Record<string, React.ReactNode> = {
   mihin: <MihinSim />,
@@ -27,14 +34,16 @@ const SIMS: Record<string, React.ReactNode> = {
 
 export default function App() {
   const { active, progress } = useActivePane();
-  const [, setPaletteOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const openPalette = useCallback(() => setPaletteOpen(true), []);
+  const closePalette = useCallback(() => setPaletteOpen(false), []);
 
   return (
     <>
       <a className="skip-link" href="#work">
         skip to work
       </a>
-      <StatusHeader active={active} progress={progress} onPalette={() => setPaletteOpen(true)} />
+      <StatusHeader active={active} progress={progress} onPalette={openPalette} />
       <main>
         <Hero />
         <Pane id="trace" number="01" title="The Trace" aside="2022 → NOW">
@@ -49,25 +58,24 @@ export default function App() {
             </p>
           </Pane>
           {flagships.map((f) => (
-            <Flagship key={f.id} f={f} sim={SIMS[f.id] ?? <div className="sim sim--soon mono-label">SIM LOADING…</div>} />
+            <Flagship key={f.id} f={f} sim={SIMS[f.id]} />
           ))}
         </div>
         <Pane id="archive" number="03" title="The Archive" aside="EVERYTHING ELSE">
-          <p data-stamp style={{ color: "var(--muted)" }}>
-            archive indexing…
-          </p>
+          <Archive />
         </Pane>
         <Pane id="field" number="04" title="Field Log" aside="OFF-DUTY">
-          <p data-stamp style={{ color: "var(--muted)" }}>
-            photos developing…
-          </p>
+          <FieldLog />
         </Pane>
         <Pane id="contact" number="05" title="Open Channel" aside="REACH OUT">
-          <p data-stamp style={{ color: "var(--muted)" }}>
-            channel opening…
-          </p>
+          <Contact />
         </Pane>
       </main>
+      <button className="fab" onClick={openPalette} aria-label="Open command palette">
+        ⌘ ASK
+      </button>
+      <Palette open={paletteOpen} onClose={closePalette} />
+      <Keymap active={active} paletteOpen={paletteOpen} openPalette={openPalette} />
     </>
   );
 }
