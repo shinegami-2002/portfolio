@@ -245,7 +245,7 @@ window.PORTFOLIO_DATA = {
     { name: "Teaching", note: "Taught Python to 150+ students through Zer01Coded." },
   ],
   contact: {
-    email: "schatad@ncsu.edu",
+    email: "shanmukh.nitpy@gmail.com",
     linkedin: "linkedin.com/in/shanmukha-chatadi",
     github: "github.com/shinegami-2002",
   },
