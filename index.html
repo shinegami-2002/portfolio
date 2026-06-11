@@ -4,7 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shanmukha Chatadi — Applied AI/ML Engineer</title>
-  <meta name="description" content="Applied AI/ML engineer. Production RAG and agentic systems on AWS Bedrock, LangGraph pipelines that grade their own retrievals, Go infrastructure. MS CS, NC State. Available now." />
+  <meta name="description" content="Applied AI/ML engineer. Production RAG and agentic systems on AWS Bedrock at MiHIN, LangGraph pipelines that grade their own retrievals, Go infrastructure, pruning research. MS CS, NC State. Available now." />
+  <meta name="author" content="Shanmukha Chatadi" />
+  <link rel="canonical" href="https://shanmukha-chatadi.vercel.app/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <meta property="og:title" content="Shanmukha Chatadi — Applied AI/ML Engineer" />
+  <meta property="og:description" content="The operator's console: production RAG at MiHIN, self-correcting agent pipelines, Go infrastructure, pruning research. Live sims of every system. Available now." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shanmukha-chatadi.vercel.app/" />
+  <meta property="og:image" content="https://shanmukha-chatadi.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shanmukha Chatadi — Applied AI/ML Engineer" />
+  <meta name="twitter:description" content="The operator's console: production RAG, agentic pipelines, Go infrastructure. Live sims of every system." />
+  <meta name="twitter:image" content="https://shanmukha-chatadi.vercel.app/og.png" />
+
   <script>
     try {
       var t = localStorage.getItem("theme");
@@ -12,15 +29,59 @@
       document.documentElement.dataset.theme = t;
     } catch (e) {}
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shanmukha Chatadi",
+    "jobTitle": "Applied AI/ML Engineer",
+    "description": "Production RAG and agentic AI systems on AWS Bedrock, LangGraph research agents, Go infrastructure. MS CS at NC State, available now.",
+    "url": "https://shanmukha-chatadi.vercel.app",
+    "email": "shanmukh.nitpy@gmail.com",
+    "sameAs": [
+      "https://linkedin.com/in/shanmukha-chatadi",
+      "https://github.com/shinegami-2002"
+    ],
+    "address": { "@type": "PostalAddress", "addressLocality": "Raleigh", "addressRegion": "NC", "addressCountry": "US" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "North Carolina State University", "description": "MS Computer Science · 2024–2026" },
+      { "@type": "CollegeOrUniversity", "name": "National Institute of Technology Puducherry", "description": "BTech Computer Science & Engineering · 2020–2024" }
+    ],
+    "hasOccupation": [
+      {
+        "@type": "Occupation",
+        "name": "AI Research Intern",
+        "occupationLocation": { "@type": "Place", "name": "MiHIN — Michigan Health Information Network" },
+        "description": "Prototyped the serverless RAG platform on AWS Bedrock for 230+ employees; owns production engineering on the enterprise AI chat platform (200+ users, 20+ bots); builds the agentic layer with A2A on Bedrock AgentCore, Strands SDK agents, and MCP integrations against HL7/FHIR systems; authored the HITRUST/NIST/HIPAA-aligned AI governance framework."
+      },
+      {
+        "@type": "Occupation",
+        "name": "Software Engineer",
+        "occupationLocation": { "@type": "Place", "name": "Rygen BioPharma, Hyderabad" },
+        "description": "Built and operated the clinical data platform (Flask, React, PostgreSQL): ETL over 100K+ records daily, 0.89 AUC-ROC models served in-product, CI/CD with 85%+ coverage."
+      }
+    ],
+    "knowsAbout": [
+      "RAG", "Agentic AI", "LLMs", "Model Context Protocol", "A2A Protocol", "AWS Bedrock", "AgentCore",
+      "LangGraph", "LangChain", "PyTorch", "Network Pruning", "CKA", "Go", "gRPC", "Kubernetes",
+      "PostgreSQL", "Redis", "FastAPI", "Python", "TypeScript", "AI Governance", "HIPAA", "HITRUST"
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <noscript>
-    <p style="font-family:monospace;padding:2rem">
-      Shanmukha Chatadi — Applied AI/ML Engineer, Raleigh NC. Production RAG/agentic AI on AWS Bedrock (MiHIN),
-      LangGraph research agents, Go infrastructure. shanmukh.nitpy@gmail.com · github.com/shinegami-2002
-    </p>
+    <div style="font-family:monospace;padding:2rem;max-width:70ch;line-height:1.7">
+      <h1>Shanmukha Chatadi — Applied AI/ML Engineer</h1>
+      <p>Raleigh NC · available now · open to relocation.</p>
+      <p>Production RAG/agentic AI on AWS Bedrock at MiHIN (230+ users, A2A on AgentCore, MCP against HL7/FHIR).
+      ScholarAgent: 7-node LangGraph pipeline, +35% groundedness. MCP Healthcare Server: 6 tools over 4 federal APIs.
+      Pruned-network fingerprinting research on 3×H100 (CKA↔mistakes r=+0.95). Distributed task queue in Go on Kubernetes.</p>
+      <p>shanmukh.nitpy@gmail.com · github.com/shinegami-2002 · linkedin.com/in/shanmukha-chatadi · <a href="/resume.pdf">resume</a></p>
+    </div>
   </noscript>
 </body>
 </html>

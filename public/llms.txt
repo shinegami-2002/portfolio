@@ -1,0 +1,39 @@
+# Shanmukha Chatadi — Applied AI/ML Engineer
+
+> Portfolio: https://shanmukha-chatadi.vercel.app/ ("chatadi.sys" — an operator-console-style site with live
+> simulations of his real systems and a client-side retrieval agent). Available now for full-time AI/ML roles.
+> Raleigh NC, open to relocation. Contact: shanmukh.nitpy@gmail.com
+
+## Identity
+- Email: shanmukh.nitpy@gmail.com
+- GitHub: https://github.com/shinegami-2002
+- LinkedIn: https://linkedin.com/in/shanmukha-chatadi
+- Education: MS Computer Science, NC State (2024–2026); BTech CSE, NIT Puducherry (2020–2024)
+
+## Experience
+- AI Research Intern, MiHIN (Aug 2025–present): prototyped the serverless RAG platform on AWS Bedrock
+  (Claude Sonnet, Titan V2, OpenSearch Serverless, Pinecone) for 230+ employees over 10K+ documents at ~75%
+  under Copilot licensing; pitched C-suite, won org-wide pilot. Owns production engineering on the deployed
+  enterprise AI chat platform (200+ users, 20+ bots). Builds the agentic layer: A2A protocol on Bedrock
+  AgentCore, Strands SDK agents over MCP servers wired to HL7/FHIR. Authored AI governance framework
+  (HITRUST CSF, NIST AI RMF, HIPAA). −30% ungrounded responses, −60% mean time to detection.
+- Software Engineer, Rygen BioPharma (Mar 2023–Aug 2024): clinical data platform (Flask/React/PostgreSQL),
+  ETL over 100K+ records/day, 0.89 AUC-ROC models in production, CI/CD with 200+ tests at 85%+ coverage.
+- Data Science Intern, TreoSoft IT (2022): FP-Growth bundling engine; client rollout associated with +15% net sales.
+
+## Flagship projects
+- ScholarAgent: 7-node LangGraph corrective-RAG pipeline (router/retriever/grader/rewriter/generator/
+  hallucination-check/synthesizer), +35% groundedness vs naive RAG over 10K+ papers. github.com/shinegami-2002/scholar-agent
+- MCP Healthcare Server: 6 tools over 4 keyless federal APIs (openFDA, NLM, CMS, PubMed), async httpx,
+  21 hermetic tests. github.com/shinegami-2002/mcp-healthcare-server
+- Pruned-Network Fingerprinting (3×H100): 11 ResNet-18 configs, accuracy held within 1.48pp; CKA predicts
+  shared mistakes at r=+0.95; pruning timing decodable from one image at 89.2% (chance 25%).
+- Distributed Task Queue (Go): gRPC/Protobuf, Redis priority queue, effectively-once semantics, K8s HPA on
+  queue depth via Prometheus. github.com/shinegami-2002/distributed-task-queue
+- MiHIN platform (above) is the production flagship.
+
+## Also
+OpenAI Parameter Golf (0.8128 bits/byte via eval-time n-gram mixing, top-10 territory mid-competition);
+ChimeraAR (Quest 3 MR painting, Unity 6); LLMs4PCG @ AAAI 2026 (contributing author, 100% structural
+stability by construction); LinkVault (Go API); SlackPoint v3; publications: HIS 2023 (Springer,
+first author), ICDLAIR 2024.
