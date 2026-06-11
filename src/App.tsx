@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { Boot } from "./components/Boot";
+import { SignalLayer } from "./components/SignalLayer";
 import { StatusHeader } from "./components/StatusHeader";
 import { Hero } from "./panes/Hero";
 import { Pane } from "./components/Pane";
@@ -35,11 +37,15 @@ const SIMS: Record<string, React.ReactNode> = {
 export default function App() {
   const { active, progress } = useActivePane();
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [booted, setBooted] = useState(false);
   const openPalette = useCallback(() => setPaletteOpen(true), []);
   const closePalette = useCallback(() => setPaletteOpen(false), []);
+  const onBootDone = useCallback(() => setBooted(true), []);
 
   return (
     <>
+      <Boot onDone={onBootDone} />
+      {booted && <SignalLayer />}
       <a className="skip-link" href="#work">
         skip to work
       </a>

@@ -153,3 +153,93 @@
     opacity: 0;
   }
 }
+
+/* ---- signal layer ---- */
+.signal-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.09;
+}
+:root[data-theme="paper"] .signal-layer {
+  opacity: 0.06;
+}
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- boot overlay ---- */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 300ms ease;
+}
+.boot--lift {
+  opacity: 0;
+  pointer-events: none;
+}
+.boot__flash {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  animation: bootFlash 380ms ease-out forwards;
+}
+@keyframes bootFlash {
+  0% {
+    opacity: 0.9;
+    transform: scaleY(0.004);
+  }
+  40% {
+    opacity: 0.35;
+    transform: scaleY(1.01);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(1);
+  }
+}
+.boot__scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--signal);
+  box-shadow: var(--glow);
+  animation: bootScan 520ms ease-in-out 120ms forwards;
+  top: 0;
+  opacity: 0;
+}
+@keyframes bootScan {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+.boot__lines {
+  display: grid;
+  gap: 9px;
+  min-width: min(420px, 80vw);
+}
+.boot__line {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0.06em;
+  animation: stampIn 180ms steps(2);
+}
+.boot__ok {
+  color: var(--signal);
+}
