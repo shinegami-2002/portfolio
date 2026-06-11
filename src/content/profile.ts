@@ -1,6 +1,6 @@
 export const profile = {
   name: "Shanmukha Chatadi",
-  brand: "chatadi.sys",
+  brand: "S.CHATADI",
   role: "Applied AI/ML Engineer",
   status: "AVAILABLE NOW",
   statusDetail: "MS CS · NC State · May 2026",
@@ -27,5 +27,11 @@ export const profile = {
     { value: 2.5, suffix: "+", label: "years shipping", decimals: 1 },
     { value: 230, suffix: "+", label: "users in prod" },
     { value: 3, label: "publications" },
+  ],
+  currently: [
+    "shipping A2A agents on Bedrock AgentCore @ MiHIN",
+    "open for full-time AI/ML roles — available now",
+    "latest: 11 pruned ResNets, fingerprinted from one image",
+    "teaching agents to cite their sources or stay quiet",
   ],
 };

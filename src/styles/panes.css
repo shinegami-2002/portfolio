@@ -327,3 +327,48 @@
     display: none;
   }
 }
+
+/* ---- hero bloom + currently rotator + header clock ---- */
+.hero__bloom {
+  position: absolute;
+  left: -8%;
+  top: 12%;
+  width: 70%;
+  height: 75%;
+  background: radial-gradient(ellipse at 38% 45%, rgba(var(--signal-rgb), 0.085), transparent 64%);
+  pointer-events: none;
+  filter: blur(8px);
+}
+.hero__currently {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 22px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--signal);
+  padding: 11px 16px;
+  max-width: 560px;
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+}
+.hero__curK {
+  color: var(--signal);
+  font-size: 9.5px;
+  flex-shrink: 0;
+}
+.hero__curV {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  letter-spacing: 0.03em;
+  animation: stampIn 220ms steps(2);
+}
+.hdr__clock {
+  font-size: 10px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 820px) {
+  .hdr__clock {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRafLoop } from "../lib/springs";
 import { pulseSignal } from "../lib/scrollBus";
 import { SimShell } from "./SimShell";
@@ -6,13 +6,13 @@ import { SimShell } from "./SimShell";
 type NodeId = "router" | "retriever" | "grader" | "rewriter" | "generator" | "check" | "synth";
 
 const NODES: { id: NodeId; label: string; x: number; y: number }[] = [
-  { id: "router", label: "ROUTER", x: 60, y: 150 },
-  { id: "retriever", label: "RETRIEVE", x: 175, y: 150 },
-  { id: "grader", label: "GRADE", x: 290, y: 150 },
-  { id: "rewriter", label: "REWRITE", x: 232, y: 62 },
-  { id: "generator", label: "GENERATE", x: 430, y: 150 },
-  { id: "check", label: "HALLU-CHECK", x: 560, y: 150 },
-  { id: "synth", label: "SYNTH", x: 672, y: 150 },
+  { id: "router", label: "ROUTER", x: 56, y: 158 },
+  { id: "retriever", label: "RETRIEVE", x: 190, y: 158 },
+  { id: "grader", label: "GRADE", x: 324, y: 158 },
+  { id: "rewriter", label: "REWRITE", x: 257, y: 56 },
+  { id: "generator", label: "GENERATE", x: 478, y: 158 },
+  { id: "check", label: "HALLU-CHECK", x: 614, y: 158 },
+  { id: "synth", label: "SYNTH", x: 724, y: 158 },
 ];
 
 type Phase = { node: NodeId; dur: number; note: string; fail?: boolean };
@@ -41,6 +41,19 @@ function Body({ running }: { running: boolean }) {
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const tRef = useRef(0);
+  const autoRan = useRef(false);
+
+  // the graph runs itself the first time it scrolls into view
+  useEffect(() => {
+    if (!running || autoRan.current) return;
+    autoRan.current = true;
+    const t = setTimeout(() => {
+      tRef.current = 0;
+      setElapsed(0);
+      setPlaying(true);
+    }, 700);
+    return () => clearTimeout(t);
+  }, [running]);
 
   useRafLoop((_, dt) => {
     if (!playing) return;
@@ -113,23 +126,23 @@ function Body({ running }: { running: boolean }) {
         </span>
       </div>
 
-      <svg viewBox="0 0 720 210" className="ssim__svg" aria-label="LangGraph pipeline execution">
+      <svg viewBox="0 0 780 235" className="ssim__svg" aria-label="LangGraph pipeline execution">
         {/* edges */}
         <g className="ssim__edges">
-          <Edge x1={88} y1={150} x2={147} y2={150} on={cur >= 1} />
-          <Edge x1={203} y1={150} x2={262} y2={150} on={cur >= 2} />
-          <Edge x1={318} y1={150} x2={402} y2={150} on={cur >= 6} />
-          <Edge x1={458} y1={150} x2={532} y2={150} on={cur >= 7} />
-          <Edge x1={588} y1={150} x2={644} y2={150} on={cur >= 8} />
+          <Edge x1={84} y1={158} x2={162} y2={158} on={cur >= 1} />
+          <Edge x1={218} y1={158} x2={296} y2={158} on={cur >= 2} />
+          <Edge x1={352} y1={158} x2={450} y2={158} on={cur >= 6} />
+          <Edge x1={506} y1={158} x2={586} y2={158} on={cur >= 7} />
+          <Edge x1={642} y1={158} x2={696} y2={158} on={cur >= 8} />
           {/* rewrite loop */}
           <path
-            d="M 290 138 Q 280 62 250 62"
+            d="M 324 144 Q 318 56 277 56"
             fill="none"
             className={`ssim__edge ${cur === 3 ? "ssim__edge--on ssim__edge--danger" : ""}`}
             strokeDasharray="4 3"
           />
           <path
-            d="M 214 62 Q 175 62 175 138"
+            d="M 237 56 Q 190 56 190 144"
             fill="none"
             className={`ssim__edge ${cur === 4 ? "ssim__edge--on" : ""}`}
             strokeDasharray="4 3"
@@ -153,8 +166,8 @@ function Body({ running }: { running: boolean }) {
             const failed = i === 1 && cur >= 2 && cur < 5;
             return (
               <g key={i} className={`ssim__doc ${failed ? "ssim__doc--fail" : "ssim__doc--ok"}`}>
-                <rect x={270 + i * 14} y={178 + (failed && cur >= 3 ? 14 : 0)} width={11} height={14} rx={1} />
-                <text x={275.5 + i * 14} y={188 + (failed && cur >= 3 ? 14 : 0)} textAnchor="middle">
+                <rect x={300 + i * 16} y={190 + (failed && cur >= 3 ? 14 : 0)} width={13} height={16} rx={1} />
+                <text x={305.5 + i * 16} y={200 + (failed && cur >= 3 ? 14 : 0)} textAnchor="middle">
                   {failed ? "✗" : "✓"}
                 </text>
               </g>

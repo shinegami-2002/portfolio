@@ -1,7 +1,7 @@
 /* ============ career trace ============ */
 .trace__chart {
   position: relative;
-  height: 280px;
+  height: 330px;
   border: 1px solid var(--line);
   background:
     linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 56px,
@@ -96,6 +96,50 @@
   border: 1px solid transparent;
   cursor: pointer;
   font-size: 9px;
+}
+.trace__lane {
+  position: absolute;
+  left: 6px;
+  font-size: 7.5px;
+  color: var(--faint);
+  letter-spacing: 0.2em;
+  z-index: 2;
+}
+.trace__outLabel {
+  position: absolute;
+  font-size: 9px;
+  color: var(--signal);
+  white-space: nowrap;
+  z-index: 2;
+}
+.trace__event {
+  position: absolute;
+  top: 286px;
+  width: 0;
+}
+.trace__diamond {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--alert);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(255, 180, 84, 0.5);
+}
+.trace__evLabel {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  font-size: 8px;
+  color: var(--muted);
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+.trace__evLabel--up {
+  top: auto;
+  bottom: 10px;
 }
 .trace__span--proj:hover {
   border-color: var(--signal);

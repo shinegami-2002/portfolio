@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
 import { PANES, jumpTo, type PaneId } from "../lib/useActivePane";
 import { useTheme } from "../lib/theme";
 import { phosphorPulse } from "../lib/phosphor";
+
+function Clock() {
+  const [t, setT] = useState("");
+  useEffect(() => {
+    const tick = () =>
+      setT(new Date().toLocaleTimeString("en-US", { hour12: false }));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <span className="hdr__clock mono-label">{t}</span>;
+}
 
 export function StatusHeader({
   active,
@@ -15,8 +28,8 @@ export function StatusHeader({
   return (
     <header className="hdr" role="banner">
       <div className="hdr__inner">
-        <button className="hdr__brand" onClick={() => jumpTo("hero")} aria-label="chatadi.sys — back to top">
-          chatadi.sys<span className="hdr__cursor">▮</span>
+        <button className="hdr__brand" onClick={() => jumpTo("hero")} aria-label="S.CHATADI — back to top">
+          S.CHATADI<span className="hdr__cursor">▮</span>
         </button>
 
         <nav className="hdr__trace" aria-label="Sections">
@@ -36,6 +49,7 @@ export function StatusHeader({
         </nav>
 
         <div className="hdr__right">
+          <Clock />
           <button
             className="hdr__theme"
             onClick={flip}

@@ -1,6 +1,6 @@
 # Shanmukha Chatadi — Applied AI/ML Engineer
 
-> Portfolio: https://shanmukha-chatadi.vercel.app/ ("chatadi.sys" — an operator-console-style site with live
+> Portfolio: https://shanmukha-chatadi.vercel.app/ (an operator-console-style site with live
 > simulations of his real systems and a client-side retrieval agent). Available now for full-time AI/ML roles.
 > Raleigh NC, open to relocation. Contact: shanmukh.nitpy@gmail.com
 

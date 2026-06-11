@@ -9,8 +9,13 @@ import { Chip } from "../components/Chip";
 export function Flagship({ f, sim }: { f: FlagshipT; sim: ReactNode }) {
   const { ref, seen } = useInView<HTMLElement>(0.06);
   return (
-    <article id={`work-${f.id}`} ref={ref} className={`flag pane ${seen ? "pane--on" : ""}`}>
+    <article id={`work-${f.id}`} ref={ref} className={`flag pane ${seen ? "pane--on" : ""}`} data-ch={f.id}>
       <div className="pane__inner">
+        <div className="flag__svcbar">
+          <span>▸ SVC/{f.id.toUpperCase()}</span>
+          <span className="flag__svcbarRule" />
+          <span>{f.status} · {f.period.toUpperCase()}</span>
+        </div>
         <header className="flag__head">
           <div className="flag__title">
             <span className={`flag__chip flag__chip--${f.status.toLowerCase()}`}>

@@ -39,7 +39,7 @@ export function Contact() {
       </div>
 
       <footer className="contact__foot mono-label" data-stamp style={{ ["--stagger" as never]: "3" }}>
-        <span>chatadi.sys v2.0 · built by hand, no framework templates</span>
+        <span>© 2026 shanmukha chatadi · designed & built by hand</span>
         <span>
           <a href="https://github.com/shinegami-2002/portfolio" target="_blank" rel="noreferrer">
             view source ↗

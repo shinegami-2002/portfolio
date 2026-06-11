@@ -1,9 +1,27 @@
+import { useEffect, useState } from "react";
 import { profile } from "../content/profile";
 import { NumberTicker } from "../components/NumberTicker";
+
+function Currently() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((n) => (n + 1) % profile.currently.length), 3400);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="hero__currently">
+      <span className="hero__curK mono-label">▸ CURRENTLY</span>
+      <span key={i} className="hero__curV">
+        {profile.currently[i]}
+      </span>
+    </div>
+  );
+}
 
 export function Hero() {
   return (
     <section id="hero" className="hero" aria-label="Introduction">
+      <div className="hero__bloom" aria-hidden="true" />
       <div className="hero__inner">
         <div className="hero__meta mono-label" data-boot-line>
           <span>// OPERATOR CONSOLE</span>
@@ -29,6 +47,8 @@ export function Hero() {
             </div>
 
             <p className="hero__sum">{profile.summary}</p>
+
+            <Currently />
 
             <div className="hero__loc mono-label">
               {profile.location} · {profile.relocation} · {profile.statusDetail}

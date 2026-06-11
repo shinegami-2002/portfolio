@@ -1,4 +1,4 @@
-# chatadi.sys — portfolio
+# shanmukha chatadi — operator console portfolio
 
 Operator-console portfolio for Shanmukha Chatadi. Live at https://shanmukha-chatadi.vercel.app/
 

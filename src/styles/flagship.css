@@ -157,3 +157,29 @@
   justify-content: center;
   color: var(--faint);
 }
+
+/* ---- per-service inverse-video bar ---- */
+.flag__svcbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--signal);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  padding: 7px 14px;
+  margin-bottom: 26px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out);
+}
+.pane--on .flag__svcbar {
+  transform: scaleX(1);
+}
+.flag__svcbarRule {
+  flex: 1;
+  height: 1px;
+  background: var(--bg);
+  opacity: 0.35;
+}

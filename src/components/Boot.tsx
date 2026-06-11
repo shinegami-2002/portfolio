@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { reducedMotion } from "../lib/springs";
 
 const LINES = [
-  "chatadi.sys v2.0 — operator console",
+  "operator console — shanmukha chatadi",
   "mounting corpus… 22 chunks indexed",
   "sims armed: queue · langgraph · mcp · cka · a2a",
-  "signal layer online. welcome.",
+  "signal online. welcome.",
 ];
 
 /** First-visit boot. ≤1.5s, any key skips, reduced-motion skips entirely. */
