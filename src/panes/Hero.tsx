@@ -37,7 +37,7 @@ export function Hero() {
 
           <aside className="badge" aria-label="Operator ID card">
             <div className="badge__photo">
-              <img src={profile.badge.src} alt="Shanmukha Chatadi" width={280} height={350} />
+              <img src={profile.badge.src} alt="Shanmukha Chatadi" width={480} height={640} />
               <div className="badge__scan" aria-hidden="true" />
             </div>
             {profile.badge.rows.map(([k, v]) => (

@@ -15,7 +15,7 @@ export function StatusHeader({
   return (
     <header className="hdr" role="banner">
       <div className="hdr__inner">
-        <button className="hdr__brand" onClick={() => jumpTo("hero")} aria-label="Back to top">
+        <button className="hdr__brand" onClick={() => jumpTo("hero")} aria-label="chatadi.sys — back to top">
           chatadi.sys<span className="hdr__cursor">▮</span>
         </button>
 

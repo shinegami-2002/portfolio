@@ -1,5 +1,20 @@
 /* chatadi.sys — design tokens. Two themes, one console. */
 
+@font-face {
+  font-family: "Archivo Variable";
+  src: url("/fonts/archivo.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62.5% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Martian Mono Variable";
+  src: url("/fonts/martian-mono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 112.5%;
+  font-display: swap;
+}
+
 :root,
 :root[data-theme="graphite"] {
   --bg: #0a0e12;
@@ -7,7 +22,7 @@
   --surface-2: #141c24;
   --ink: #e6edf3;
   --muted: #8b98a5;
-  --faint: #4d5a66;
+  --faint: #76828e;
   --signal: #3df0b0;
   --signal-dim: rgba(61, 240, 176, 0.14);
   --signal-2: #6bb8ff;
@@ -28,7 +43,7 @@
   --surface-2: #eceae3;
   --ink: #14181c;
   --muted: #5c6670;
-  --faint: #9aa1a8;
+  --faint: #66707a;
   --signal: #00805f;
   --signal-dim: rgba(0, 128, 95, 0.1);
   --signal-2: #0b66d0;

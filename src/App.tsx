@@ -77,7 +77,7 @@ export default function App() {
           <Contact />
         </Pane>
       </main>
-      <button className="fab" onClick={openPalette} aria-label="Open command palette">
+      <button className="fab" onClick={openPalette} aria-label="ASK — open command palette">
         ⌘ ASK
       </button>
       <Palette open={paletteOpen} onClose={closePalette} />
